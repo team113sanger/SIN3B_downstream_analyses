@@ -1028,15 +1028,14 @@ process_expression_data <- function(SKCM_counts) {
 }
 
 # Load raw counts
-skcm_counts <- readRDS("SKCM_counts.rds")
+skcm_counts <- readRDS(here("input_data/SKCM_counts.rds"))
 
 # Transforming to VST
 vst_matrix <- process_expression_data(skcm_counts)
 
 # Save expression data (vst)
 #saveRDS(vst_matrix,here("data", "processed", "expression_vst_processed.rds"))
-          
-          
+
 ```
 
 ### 3.5 Match Clinical and Expression Data

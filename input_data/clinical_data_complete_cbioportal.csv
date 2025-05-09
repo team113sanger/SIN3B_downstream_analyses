@@ -1,0 +1,473 @@
+patient_id,sample_id,sample_type,primary_melanoma_skin_type,initial_pathologic_dx_year,age,sex,ajcc_pathologic_tumor_stage,ajcc_staging_edition,clark_level_at_diagnosis,breslow_depth,primary_melanoma_tumor_ulceration,primary_melanoma_mitotic_rate,os_status,os_months,dfs_months,somatic_status,tmb_nonsynonymous,form_completion_date,stage,BRAF_mutation,BRAF_class1,BRAF_class2
+TCGA-3N-A9WB,TCGA-3N-A9WB-06,Metastasis,Non-glabrous skin,2012,71,Male,Stage IA,7th,III,0.7,NO,2,1:DECEASED,17.02,16,Matched,NA,5/29/14,1,H725Y,0,1
+TCGA-3N-A9WC,TCGA-3N-A9WC-06,Metastasis,Non-glabrous skin,2009,82,Male,Stage IIA,6th,IV,1.8,YES,4,0:LIVING,66.43,56.01,Matched,NA,5/29/14,2,H574Y,0,1
+TCGA-3N-A9WD,TCGA-3N-A9WD-06,Metastasis,Non-glabrous skin,2013,82,Male,Stage IIIA,7th,III,1.25,NO,4,1:DECEASED,12.98,10.05,Matched,NA,5/29/14,3,WT,0,0
+TCGA-BF-A1PU,TCGA-BF-A1PU-01,Primary,Non-glabrous skin,2010,46,Female,Stage IIC,7th,III,13,YES,[Not Available],0:LIVING,12.71,15.9,Matched,2.43333333333,4/25/13,2,V600E,1,1
+TCGA-BF-A1PV,TCGA-BF-A1PV-01,Primary,Non-glabrous skin,2010,74,Female,Stage IIC,7th,IV,9,YES,[Not Available],0:LIVING,0.46,0.46,Matched,8.53333333333,4/25/13,2,WT,0,0
+TCGA-BF-A1PX,TCGA-BF-A1PX-01,Primary,Non-glabrous skin,2010,56,Male,Stage IIIB,7th,III,12,YES,10,1:DECEASED,9.26,[Not Available],Matched,10.2666666667,4/25/13,3,WT,0,0
+TCGA-BF-A1PZ,TCGA-BF-A1PZ-01,Primary,Non-glabrous skin,2010,71,Female,Stage IIB,7th,III,8,NO,[Not Available],0:LIVING,28.02,28.02,Matched,7.43333333333,4/25/13,2,WT,0,0
+TCGA-BF-A1Q0,TCGA-BF-A1Q0-01,Primary,Non-glabrous skin,2010,80,Male,Stage IIC,7th,III,5,YES,[Not Available],0:LIVING,27.3,27.3,Matched,19.3,4/25/13,2,WT,0,0
+TCGA-BF-A3DJ,TCGA-BF-A3DJ-01,Primary,Non-glabrous skin,2011,36,Female,Stage IIIB,7th,III,11,YES,[Not Available],0:LIVING,15.24,7.13,Matched,4.4,4/25/13,3,V600E,1,1
+TCGA-BF-A3DL,TCGA-BF-A3DL-01,Primary,Non-glabrous skin,2011,84,Female,Stage IIIB,7th,IV,3,YES,[Not Available],0:LIVING,25.26,25.26,Matched,13,4/25/13,3,V600E V600M,1,1
+TCGA-BF-A3DM,TCGA-BF-A3DM-01,Primary,Non-glabrous skin,2011,63,Male,Stage IIA,7th,V,1.5,YES,[Not Available],0:LIVING,19.74,19.74,Matched,13,4/25/13,2,V600E V600M,1,1
+TCGA-BF-A3DN,TCGA-BF-A3DN-01,Primary,Non-glabrous skin,2011,81,Female,Stage IIIC,7th,IV,3,YES,[Not Available],0:LIVING,23.55,23.55,Matched,2.53333333333,4/25/13,3,V600E,1,1
+TCGA-BF-A5EO,TCGA-BF-A5EO-01,Primary,Non-glabrous skin,2012,65,Male,Stage IIC,7th,III,8,YES,[Not Available],0:LIVING,23.09,23.09,Matched,17.3333333333,11/13/14,2,WT,0,0
+TCGA-BF-A5EP,TCGA-BF-A5EP-01,Primary,Non-glabrous skin,2012,75,Female,Stage IIIC,7th,V,70,YES,[Not Available],0:LIVING,11.01,11.01,Matched,4.76666666667,11/13/14,3,WT,0,0
+TCGA-BF-A5EQ,TCGA-BF-A5EQ-01,Primary,Non-glabrous skin,2012,63,Male,Stage IIC,7th,III,5,[Not Available],[Not Available],0:LIVING,10.61,10.61,Matched,17.2666666667,11/13/14,2,V600E V600M,1,1
+TCGA-BF-A5ER,TCGA-BF-A5ER-01,Primary,Non-glabrous skin,2012,63,Male,Stage IIC,7th,IV,14,YES,[Not Available],0:LIVING,10.74,10.74,Matched,5.46666666667,11/13/14,2,V600E V600M,1,1
+TCGA-BF-A5ES,TCGA-BF-A5ES-01,Primary,Non-glabrous skin,2012,76,Female,Stage IIC,7th,IV,8,YES,[Not Available],0:LIVING,16.1,16.1,Matched,14.0666666667,11/13/14,2,WT,0,0
+TCGA-BF-A9VF,TCGA-BF-A9VF-01,Primary,Non-glabrous skin,2013,77,Male,Stage IIC,7th,III,12,YES,[Not Available],0:LIVING,14.45,14.45,Matched,NA,11/13/14,2,V600E,1,1
+TCGA-BF-AAOU,TCGA-BF-AAOU-01,Primary,Non-glabrous skin,2013,73,Female,Stage IIC,7th,IV,12,YES,[Not Available],0:LIVING,15.64,15.64,Matched,NA,11/13/14,2,WT,0,0
+TCGA-BF-AAOX,TCGA-BF-AAOX-01,Primary,Non-glabrous skin,2013,83,Male,Stage IIC,7th,IV,11,YES,[Not Available],0:LIVING,14.59,14.59,Matched,NA,11/13/14,2,WT,0,0
+TCGA-BF-AAP0,TCGA-BF-AAP0-06,Metastasis,Non-glabrous skin,2013,40,Female,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,14.91,14.91,Matched,NA,11/13/14,4,V600E V600M,1,1
+TCGA-BF-AAP1,TCGA-BF-AAP1-01,Primary,Non-glabrous skin,2013,86,Male,Stage IIC,7th,IV,15,YES,[Not Available],0:LIVING,13.44,13.44,Matched,NA,11/13/14,2,K601E,0,1
+TCGA-BF-AAP2,TCGA-BF-AAP2-01,Primary,Non-glabrous skin,2013,62,Male,Stage IIB,7th,III,3,YES,[Not Available],0:LIVING,13.3,13.3,Matched,NA,11/13/14,2,WT,0,0
+TCGA-BF-AAP4,TCGA-BF-AAP4-01,Primary,Non-glabrous skin,2013,61,Male,Stage IIC,7th,V,15,YES,[Not Available],0:LIVING,11.01,11.01,Matched,NA,11/13/14,2,WT,0,0
+TCGA-BF-AAP6,TCGA-BF-AAP6-01,Primary,Non-glabrous skin,2013,55,Male,Stage III,7th,IV,20,YES,[Not Available],0:LIVING,10.68,10.68,Matched,NA,11/13/14,3,V600E,1,1
+TCGA-BF-AAP7,TCGA-BF-AAP7-01,Primary,Non-glabrous skin,2013,76,Female,Stage IIC,7th,IV,5,YES,[Not Available],0:LIVING,10.45,10.45,Matched,NA,11/13/14,2,V600E,1,1
+TCGA-BF-AAP8,TCGA-BF-AAP8-01,Primary,Non-glabrous skin,2013,58,Male,Stage IIC,7th,IV,6,YES,[Not Available],0:LIVING,14.68,14.68,Matched,NA,11/13/14,2,WT,0,0
+TCGA-D3-A1Q1,TCGA-D3-A1Q1-06,Metastasis,Non-glabrous skin,2004,79,Female,Stage IIIC,7th,II,0.4,NO,3,1:DECEASED,16.56,15.41,Matched,1.7,10/2/12,3,WT,0,0
+TCGA-D3-A1Q3,TCGA-D3-A1Q3-06,Metastasis,Non-glabrous skin,2001,64,Male,Stage IIC,7th,[Not Available],4.6,YES,15,1:DECEASED,16.66,[Not Available],Matched,1.5,1/8/13,2,WT,0,0
+TCGA-D3-A1Q4,TCGA-D3-A1Q4-06,Metastasis,Non-glabrous skin,2003,53,Female,Stage IIIC,7th,IV,1.45,YES,0,0:LIVING,111.96,111.96,Matched,7.3,10/2/12,3,V600E,1,1
+TCGA-D3-A1Q5,TCGA-D3-A1Q5-06,Metastasis,Non-glabrous skin,1996,60,Male,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,112.48,80.55,Matched,9.96666666667,10/2/12,2,V600E,1,1
+TCGA-D3-A1Q6,TCGA-D3-A1Q6-06,Metastasis,Non-glabrous skin,2003,55,Male,Stage III,7th,V,50,[Not Available],[Not Available],1:DECEASED,71.75,1.58,Matched,21.7666666667,10/2/12,3,V600E,1,1
+TCGA-D3-A1Q7,TCGA-D3-A1Q7-06,Metastasis,Non-glabrous skin,2002,42,Female,Stage IB,7th,III,0.68,NO,1,0:LIVING,133.15,35.78,Matched,2.66666666667,10/2/12,1,V600E,1,1
+TCGA-D3-A1Q8,TCGA-D3-A1Q8-06,Metastasis,Non-glabrous skin,2004,33,Male,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,28.06,25.59,Matched,6.6,10/2/12,4,WT,0,0
+TCGA-D3-A1Q9,TCGA-D3-A1Q9-06,Metastasis,Non-glabrous skin,2005,72,Male,Stage IIIB,7th,V,6,YES,10,1:DECEASED,31.57,16.52,Matched,1.26666666667,10/2/12,3,V600E,1,1
+TCGA-D3-A1QA,TCGA-D3-A1QA-07,Metastasis,Non-glabrous skin,2005,55,Male,Stage IB,7th,III,1.12,NO,2,0:LIVING,90.83,69.15,Matched,NA,10/2/12,1,NA,NA,NA
+TCGA-D3-A1QA,TCGA-D3-A1QA-06,Metastasis,Non-glabrous skin,2005,55,Male,Stage IB,7th,III,1.12,NO,2,0:LIVING,90.83,69.15,Matched,11.6666666667,10/2/12,1,V600G V600M,0,1
+TCGA-D3-A1QB,TCGA-D3-A1QB-06,Metastasis,Non-glabrous skin,2005,75,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,95.66,30.98,Matched,10.2333333333,10/2/12,3,WT,0,0
+TCGA-D3-A2J6,TCGA-D3-A2J6-06,Metastasis,Non-glabrous skin,2002,65,Male,Stage IIB,7th,IV,3.2,YES,13,1:DECEASED,43.4,42.35,Matched,0.7,10/2/12,2,WT,0,0
+TCGA-D3-A2J7,TCGA-D3-A2J7-06,Metastasis,Non-glabrous skin,2003,67,Male,Stage IIIC,7th,III,3.6,YES,2,1:DECEASED,103.02,71.02,Matched,10.2,10/2/12,3,V600E,1,1
+TCGA-D3-A2J8,TCGA-D3-A2J8-06,Metastasis,Non-glabrous skin,2003,48,Male,Stage IB,7th,IV,1.4,NO,1,1:DECEASED,65.44,59.59,Matched,17.7333333333,10/2/12,1,WT,0,0
+TCGA-D3-A2J9,TCGA-D3-A2J9-06,Metastasis,Non-glabrous skin,2003,75,Male,Stage IIIC,7th,V,21,YES,[Not Available],1:DECEASED,23.75,18.1,Matched,2,10/2/12,3,WT,0,0
+TCGA-D3-A2JA,TCGA-D3-A2JA-06,Metastasis,Non-glabrous skin,2003,68,Male,Stage IIIA,7th,III,1.2,NO,0,0:LIVING,115.44,1.31,Matched,10.3666666667,10/2/12,3,WT,0,0
+TCGA-D3-A2JB,TCGA-D3-A2JB-06,Metastasis,Non-glabrous skin,1997,70,Female,Stage 0,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,167.87,105.75,Matched,0.566666666667,10/10/12,0,WT,0,0
+TCGA-D3-A2JC,TCGA-D3-A2JC-06,Metastasis,Non-glabrous skin,2006,53,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,86.7,86.7,Matched,5.86666666667,10/10/12,3,WT,0,0
+TCGA-D3-A2JD,TCGA-D3-A2JD-06,Metastasis,Non-glabrous skin,2007,58,Male,Stage IIIC,7th,V,18,YES,14,1:DECEASED,11.86,6.54,Matched,10.7333333333,10/10/12,3,V600E,1,1
+TCGA-D3-A2JE,TCGA-D3-A2JE-06,Metastasis,Non-glabrous skin,2009,75,Female,Stage IIIC,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,27.63,25.62,Matched,NA,7/22/14,3,V600E,1,1
+TCGA-D3-A2JF,TCGA-D3-A2JF-06,Metastasis,Non-glabrous skin,2008,74,Male,Stage IA,7th,III,0.28,NO,0,0:LIVING,62.02,43.86,Matched,40.0666666667,10/10/12,1,WT,0,0
+TCGA-D3-A2JG,TCGA-D3-A2JG-06,Metastasis,Non-glabrous skin,2001,30,Female,Stage IIIA,7th,IV,2.5,NO,1,1:DECEASED,113.44,107.72,Matched,3,10/10/12,3,V600E,1,1
+TCGA-D3-A2JH,TCGA-D3-A2JH-06,Metastasis,Non-glabrous skin,2010,68,Male,Stage IB,7th,II,1,NO,1,0:LIVING,42.05,18.69,Matched,17.6,10/10/12,1,K601E,0,1
+TCGA-D3-A2JK,TCGA-D3-A2JK-06,Metastasis,Non-glabrous skin,2005,24,Male,Stage IIIC,7th,IV,4.3,YES,4,1:DECEASED,12.09,8.8,Matched,8.1,10/10/12,3,V600E,1,1
+TCGA-D3-A2JL,TCGA-D3-A2JL-06,Metastasis,Non-glabrous skin,1999,43,Female,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,171.45,98.39,Matched,9.5,10/10/12,2,WT,0,0
+TCGA-D3-A2JN,TCGA-D3-A2JN-06,Metastasis,Non-glabrous skin,2007,46,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,66.43,[Not Available],Matched,9.66666666667,10/10/12,3,V600E,1,1
+TCGA-D3-A2JO,TCGA-D3-A2JO-06,Metastasis,Non-glabrous skin,2008,50,Female,Stage IIIC,7th,[Not Available],NA,YES,[Not Available],0:LIVING,66.03,66.03,Matched,17.3666666667,10/10/12,3,WT,0,0
+TCGA-D3-A2JP,TCGA-D3-A2JP-06,Metastasis,Non-glabrous skin,2008,37,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,59.53,7.46,Matched,7.86666666667,10/10/12,3,V600E,1,1
+TCGA-D3-A3BZ,TCGA-D3-A3BZ-06,Metastasis,Non-glabrous skin,2002,63,Male,Stage IIB,7th,V,4.6,NO,1,0:LIVING,130.62,76.87,Matched,2.33333333333,10/10/12,2,WT,0,0
+TCGA-D3-A3C1,TCGA-D3-A3C1-06,Metastasis,Non-glabrous skin,1998,NA,Male,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,4.46666666667,10/10/12,2,V600E,1,1
+TCGA-D3-A3C3,TCGA-D3-A3C3-06,Metastasis,Non-glabrous skin,1985,NA,Female,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,7.73333333333,10/10/12,2,V600E,1,1
+TCGA-D3-A3C6,TCGA-D3-A3C6-06,Metastasis,Non-glabrous skin,2006,54,Female,Stage IB,7th,IV,1.3,NO,7,1:DECEASED,58.02,53.32,Matched,2.96666666667,10/10/12,1,V600E,1,1
+TCGA-D3-A3C7,TCGA-D3-A3C7-06,Metastasis,Non-glabrous skin,2009,57,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,46.94,46.94,Matched,26.8666666667,10/10/12,3,V600E,1,1
+TCGA-D3-A3C8,TCGA-D3-A3C8-06,Metastasis,Non-glabrous skin,2009,58,Female,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,46.29,5.78,Matched,20.3333333333,10/10/12,3,WT,0,0
+TCGA-D3-A3CB,TCGA-D3-A3CB-06,Metastasis,Non-glabrous skin,1999,39,Male,I/II NOS,7th,III,1.75,[Not Available],[Not Available],0:LIVING,166.39,166.39,Matched,7.26666666667,10/10/12,2,V600E,1,1
+TCGA-D3-A3CC,TCGA-D3-A3CC-06,Metastasis,Non-glabrous skin,2005,69,Female,Stage IIC,7th,V,7.2,YES,7,0:LIVING,86.86,84.13,Matched,1.06666666667,10/10/12,2,WT,0,0
+TCGA-D3-A3CE,TCGA-D3-A3CE-06,Metastasis,Non-glabrous skin,2001,74,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,60.18,51.48,Matched,1.36666666667,10/10/12,3,V600E,1,1
+TCGA-D3-A3CF,TCGA-D3-A3CF-06,Metastasis,Non-glabrous skin,2009,61,Female,Stage IIIC,7th,V,9,YES,2,1:DECEASED,24.51,21.52,Matched,1.13333333333,10/10/12,3,WT,0,0
+TCGA-D3-A3ML,TCGA-D3-A3ML-06,Metastasis,Non-glabrous skin,2003,70,Male,Stage IIIA,7th,IV,2.3,NO,3,1:DECEASED,13.86,12.68,Matched,25.4,11/8/12,3,WT,0,0
+TCGA-D3-A3MO,TCGA-D3-A3MO-06,Metastasis,Non-glabrous skin,2009,47,Male,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,9.33,8.28,Matched,2.06666666667,10/10/12,3,V600E,1,1
+TCGA-D3-A3MR,TCGA-D3-A3MR-06,Metastasis,Non-glabrous skin,2004,42,Male,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,103.52,102.1,Matched,24.5333333333,10/10/12,3,V600E,1,1
+TCGA-D3-A3MU,TCGA-D3-A3MU-06,Metastasis,Non-glabrous skin,2010,53,Male,Stage IIIA,7th,IV,2.9,NO,10,0:LIVING,39.72,24.64,Matched,14.3333333333,1/7/13,3,V600E,1,1
+TCGA-D3-A3MV,TCGA-D3-A3MV-06,Metastasis,Non-glabrous skin,2010,38,Female,Stage IIIB,7th,IV,1.2,YES,5,0:LIVING,45.27,0.53,Matched,13.9,10/10/12,3,WT,0,0
+TCGA-D3-A51E,TCGA-D3-A51E-06,Metastasis,Non-glabrous skin,1999,39,Female,I/II NOS,7th,III,1.2,[Not Available],[Not Available],0:LIVING,174.7,174.7,Matched,8.1,3/11/13,2,WT,0,0
+TCGA-D3-A51F,TCGA-D3-A51F-06,Metastasis,Non-glabrous skin,2009,51,Male,Stage IIIC,7th,IV,7,YES,11,0:LIVING,55.68,55.68,Matched,3.7,3/11/13,3,WT,0,0
+TCGA-D3-A51G,TCGA-D3-A51G-06,Metastasis,Non-glabrous skin,1990,NA,Male,Stage 0,7th,I,0,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,33.4,3/11/13,0,WT,0,0
+TCGA-D3-A51H,TCGA-D3-A51H-06,Metastasis,Non-glabrous skin,2009,60,Male,Stage IIIC,7th,IV,0.91,YES,0,0:LIVING,56.31,27.53,Matched,1.66666666667,3/11/13,3,WT,0,0
+TCGA-D3-A51J,TCGA-D3-A51J-06,Metastasis,Non-glabrous skin,2001,19,Male,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,145.01,65.97,Matched,13.0333333333,3/11/13,3,V600E,1,1
+TCGA-D3-A51K,TCGA-D3-A51K-06,Metastasis,Non-glabrous skin,2011,51,Male,Stage IIIB,7th,I,0,[Not Available],[Not Available],0:LIVING,32.92,32.92,Matched,1,3/11/13,3,WT,0,0
+TCGA-D3-A51N,TCGA-D3-A51N-06,Metastasis,Non-glabrous skin,2012,56,Female,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,22.6,0.59,Matched,3.16666666667,3/11/13,4,V600E,1,1
+TCGA-D3-A51R,TCGA-D3-A51R-06,Metastasis,Non-glabrous skin,2008,60,Male,Stage IIA,7th,IV,2.5,NO,2,0:LIVING,63.76,33.38,Matched,19.5666666667,3/11/13,2,WT,0,0
+TCGA-D3-A51T,TCGA-D3-A51T-06,Metastasis,Non-glabrous skin,2011,59,Female,Stage IIIC,7th,IV,4.2,YES,16,0:LIVING,26.87,6.9,Matched,32.4,3/11/13,3,G469R,0,1
+TCGA-D3-A5GL,TCGA-D3-A5GL-06,Metastasis,Non-glabrous skin,2003,74,Male,Stage IB,7th,IV,1.6,NO,1,0:LIVING,125.69,35.87,Matched,12.4,5/10/13,1,WT,0,0
+TCGA-D3-A5GN,TCGA-D3-A5GN-06,Metastasis,Non-glabrous skin,2001,15,Female,Stage I,7th,III,0.6,[Not Available],[Not Available],0:LIVING,135.64,88.8,Matched,13.0666666667,5/10/13,1,V600E,1,1
+TCGA-D3-A5GO,TCGA-D3-A5GO-06,Metastasis,Non-glabrous skin,2001,61,Male,Stage II,7th,V,4.3,[Not Available],[Not Available],0:LIVING,137.81,79.37,Matched,43.4333333333,5/10/13,2,WT,0,0
+TCGA-D3-A5GR,TCGA-D3-A5GR-06,Metastasis,Non-glabrous skin,1998,23,Female,Stage III,7th,III,0.98,[Not Available],1,0:LIVING,178.19,175.89,Matched,7.3,5/16/13,3,V600E,1,1
+TCGA-D3-A5GS,TCGA-D3-A5GS-06,Metastasis,Non-glabrous skin,2012,58,Male,Stage IV,7th,II,0.62,NO,1,0:LIVING,18.17,5.29,Matched,10.9333333333,5/15/13,4,V600E,1,1
+TCGA-D3-A5GT,TCGA-D3-A5GT-01,Primary,Non-glabrous skin,2012,43,Male,Stage IIIC,7th,IV,1.92,YES,4,0:LIVING,16,16,Matched,0.866666666667,5/15/13,3,V600E,1,1
+TCGA-D3-A5GU,TCGA-D3-A5GU-06,Metastasis,Non-glabrous skin,2002,36,Male,Stage IB,7th,III,0.48,NO,2,0:LIVING,125.1,107.03,Matched,NA,5/16/13,1,V600E,1,1
+TCGA-D3-A8GB,TCGA-D3-A8GB-06,Metastasis,Non-glabrous skin,2003,48,Male,Stage IIIB,7th,IV,3.5,NO,4,1:DECEASED,30.81,15.14,Matched,NA,12/12/13,3,V600E,1,1
+TCGA-D3-A8GC,TCGA-D3-A8GC-06,Metastasis,Non-glabrous skin,2000,48,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,79.53,75.16,Matched,NA,12/12/13,3,WT,0,0
+TCGA-D3-A8GD,TCGA-D3-A8GD-06,Metastasis,Non-glabrous skin,2012,63,Female,Stage IIIC,7th,IV,20,YES,18,0:LIVING,23.59,4.83,Matched,NA,12/12/13,3,V600E,1,1
+TCGA-D3-A8GE,TCGA-D3-A8GE-06,Metastasis,Non-glabrous skin,2012,26,Male,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,26.41,1.94,Matched,NA,12/13/13,4,WT,0,0
+TCGA-D3-A8GI,TCGA-D3-A8GI-06,Metastasis,Non-glabrous skin,2008,68,Male,Stage IA,7th,IV,0.98,NO,4,1:DECEASED,58.48,57.13,Matched,NA,12/17/13,1,WT,0,0
+TCGA-D3-A8GJ,TCGA-D3-A8GJ-06,Metastasis,Non-glabrous skin,1994,18,Male,Stage II,7th,III,2.4,[Not Available],[Not Available],0:LIVING,241.2,47.4,Matched,NA,12/17/13,2,V600E,1,1
+TCGA-D3-A8GK,TCGA-D3-A8GK-06,Metastasis,Non-glabrous skin,2000,45,Male,Stage IIA,7th,IV,2.6,NO,5,0:LIVING,170.07,51.08,Matched,NA,12/19/13,2,WT,0,0
+TCGA-D3-A8GL,TCGA-D3-A8GL-06,Metastasis,Non-glabrous skin,1996,43,Male,Stage IIIB,7th,IV,1.32,NO,2,1:DECEASED,89.06,84.63,Matched,NA,12/19/13,3,WT,0,0
+TCGA-D3-A8GM,TCGA-D3-A8GM-06,Metastasis,Non-glabrous skin,2005,73,Male,Stage IIB,7th,IV,3.8,YES,9,1:DECEASED,107.06,[Not Available],Matched,NA,12/19/13,2,Y566C,0,1
+TCGA-D3-A8GN,TCGA-D3-A8GN-06,Metastasis,[Not Available],2000,27,Female,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,160.87,25.85,Matched,NA,12/19/13,2,V600E,1,1
+TCGA-D3-A8GO,TCGA-D3-A8GO-06,Metastasis,[Not Available],1996,NA,Female,I/II NOS,7th,III,1.2,[Not Available],[Not Available],1:DECEASED,NA,[Not Available],Matched,NA,12/20/13,2,V600E V600M,1,1
+TCGA-D3-A8GP,TCGA-D3-A8GP-06,Metastasis,[Not Available],2002,77,Male,Stage III,7th,IV,1.8,[Not Available],[Not Available],0:LIVING,152.63,17.58,Matched,NA,12/20/13,3,WT,0,0
+TCGA-D3-A8GQ,TCGA-D3-A8GQ-06,Metastasis,[Not Available],2004,66,Male,Stage II,7th,III,2.6,[Not Available],[Not Available],1:DECEASED,29.04,26.02,Matched,NA,12/20/13,2,WT,0,0
+TCGA-D3-A8GR,TCGA-D3-A8GR-06,Metastasis,[Not Available],1999,54,Female,Stage 0,7th,I,0.01,[Not Available],[Not Available],1:DECEASED,129.53,124.01,Matched,NA,12/20/13,0,WT,0,0
+TCGA-D3-A8GS,TCGA-D3-A8GS-06,Metastasis,[Not Available],1997,52,Male,Stage I,7th,III,0.6,[Not Available],[Not Available],1:DECEASED,117.08,93.56,Matched,NA,12/20/13,1,V600E,1,1
+TCGA-D3-A8GV,TCGA-D3-A8GV-06,Metastasis,Non-glabrous skin,1993,25,Male,I/II NOS,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,167.58,158.94,Matched,NA,1/2/14,2,V600E,1,1
+TCGA-D9-A148,TCGA-D9-A148-06,Metastasis,Non-glabrous skin,1999,40,Male,[Not Available],7th,[Not Available],NA,NO,[Not Available],0:LIVING,151.41,143.36,Matched,7.93333333333,8/13/12,NA,V600E,1,1
+TCGA-D9-A149,TCGA-D9-A149-06,Metastasis,Non-glabrous skin,2007,65,Female,[Not Available],7th,[Not Available],NA,NO,[Not Available],0:LIVING,54.63,42.38,Matched,6.76666666667,8/13/12,NA,WT,0,0
+TCGA-D9-A1JW,TCGA-D9-A1JW-06,Metastasis,Non-glabrous skin,2010,82,Male,[Not Available],7th,[Not Available],NA,NO,[Not Available],0:LIVING,3.65,0.33,Matched,25,8/13/12,NA,N581T,0,1
+TCGA-D9-A1JX,TCGA-D9-A1JX-06,Metastasis,Non-glabrous skin,2010,80,Female,[Not Available],7th,III,NA,NO,[Not Available],1:DECEASED,7.1,6.41,Matched,5.36666666667,8/13/12,NA,V600E,1,1
+TCGA-D9-A1X3,TCGA-D9-A1X3-06,Metastasis,Non-glabrous skin,2010,63,Male,[Not Available],7th,V,12,YES,[Not Available],0:LIVING,18.1,18.1,Matched,NA,8/13/12,NA,WT,0,0
+TCGA-D9-A3Z1,TCGA-D9-A3Z1-06,Metastasis,[Not Available],2011,66,Male,Stage IIIC,7th,IV,1.7,[Not Available],[Not Available],1:DECEASED,15.37,11.01,Matched,13.6333333333,7/24/12,3,WT,0,0
+TCGA-D9-A3Z3,TCGA-D9-A3Z3-06,Metastasis,Non-glabrous skin,2012,39,Female,Stage IIIB,7th,IV,3.9,NO,6,0:LIVING,22.27,22.27,Matched,3.86666666667,7/24/12,3,V600E,1,1
+TCGA-D9-A3Z4,TCGA-D9-A3Z4-01,Primary,Non-glabrous skin,2012,54,Male,Stage IIIC,7th,V,12,YES,[Not Available],1:DECEASED,17.05,6.31,Matched,4.23333333333,7/24/12,3,WT,0,0
+TCGA-D9-A4Z2,TCGA-D9-A4Z2-01,Primary,Non-glabrous skin,2012,50,Male,Stage IIIC,7th,IV,25,YES,10,1:DECEASED,6.24,2.63,Matched,0.8,1/23/13,3,V600E,1,1
+TCGA-D9-A4Z3,TCGA-D9-A4Z3-01,Primary,Non-glabrous skin,2012,73,Female,Stage IIIC,7th,V,75,YES,10,0:LIVING,16.59,3.29,Matched,23,2/1/13,3,WT,0,0
+TCGA-D9-A4Z5,TCGA-D9-A4Z5-01,Primary,Non-glabrous skin,2012,68,Male,Stage IIB,7th,III,NA,NO,[Not Available],0:LIVING,7.16,7.16,Matched,2.36666666667,1/23/13,2,N581H,0,1
+TCGA-D9-A4Z6,TCGA-D9-A4Z6-06,Metastasis,Non-glabrous skin,2012,54,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,18.43,7,Matched,NA,2/1/13,3,R726C,0,1
+TCGA-D9-A6E9,TCGA-D9-A6E9-06,Metastasis,Non-glabrous skin,2013,75,Female,Stage IIIA,7th,IV,4,NO,[Not Available],0:LIVING,9.89,9.89,Matched,5.6,3/28/14,3,V600E,1,1
+TCGA-D9-A6EA,TCGA-D9-A6EA-06,Metastasis,Non-glabrous skin,2012,70,Male,Stage IIIC,7th,IV,6,NO,[Not Available],0:LIVING,25.16,25.16,Matched,18.4666666667,3/28/14,3,WT,0,0
+TCGA-D9-A6EC,TCGA-D9-A6EC-06,Metastasis,Non-glabrous skin,2008,56,Male,Stage IIIA,6th,III,3,NO,[Not Available],0:LIVING,77.5,77.5,Matched,129.866666667,3/28/14,3,L485F L485*,0,1
+TCGA-D9-A6EG,TCGA-D9-A6EG-06,Metastasis,Non-glabrous skin,2012,56,Male,Stage IIIA,7th,IV,5,YES,[Not Available],1:DECEASED,22.93,13.07,Matched,2.46666666667,3/28/14,3,V600E,1,1
+TCGA-DA-A1HV,TCGA-DA-A1HV-06,Metastasis,Non-glabrous skin,2008,75,Female,Stage IIIB,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,76.51,28.45,Matched,37.6,1/10/13,3,WT,0,0
+TCGA-DA-A1HW,TCGA-DA-A1HW-06,Metastasis,Non-glabrous skin,2009,37,Female,Stage IIIB,6th,III,0.7,NO,[Not Available],1:DECEASED,36.01,27.99,Matched,9.03333333333,1/10/13,3,V600E,1,1
+TCGA-DA-A1HY,TCGA-DA-A1HY-06,Metastasis,Non-glabrous skin,2002,42,Male,Stage III,5th,IV,1.13,YES,[Not Available],0:LIVING,144.78,144.78,Matched,20.5,1/10/13,3,V600E,1,1
+TCGA-DA-A1I0,TCGA-DA-A1I0-06,Metastasis,Non-glabrous skin,2008,63,Male,Stage IV,6th,IV,4.5,YES,[Not Available],1:DECEASED,20.37,19.68,Matched,13.9333333333,1/10/13,4,V600E V600M,1,1
+TCGA-DA-A1I1,TCGA-DA-A1I1-06,Metastasis,Non-glabrous skin,1996,55,Male,Stage III,4th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,222.34,183.67,Matched,11.1333333333,1/10/13,3,WT,0,0
+TCGA-DA-A1I2,TCGA-DA-A1I2-06,Metastasis,Non-glabrous skin,1996,45,Male,Stage III,4th,IV,NA,YES,[Not Available],1:DECEASED,176.41,174.28,Matched,3.53333333333,1/10/13,3,V600E,1,1
+TCGA-DA-A1I4,TCGA-DA-A1I4-06,Metastasis,Non-glabrous skin,2006,51,Male,Stage IIIC,6th,IV,3.4,YES,[Not Available],1:DECEASED,35.91,29.2,Matched,7.56666666667,1/10/13,3,V600E,1,1
+TCGA-DA-A1I5,TCGA-DA-A1I5-06,Metastasis,Non-glabrous skin,2003,27,Female,Stage IV,6th,IV,0.6,NO,[Not Available],0:LIVING,134.92,134.92,Matched,12.5666666667,1/10/13,4,V600E,1,1
+TCGA-DA-A1I7,TCGA-DA-A1I7-06,Metastasis,Non-glabrous skin,2007,62,Male,Stage IIIB,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,88.8,24.8,Matched,12.3333333333,1/10/13,3,V600E,1,1
+TCGA-DA-A1I8,TCGA-DA-A1I8-06,Metastasis,Non-glabrous skin,2005,63,Female,Stage IIC,6th,IV,8,YES,[Not Available],1:DECEASED,53.88,42.97,Matched,4.8,1/10/13,2,V600E,1,1
+TCGA-DA-A1IA,TCGA-DA-A1IA-06,Metastasis,Non-glabrous skin,2005,32,Female,Stage IIIB,6th,IV,1.3,NO,[Not Available],1:DECEASED,65.87,[Not Available],Matched,9.33333333333,1/10/13,3,WT,0,0
+TCGA-DA-A1IB,TCGA-DA-A1IB-06,Metastasis,Non-glabrous skin,2010,69,Female,Stage IIIC,7th,IV,1.5,YES,[Not Available],1:DECEASED,40.57,7.98,Matched,0.8,1/10/13,3,WT,0,0
+TCGA-DA-A1IC,TCGA-DA-A1IC-06,Metastasis,Non-glabrous skin,2005,81,Male,Stage IIIB,6th,IV,2.5,NO,[Not Available],1:DECEASED,68.04,63.4,Matched,26.3333333333,1/10/13,3,WT,0,0
+TCGA-DA-A3F2,TCGA-DA-A3F2-06,Metastasis,Non-glabrous skin,2010,55,Male,Stage IIIB,7th,V,5.1,NO,[Not Available],1:DECEASED,33.9,14.13,Matched,0.3,1/10/13,3,NA,NA,NA
+TCGA-DA-A3F3,TCGA-DA-A3F3-06,Metastasis,Non-glabrous skin,2010,52,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,10.48,[Not Available],Matched,8.96666666667,1/10/13,3,WT,0,0
+TCGA-DA-A3F5,TCGA-DA-A3F5-06,Metastasis,Non-glabrous skin,1994,45,Male,Stage I,4th,III,0.4,[Not Available],[Not Available],1:DECEASED,225.79,224.74,Matched,9.93333333333,1/10/13,1,V600E,1,1
+TCGA-DA-A3F8,TCGA-DA-A3F8-06,Metastasis,Non-glabrous skin,2011,39,Male,Stage IIIB,7th,IV,1.9,NO,[Not Available],0:LIVING,43.33,43.33,Matched,33.1,1/10/13,3,V600E V600M,1,1
+TCGA-DA-A95V,TCGA-DA-A95V-06,Metastasis,Non-glabrous skin,2009,83,Female,Stage IIC,6th,IV,4.1,YES,[Not Available],0:LIVING,72.04,72.04,Matched,NA,1/27/15,2,WT,0,0
+TCGA-DA-A95W,TCGA-DA-A95W-06,Metastasis,[Not Available],2011,52,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,37.32,37.32,Matched,NA,1/27/15,3,V600E,1,1
+TCGA-DA-A95X,TCGA-DA-A95X-06,Metastasis,Non-glabrous skin,2009,62,Male,Stage IB,6th,IV,1.45,NO,[Not Available],0:LIVING,73.88,73.88,Matched,NA,1/27/15,1,WT,0,0
+TCGA-DA-A95Y,TCGA-DA-A95Y-06,Metastasis,Non-glabrous skin,2012,68,Male,Stage IIC,7th,IV,5.03,YES,[Not Available],1:DECEASED,14.13,11.1,Matched,NA,1/27/15,2,N486_P490del,0,1
+TCGA-DA-A95Z,TCGA-DA-A95Z-06,Metastasis,Non-glabrous skin,2013,87,Male,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,13.01,13.01,Matched,NA,1/27/15,4,G466E,0,1
+TCGA-DA-A960,TCGA-DA-A960-01,Primary,Non-glabrous skin,2012,73,Male,Stage IIB,7th,IV,2.32,YES,[Not Available],0:LIVING,26.41,26.41,Matched,NA,1/27/15,2,WT,0,0
+TCGA-EB-A1NK,TCGA-EB-A1NK-01,Primary,Non-glabrous skin,2010,48,Male,Stage IIC,7th,IV,8,YES,[Not Available],0:LIVING,34.13,34.13,Matched,4.16666666667,9/12/12,2,WT,0,0
+TCGA-EB-A24C,TCGA-EB-A24C-01,Primary,Non-glabrous skin,2011,56,Male,[Not Available],7th,[Not Available],10,YES,[Not Available],0:LIVING,20.76,15.28,Matched,0.866666666667,9/12/12,NA,V600E,1,1
+TCGA-EB-A24D,TCGA-EB-A24D-01,Primary,Non-glabrous skin,2011,72,Male,Stage IIIB,7th,[Not Available],36,NO,[Not Available],0:LIVING,21.19,16.43,Matched,16.1666666667,9/12/12,3,K601E L245F,0,1
+TCGA-EB-A299,TCGA-EB-A299-01,Primary,Non-glabrous skin,2011,63,Male,Stage IIA,7th,III,2,YES,4,0:LIVING,12.42,12.42,Matched,4.36666666667,9/12/12,2,V600E,1,1
+TCGA-EB-A3HV,TCGA-EB-A3HV-01,Primary,Non-glabrous skin,2011,37,Male,Stage IIC,7th,IV,13,YES,[Not Available],0:LIVING,1.28,1.28,Matched,2,9/12/12,2,V600E,1,1
+TCGA-EB-A3XB,TCGA-EB-A3XB-01,Primary,Non-glabrous skin,2011,63,Male,Stage II,7th,IV,NA,[Not Available],[Not Available],0:LIVING,26.15,26.15,Matched,14.2,8/14/12,2,V600E V600M,1,1
+TCGA-EB-A3XC,TCGA-EB-A3XC-01,Primary,Non-glabrous skin,2012,74,Male,Stage IIC,7th,[Not Available],NA,YES,[Not Available],0:LIVING,21.35,21.35,Matched,11.1333333333,8/14/12,2,V600G V600M,0,1
+TCGA-EB-A3XD,TCGA-EB-A3XD-01,Primary,Non-glabrous skin,2011,53,Female,Stage IIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,38.11,38.11,Matched,11.4666666667,8/14/12,2,V600E,1,1
+TCGA-EB-A3XE,TCGA-EB-A3XE-01,Primary,Non-glabrous skin,2012,77,Female,Stage IIA,7th,[Not Available],3,NO,[Not Available],0:LIVING,5.91,5.91,Matched,0.666666666667,8/14/12,2,V600E,1,1
+TCGA-EB-A3XF,TCGA-EB-A3XF-01,Primary,Non-glabrous skin,2012,57,Male,Stage IIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,9.13,9.13,Matched,10.9,8/14/12,2,V600E V600M,1,1
+TCGA-EB-A3Y6,TCGA-EB-A3Y6-01,Primary,Non-glabrous skin,2012,56,Female,Stage IIC,7th,[Not Available],4.5,YES,[Not Available],0:LIVING,4.14,4.14,Matched,16.5333333333,9/25/12,2,V600E,1,1
+TCGA-EB-A3Y7,TCGA-EB-A3Y7-01,Primary,Non-glabrous skin,2012,86,Female,Stage IIIB,7th,[Not Available],4,NO,[Not Available],1:DECEASED,10.71,[Not Available],Matched,30.7,9/25/12,3,WT,0,0
+TCGA-EB-A41A,TCGA-EB-A41A-01,Primary,Non-glabrous skin,2012,90,Male,Stage IIC,7th,[Not Available],7,YES,[Not Available],0:LIVING,8.61,8.61,Matched,50.8666666667,9/25/12,2,WT,0,0
+TCGA-EB-A41B,TCGA-EB-A41B-01,Primary,Non-glabrous skin,2012,76,Female,Stage IIC,7th,V,28,YES,[Not Available],0:LIVING,9.56,9.56,Matched,10.9666666667,9/25/12,2,WT,0,0
+TCGA-EB-A42Y,TCGA-EB-A42Y-01,Primary,Non-glabrous skin,2012,73,Female,Stage IIC,7th,[Not Available],5,YES,[Not Available],1:DECEASED,23.69,23.69,Matched,2.4,11/20/12,2,WT,0,0
+TCGA-EB-A42Z,TCGA-EB-A42Z-01,Primary,Non-glabrous skin,2012,49,Male,Stage IIIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,14.49,14.49,Matched,3.13333333333,11/21/12,3,V600E,1,1
+TCGA-EB-A430,TCGA-EB-A430-01,Primary,Non-glabrous skin,2012,83,Male,Stage IIC,7th,IV,18,YES,[Not Available],0:LIVING,-0.07,-0.07,Matched,11.4,11/21/12,2,V600E,1,1
+TCGA-EB-A431,TCGA-EB-A431-01,Primary,Non-glabrous skin,2012,34,Male,Stage IIC,7th,III,15,YES,[Not Available],0:LIVING,18.66,18.66,Matched,46.7,11/20/12,2,V600E,1,1
+TCGA-EB-A44N,TCGA-EB-A44N-01,Primary,Non-glabrous skin,2012,59,Male,Stage IIC,7th,III,5,YES,[Not Available],1:DECEASED,6.73,[Not Available],Matched,4.4,12/19/12,2,V600E,1,1
+TCGA-EB-A44O,TCGA-EB-A44O-01,Primary,Non-glabrous skin,2012,69,Male,Stage IIB,7th,[Not Available],5,NO,[Not Available],0:LIVING,2.66,1.97,Matched,13.7333333333,12/19/12,2,WT,0,0
+TCGA-EB-A44P,TCGA-EB-A44P-01,Primary,Non-glabrous skin,2012,58,Female,Stage IIC,7th,[Not Available],NA,NO,[Not Available],0:LIVING,24.34,24.34,Matched,9.06666666667,12/19/12,2,V600E,1,1
+TCGA-EB-A44Q,TCGA-EB-A44Q-06,Metastasis,Non-glabrous skin,2012,51,Female,Stage IIIC,7th,[Not Available],NA,YES,[Not Available],0:LIVING,13.86,13.86,Matched,1.76666666667,12/19/12,3,WT,0,0
+TCGA-EB-A44R,TCGA-EB-A44R-06,Metastasis,Non-glabrous skin,2011,52,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,10.35,[Not Available],Matched,1.76666666667,12/19/12,3,WT,0,0
+TCGA-EB-A4IQ,TCGA-EB-A4IQ-01,Primary,Non-glabrous skin,2012,42,Female,Stage IIIB,7th,[Not Available],15,YES,[Not Available],1:DECEASED,20.89,[Not Available],Matched,0.433333333333,2/11/13,3,WT,0,0
+TCGA-EB-A4IS,TCGA-EB-A4IS-01,Primary,Non-glabrous skin,2012,77,Male,Stage IIB,7th,[Not Available],2.5,YES,[Not Available],0:LIVING,25.43,25.43,Matched,15.1666666667,2/11/13,2,V600E,1,1
+TCGA-EB-A4OY,TCGA-EB-A4OY-01,Primary,Non-glabrous skin,2012,65,Female,Stage IIIB,7th,V,10,[Not Available],[Not Available],0:LIVING,32.1,32.1,Matched,1.96666666667,2/11/13,3,WT,0,0
+TCGA-EB-A4OZ,TCGA-EB-A4OZ-01,Primary,Non-glabrous skin,2012,41,Female,Stage IIIC,7th,V,18,NO,[Not Available],0:LIVING,20.37,20.37,Matched,1,2/11/13,3,WT,0,0
+TCGA-EB-A4P0,TCGA-EB-A4P0-01,Primary,Non-glabrous skin,2012,82,Male,Stage IIC,7th,IV,8,YES,[Not Available],1:DECEASED,10.71,[Not Available],Matched,5.3,2/11/13,2,V600E,1,1
+TCGA-EB-A4XL,TCGA-EB-A4XL-01,Primary,Non-glabrous skin,2012,56,Female,Stage IIC,7th,IV,7,YES,[Not Available],0:LIVING,25.53,25.53,Matched,12.9,6/21/13,2,WT,0,0
+TCGA-EB-A51B,TCGA-EB-A51B-01,Primary,Non-glabrous skin,2012,53,Male,Stage IIC,7th,III,10,YES,[Not Available],0:LIVING,30.58,30.58,Matched,NA,4/9/13,2,WT,0,0
+TCGA-EB-A550,TCGA-EB-A550-01,Primary,Non-glabrous skin,2012,75,Female,Stage IIC,7th,IV,15,YES,[Not Available],1:DECEASED,8.67,[Not Available],Matched,NA,4/10/13,2,V600E,1,1
+TCGA-EB-A551,TCGA-EB-A551-01,Primary,Non-glabrous skin,2012,78,Female,Stage IIIC,7th,V,10,YES,[Not Available],0:LIVING,19.38,19.38,Matched,9.73333333333,4/10/13,3,WT,0,0
+TCGA-EB-A553,TCGA-EB-A553-01,Primary,Non-glabrous skin,2012,62,Male,Stage IIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,7.42,7.42,Matched,9.5,4/10/13,2,V600E,1,1
+TCGA-EB-A57M,TCGA-EB-A57M-01,Primary,Non-glabrous skin,2012,56,Male,Stage IIIB,7th,[Not Available],8,YES,[Not Available],1:DECEASED,15.51,[Not Available],Matched,2.03333333333,4/12/13,3,WT,0,0
+TCGA-EB-A5FP,TCGA-EB-A5FP-01,Primary,Non-glabrous skin,2012,65,Female,Stage IV,7th,[Not Available],8,YES,[Not Available],1:DECEASED,14.91,[Not Available],Matched,11.0333333333,5/22/13,4,V600E V600M,1,1
+TCGA-EB-A5KH,TCGA-EB-A5KH-06,Metastasis,Non-glabrous skin,2011,55,Male,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,20.34,[Not Available],Matched,1.36666666667,4/10/13,3,WT,0,0
+TCGA-EB-A5SE,TCGA-EB-A5SE-01,Primary,Non-glabrous skin,2012,73,Male,Stage IIB,7th,IV,4,YES,[Not Available],1:DECEASED,13.17,12.06,Matched,7.76666666667,5/23/13,2,V600E,1,1
+TCGA-EB-A5SF,TCGA-EB-A5SF-01,Primary,Non-glabrous skin,2012,78,Female,Stage IIC,7th,V,11,YES,[Not Available],1:DECEASED,12.12,[Not Available],Matched,1.16666666667,11/26/13,2,WT,0,0
+TCGA-EB-A5SG,TCGA-EB-A5SG-06,Metastasis,[Not Available],2008,57,Female,[Not Available],[Not Available],[Not Available],NA,NO,[Not Available],0:LIVING,68.2,45.07,Matched,8.13333333333,11/21/13,NA,WT,0,0
+TCGA-EB-A5SH,TCGA-EB-A5SH-06,Metastasis,[Not Available],2009,60,Female,Stage III,6th,V,5,YES,[Not Available],0:LIVING,53.98,34.99,Matched,3.2,11/21/13,3,WT,0,0
+TCGA-EB-A5UL,TCGA-EB-A5UL-06,Metastasis,Non-glabrous skin,2012,71,Male,Stage III,7th,[Not Available],4,[Not Available],[Not Available],0:LIVING,29.27,29.27,Matched,13.4333333333,7/22/13,3,WT,0,0
+TCGA-EB-A5UM,TCGA-EB-A5UM-01,Primary,Non-glabrous skin,2012,48,Female,Stage IIC,7th,[Not Available],5,YES,[Not Available],0:LIVING,25.59,25.59,Matched,15.9666666667,5/24/13,2,WT,0,0
+TCGA-EB-A5UN,TCGA-EB-A5UN-06,Metastasis,Non-glabrous skin,2009,49,Male,Stage IIC,6th,IV,14,YES,4,0:LIVING,58.87,55.49,Matched,20.7333333333,7/12/13,2,V600E,1,1
+TCGA-EB-A5VU,TCGA-EB-A5VU-01,Primary,Non-glabrous skin,2012,56,Male,Stage IIIB,7th,[Not Available],15,YES,[Not Available],1:DECEASED,10.55,7.13,Matched,1.73333333333,7/22/13,3,WT,0,0
+TCGA-EB-A5VV,TCGA-EB-A5VV-06,Metastasis,Non-glabrous skin,2012,74,Female,Stage IIIB,7th,[Not Available],4,YES,[Not Available],0:LIVING,7.03,7.03,Matched,0.3,6/13/13,3,NA,NA,NA
+TCGA-EB-A6L9,TCGA-EB-A6L9-06,Metastasis,Non-glabrous skin,2012,55,Male,Stage IIIC,7th,[Not Available],NA,YES,[Not Available],0:LIVING,36.43,36.43,Matched,0.9,10/17/13,3,WT,0,0
+TCGA-EB-A6QY,TCGA-EB-A6QY-01,Primary,Non-glabrous skin,2013,71,Male,Stage IIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,12.55,1.18,Matched,17.2,10/17/13,2,V600E V600M,1,1
+TCGA-EB-A6QZ,TCGA-EB-A6QZ-01,Primary,Non-glabrous skin,2013,76,Female,Stage IIA,7th,[Not Available],3,NO,[Not Available],1:DECEASED,11.56,[Not Available],Matched,7.76666666667,10/17/13,2,V600E,1,1
+TCGA-EB-A6R0,TCGA-EB-A6R0-01,Primary,Non-glabrous skin,2012,58,Female,Stage IIC,7th,IV,10,YES,[Not Available],1:DECEASED,19.97,[Not Available],Matched,10.9,10/17/13,2,V600E V600M,1,1
+TCGA-EB-A82B,TCGA-EB-A82B-01,Primary,Non-glabrous skin,2013,58,Female,Stage III,7th,V,20,YES,[Not Available],0:LIVING,12.81,12.81,Matched,NA,1/7/14,3,WT,0,0
+TCGA-EB-A82C,TCGA-EB-A82C-01,Primary,Non-glabrous skin,2013,70,Female,Stage IIC,7th,V,10,YES,[Not Available],0:LIVING,0.56,0.56,Matched,NA,1/7/14,2,WT,0,0
+TCGA-EB-A85I,TCGA-EB-A85I-01,Primary,Non-glabrous skin,2013,66,Male,Stage IIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,11.89,11.89,Matched,NA,1/3/14,2,V600E,1,1
+TCGA-EB-A85J,TCGA-EB-A85J-01,Primary,Non-glabrous skin,2013,66,Female,Stage IIB,7th,[Not Available],5.5,NO,[Not Available],0:LIVING,11.83,4.53,Matched,NA,1/3/14,2,WT,0,0
+TCGA-EB-A97M,TCGA-EB-A97M-01,Primary,Non-glabrous skin,2013,66,Male,Stage IIC,7th,IV,15,YES,[Not Available],0:LIVING,13.6,13.6,Matched,NA,4/18/14,2,WT,0,0
+TCGA-EE-A17X,TCGA-EE-A17X-06,Metastasis,Non-glabrous skin,2006,54,Male,Stage IA,6th,III,0.8,NO,6,1:DECEASED,29.8,17.44,Matched,22.4,1/8/13,1,WT,0,0
+TCGA-EE-A17Y,TCGA-EE-A17Y-06,Metastasis,Non-glabrous skin,2007,69,Male,Stage IIIB,6th,IV,2.8,YES,17,1:DECEASED,27.2,16.66,Matched,4.63333333333,7/12/13,3,V600E,1,1
+TCGA-EE-A17Z,TCGA-EE-A17Z-06,Metastasis,Non-glabrous skin,2008,57,Male,Stage IIB,6th,V,29,NO,9,1:DECEASED,8.64,4.57,Matched,1.06666666667,1/8/13,2,WT,0,0
+TCGA-EE-A180,TCGA-EE-A180-06,Metastasis,Non-glabrous skin,2001,69,Male,Stage III,5th,IV,4.9,NO,33,1:DECEASED,94.91,89.55,Matched,15.1333333333,6/3/12,3,WT,0,0
+TCGA-EE-A181,TCGA-EE-A181-06,Metastasis,Non-glabrous skin,2005,82,Female,Stage II,6th,IV,2.5,[Not Available],4,1:DECEASED,33.71,25.89,Matched,83.2333333333,1/8/13,2,S467L,0,1
+TCGA-EE-A182,TCGA-EE-A182-06,Metastasis,Non-glabrous skin,2008,84,Female,Stage IIIC,6th,V,14,YES,5,1:DECEASED,14.68,10.78,Matched,39.8,1/8/13,3,WT,0,0
+TCGA-EE-A183,TCGA-EE-A183-06,Metastasis,Non-glabrous skin,2007,48,Male,Stage 0,6th,I,NA,[Not Available],[Not Available],1:DECEASED,26.87,23,Matched,21.8666666667,1/8/13,0,V600E V600M,1,1
+TCGA-EE-A184,TCGA-EE-A184-06,Metastasis,Non-glabrous skin,2003,72,Male,Stage IB,6th,IV,1.95,NO,2,1:DECEASED,68.1,50.13,Matched,8.4,7/12/13,1,WT,0,0
+TCGA-EE-A185,TCGA-EE-A185-06,Metastasis,Non-glabrous skin,2008,55,Female,Stage IIIC,6th,IV,6,YES,12,1:DECEASED,4.96,2.79,Matched,5.43333333333,1/8/13,3,WT,0,0
+TCGA-EE-A20B,TCGA-EE-A20B-06,Metastasis,Non-glabrous skin,2002,66,Female,Stage II,5th,III,2.6,[Not Available],10,0:LIVING,133.71,133.71,Matched,5.2,1/8/13,2,V600E,1,1
+TCGA-EE-A20C,TCGA-EE-A20C-06,Metastasis,Non-glabrous skin,1997,59,Male,Stage 0,4th,I,NA,[Not Available],[Not Available],1:DECEASED,151.15,145.89,Matched,57.6333333333,7/31/13,0,WT,0,0
+TCGA-EE-A20F,TCGA-EE-A20F-06,Metastasis,Non-glabrous skin,2002,53,Male,Stage I,5th,[Not Available],0.5,[Not Available],[Not Available],0:LIVING,91.49,91.49,Matched,13.2,1/8/13,1,V600E,1,1
+TCGA-EE-A20H,TCGA-EE-A20H-06,Metastasis,Non-glabrous skin,1995,56,Male,Stage I,4th,III,1.05,[Not Available],[Not Available],1:DECEASED,168.13,163.93,Matched,16.8333333333,1/8/13,1,V600E V600M,1,1
+TCGA-EE-A20I,TCGA-EE-A20I-06,Metastasis,Non-glabrous skin,2008,79,Male,Stage IV,6th,[Not Available],NA,YES,12,1:DECEASED,13.53,12.65,Matched,0.666666666667,7/11/13,4,WT,0,0
+TCGA-EE-A29A,TCGA-EE-A29A-06,Metastasis,Non-glabrous skin,2003,68,Male,Stage IIIA,6th,IV,2.3,NO,6,1:DECEASED,63.3,58.97,Matched,7.16666666667,1/8/13,3,V600E,1,1
+TCGA-EE-A29B,TCGA-EE-A29B-06,Metastasis,Non-glabrous skin,2004,67,Male,Stage IIB,6th,III,4,YES,[Not Available],1:DECEASED,85.02,80.35,Matched,15.8333333333,7/31/13,2,WT,0,0
+TCGA-EE-A29C,TCGA-EE-A29C-06,Metastasis,Non-glabrous skin,2007,20,Male,Stage IB,6th,IV,1.7,NO,4,1:DECEASED,78.91,72.67,Matched,11.7333333333,1/8/13,1,V600E,1,1
+TCGA-EE-A29D,TCGA-EE-A29D-06,Metastasis,Non-glabrous skin,2008,87,Male,Stage IIIC,6th,IV,3.2,YES,7,1:DECEASED,13.96,[Not Available],Matched,102.166666667,1/8/13,3,WT,0,0
+TCGA-EE-A29E,TCGA-EE-A29E-06,Metastasis,Non-glabrous skin,2008,54,Male,Stage IIIB,6th,IV,3.2,NO,6,0:LIVING,63.73,63.73,Matched,95.9666666667,1/8/13,3,V600E V600M,1,1
+TCGA-EE-A29G,TCGA-EE-A29G-06,Metastasis,Non-glabrous skin,2003,53,Male,Stage IIIA,6th,V,7.4,NO,14,1:DECEASED,72.01,69.15,Matched,11.4,7/11/13,3,WT,0,0
+TCGA-EE-A29H,TCGA-EE-A29H-06,Metastasis,Non-glabrous skin,2008,59,Female,Stage IA,6th,II,1,NO,1,0:LIVING,64.59,64.59,Matched,9.13333333333,1/8/13,1,V600E,1,1
+TCGA-EE-A29L,TCGA-EE-A29L-06,Metastasis,Non-glabrous skin,2009,78,Male,Stage IIIC,6th,V,7,YES,16,1:DECEASED,2.6,1.81,Matched,54.6666666667,1/8/13,3,WT,0,0
+TCGA-EE-A29M,TCGA-EE-A29M-06,Metastasis,Non-glabrous skin,2007,33,Female,Stage IB,6th,III,1.02,NO,3,0:LIVING,56.8,56.8,Matched,64.5666666667,1/8/13,1,V600E,1,1
+TCGA-EE-A29N,TCGA-EE-A29N-06,Metastasis,Non-glabrous skin,2009,78,Male,I/II NOS,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,18.59,17.97,Matched,17.6333333333,1/8/13,2,D594N,0,1
+TCGA-EE-A29P,TCGA-EE-A29P-06,Metastasis,Non-glabrous skin,2006,73,Female,Stage IIC,6th,IV,4.5,YES,16,0:LIVING,56.37,54.8,Matched,8.56666666667,1/8/13,2,V600E,1,1
+TCGA-EE-A29Q,TCGA-EE-A29Q-06,Metastasis,Non-glabrous skin,2007,70,Female,Stage IIB,6th,IV,2.3,YES,8,1:DECEASED,66.69,[Not Available],Matched,8.06666666667,1/8/13,2,WT,0,0
+TCGA-EE-A29R,TCGA-EE-A29R-06,Metastasis,Non-glabrous skin,2010,48,Female,Stage IIIC,7th,V,3.5,YES,6,0:LIVING,14.45,14.03,Matched,18.2333333333,1/8/13,3,WT,0,0
+TCGA-EE-A29S,TCGA-EE-A29S-06,Metastasis,Non-glabrous skin,2006,79,Male,Stage IIA,6th,IV,2.5,NO,7,1:DECEASED,61.24,55.85,Matched,29,1/8/13,2,WT,0,0
+TCGA-EE-A29T,TCGA-EE-A29T-06,Metastasis,Non-glabrous skin,1982,51,Female,[Not Available],1st,[Not Available],NA,[Not Available],[Not Available],0:LIVING,369.65,272.83,Matched,10.9,1/8/13,NA,V600E,1,1
+TCGA-EE-A29V,TCGA-EE-A29V-06,Metastasis,Non-glabrous skin,2008,85,Male,Stage IIIC,6th,IV,3.5,YES,14,1:DECEASED,25.85,23.03,Matched,28.2666666667,1/8/13,3,WT,0,0
+TCGA-EE-A29W,TCGA-EE-A29W-06,Metastasis,Non-glabrous skin,1997,42,Male,Stage 0,4th,I,0,[Not Available],[Not Available],0:LIVING,194.88,159,Matched,2.33333333333,7/9/13,0,V600E,1,1
+TCGA-EE-A29X,TCGA-EE-A29X-06,Metastasis,Non-glabrous skin,2009,58,Female,Stage IB,6th,IV,2,NO,8,1:DECEASED,17.9,16.59,Matched,3.93333333333,1/8/13,1,WT,0,0
+TCGA-EE-A2A0,TCGA-EE-A2A0-06,Metastasis,Non-glabrous skin,2006,77,Female,Stage IIA,6th,IV,2.2,NO,2,1:DECEASED,46.78,40.97,Matched,12.1333333333,1/8/13,2,L597Q P367S,0,1
+TCGA-EE-A2A1,TCGA-EE-A2A1-06,Metastasis,Non-glabrous skin,2004,46,Male,Stage IB,6th,IV,1.3,NO,7,0:LIVING,115.87,114.59,Matched,11.1666666667,1/8/13,1,WT,0,0
+TCGA-EE-A2A2,TCGA-EE-A2A2-06,Metastasis,Non-glabrous skin,2009,71,Male,Stage IIIC,6th,IV,7,YES,8,0:LIVING,59.59,59.59,Matched,49.3333333333,1/8/13,3,WT,0,0
+TCGA-EE-A2A5,TCGA-EE-A2A5-06,Metastasis,Non-glabrous skin,2007,43,Male,Stage IB,6th,IV,1.1,NO,3,1:DECEASED,39.26,36.7,Matched,9.36666666667,1/8/13,1,WT,0,0
+TCGA-EE-A2A6,TCGA-EE-A2A6-06,Metastasis,Non-glabrous skin,2006,43,Male,Stage IA,6th,II,0.55,NO,0,0:LIVING,86.07,49.44,Matched,8.5,1/8/13,1,V600E,1,1
+TCGA-EE-A2GB,TCGA-EE-A2GB-06,Metastasis,Non-glabrous skin,2007,51,Male,Stage IIIB,6th,III,1.65,YES,9,0:LIVING,59.23,59.23,Matched,18.7,12/20/12,3,V600E V600M,1,1
+TCGA-EE-A2GC,TCGA-EE-A2GC-06,Metastasis,Non-glabrous skin,2008,82,Male,Stage IIB,6th,III,2.3,YES,35,0:LIVING,67.38,67.38,Matched,63.5333333333,12/20/12,2,G466E,0,1
+TCGA-EE-A2GD,TCGA-EE-A2GD-06,Metastasis,Non-glabrous skin,1984,58,Female,Stage IIB,2nd,IV,4.4,YES,[Not Available],1:DECEASED,339.88,333.21,Matched,15.5,12/20/12,2,WT,0,0
+TCGA-EE-A2GE,TCGA-EE-A2GE-06,Metastasis,Non-glabrous skin,1999,44,Male,Stage I,5th,III,0.9,NO,0,0:LIVING,173.65,173.65,Matched,6.93333333333,12/20/12,1,V600E,1,1
+TCGA-EE-A2GH,TCGA-EE-A2GH-06,Metastasis,Non-glabrous skin,1996,34,Male,Stage I,4th,III,0.8,[Not Available],2,0:LIVING,220.07,220.07,Matched,9.13333333333,12/20/12,1,V600E P318S P318L,1,1
+TCGA-EE-A2GI,TCGA-EE-A2GI-06,Metastasis,Non-glabrous skin,2008,39,Male,Stage IA,6th,III,0.65,NO,[Not Available],0:LIVING,48.69,48.69,Matched,43.4,12/20/12,1,WT,0,0
+TCGA-EE-A2GJ,TCGA-EE-A2GJ-06,Metastasis,Non-glabrous skin,2004,83,Male,Stage IA,6th,II,0.4,NO,0,1:DECEASED,107.29,86.2,Matched,31,12/20/12,1,G466E,0,1
+TCGA-EE-A2GK,TCGA-EE-A2GK-06,Metastasis,Non-glabrous skin,2007,46,Female,Stage I,6th,III,0.8,[Not Available],[Not Available],0:LIVING,54.7,49.21,Matched,0.233333333333,12/20/12,1,NA,NA,NA
+TCGA-EE-A2GL,TCGA-EE-A2GL-06,Metastasis,Non-glabrous skin,2006,40,Female,Stage IIA,6th,IV,3.1,NO,3,0:LIVING,79.6,79.6,Matched,9.93333333333,12/20/12,2,WT,0,0
+TCGA-EE-A2GM,TCGA-EE-A2GM-06,Metastasis,Non-glabrous skin,2004,70,Female,Stage IIC,6th,IV,6.5,YES,1,0:LIVING,75.43,56.34,Matched,20.1333333333,12/20/12,2,P348T,0,1
+TCGA-EE-A2GN,TCGA-EE-A2GN-06,Metastasis,Non-glabrous skin,2003,67,Male,Stage IIA,6th,IV,1.9,YES,9,1:DECEASED,102.04,79.57,Matched,12.4666666667,12/20/12,2,WT,0,0
+TCGA-EE-A2GO,TCGA-EE-A2GO-06,Metastasis,Non-glabrous skin,2002,66,Female,Stage II,5th,IV,3.4,NO,2,0:LIVING,126.71,122.08,Matched,53.0333333333,12/20/12,2,G469R,0,1
+TCGA-EE-A2GP,TCGA-EE-A2GP-06,Metastasis,Non-glabrous skin,2009,80,Male,Stage IIIB,6th,IV,4.2,YES,30,1:DECEASED,13.9,8.48,Matched,17.2,12/20/12,3,WT,0,0
+TCGA-EE-A2GR,TCGA-EE-A2GR-06,Metastasis,Non-glabrous skin,2009,78,Male,Stage II,6th,IV,6.9,[Not Available],8,1:DECEASED,42.74,[Not Available],Matched,44.0666666667,12/20/12,2,WT,0,0
+TCGA-EE-A2GS,TCGA-EE-A2GS-06,Metastasis,Non-glabrous skin,2006,28,Female,Stage IB,6th,IV,1.8,NO,6,1:DECEASED,81.14,51.41,Matched,9.96666666667,12/20/12,1,V600E,1,1
+TCGA-EE-A2GT,TCGA-EE-A2GT-06,Metastasis,Non-glabrous skin,2009,77,Male,Stage IIA,6th,IV,2.2,NO,5,0:LIVING,44.84,44.58,Matched,9.66666666667,12/20/12,2,V600E V600M,1,1
+TCGA-EE-A2GU,TCGA-EE-A2GU-06,Metastasis,Non-glabrous skin,2005,65,Female,Stage IA,6th,II,0.3,NO,0,0:LIVING,94.74,94.74,Matched,16.4666666667,12/20/12,1,WT,0,0
+TCGA-EE-A2M5,TCGA-EE-A2M5-06,Metastasis,Non-glabrous skin,1999,49,Male,Stage I,5th,III,0.8,NO,1,1:DECEASED,21.65,19.02,Matched,54.7,12/20/12,1,V600E,1,1
+TCGA-EE-A2M6,TCGA-EE-A2M6-06,Metastasis,Non-glabrous skin,1997,61,Male,Stage I,4th,II,0.7,NO,0,0:LIVING,129.17,129.17,Matched,15.3333333333,12/20/12,1,V600E,1,1
+TCGA-EE-A2M7,TCGA-EE-A2M7-06,Metastasis,Non-glabrous skin,1999,66,Male,Stage II,5th,III,2.2,[Not Available],2,1:DECEASED,28.81,26.25,Matched,1.76666666667,12/20/12,2,V600E,1,1
+TCGA-EE-A2M8,TCGA-EE-A2M8-06,Metastasis,Non-glabrous skin,2000,54,Female,Stage III,5th,IV,2,NO,4,1:DECEASED,19.74,16.36,Matched,3.13333333333,12/20/12,3,V600E,1,1
+TCGA-EE-A2MC,TCGA-EE-A2MC-06,Metastasis,Non-glabrous skin,2000,73,Male,Stage I,5th,III,1,NO,2,1:DECEASED,61.47,35.61,Matched,21.4333333333,12/21/12,1,WT,0,0
+TCGA-EE-A2MD,TCGA-EE-A2MD-06,Metastasis,Non-glabrous skin,1998,52,Male,Stage II,5th,III,3,YES,13,1:DECEASED,47.24,44.15,Matched,46.0333333333,12/21/12,2,WT,0,0
+TCGA-EE-A2ME,TCGA-EE-A2ME-06,Metastasis,Non-glabrous skin,1995,51,Male,Stage I,4th,III,0.52,NO,0,1:DECEASED,103.19,99.11,Matched,1.7,12/20/12,1,V600E,1,1
+TCGA-EE-A2MF,TCGA-EE-A2MF-06,Metastasis,Non-glabrous skin,1979,39,Female,Stage I,1st,IV,1.5,[Not Available],[Not Available],1:DECEASED,268.53,266.95,Matched,21.2666666667,5/20/14,1,WT,0,0
+TCGA-EE-A2MG,TCGA-EE-A2MG-06,Metastasis,Non-glabrous skin,1997,23,Male,Stage I,4th,III,0.7,[Not Available],0,1:DECEASED,103.12,101.74,Matched,6.06666666667,12/20/12,1,V600E,1,1
+TCGA-EE-A2MH,TCGA-EE-A2MH-06,Metastasis,Non-glabrous skin,2001,66,Male,Stage III,5th,V,3.4,NO,2,1:DECEASED,16.95,14.68,Matched,3.93333333333,12/20/12,3,V600E,1,1
+TCGA-EE-A2MI,TCGA-EE-A2MI-06,Metastasis,Non-glabrous skin,1986,43,Male,Stage IIB,2nd,II,0.4,[Not Available],[Not Available],1:DECEASED,204.5,201.02,Matched,29.4666666667,12/20/12,2,WT,0,0
+TCGA-EE-A2MJ,TCGA-EE-A2MJ-06,Metastasis,Non-glabrous skin,1999,60,Male,Stage III,5th,V,11,NO,8,1:DECEASED,96.16,41.23,Matched,64,12/20/12,3,WT,0,0
+TCGA-EE-A2MK,TCGA-EE-A2MK-06,Metastasis,Non-glabrous skin,1999,18,Female,Stage III,5th,IV,5.2,NO,8,0:LIVING,180.26,180.26,Matched,8.26666666667,12/20/12,3,V600E,1,1
+TCGA-EE-A2ML,TCGA-EE-A2ML-06,Metastasis,Non-glabrous skin,1994,35,Male,Stage II,4th,III,3,NO,8,1:DECEASED,216.49,195.93,Matched,16,12/20/12,2,WT,0,0
+TCGA-EE-A2MM,TCGA-EE-A2MM-06,Metastasis,Non-glabrous skin,1993,63,Female,Stage I,4th,III,0.6,[Not Available],1,1:DECEASED,167.77,151.05,Matched,15.6333333333,12/20/12,1,WT,0,0
+TCGA-EE-A2MN,TCGA-EE-A2MN-06,Metastasis,Non-glabrous skin,2000,58,Male,Stage I,5th,III,1,NO,0,1:DECEASED,47.5,44.65,Matched,4.03333333333,12/20/12,1,WT,0,0
+TCGA-EE-A2MP,TCGA-EE-A2MP-06,Metastasis,Non-glabrous skin,1991,34,Female,Stage I,3rd,[Not Available],1.05,[Not Available],[Not Available],0:LIVING,248.46,246.58,Matched,8.43333333333,12/21/12,1,V600E,1,1
+TCGA-EE-A2MQ,TCGA-EE-A2MQ-06,Metastasis,Non-glabrous skin,2006,70,Female,Stage IIIA,6th,IV,3.1,NO,5,1:DECEASED,43.2,36.96,Matched,7.46666666667,12/21/12,3,K601E,0,1
+TCGA-EE-A2MR,TCGA-EE-A2MR-06,Metastasis,Non-glabrous skin,2002,61,Male,Stage I,5th,III,1.25,NO,[Not Available],0:LIVING,134.3,123.95,Matched,131.866666667,12/21/12,1,WT,0,0
+TCGA-EE-A2MS,TCGA-EE-A2MS-06,Metastasis,Non-glabrous skin,1999,72,Male,Stage II,5th,IV,1.8,NO,4,0:LIVING,162.35,148.55,Matched,77.0333333333,12/21/12,2,WT,0,0
+TCGA-EE-A2MT,TCGA-EE-A2MT-06,Metastasis,Non-glabrous skin,2007,45,Male,Stage IB,6th,IV,1.5,NO,4,0:LIVING,71.16,71.16,Matched,25.3666666667,12/21/12,1,WT,0,0
+TCGA-EE-A2MU,TCGA-EE-A2MU-06,Metastasis,Non-glabrous skin,2005,71,Male,Stage IA,6th,II,0.5,NO,2,0:LIVING,53.22,53.22,Matched,19.3666666667,12/21/12,1,WT,0,0
+TCGA-EE-A3AA,TCGA-EE-A3AA-06,Metastasis,Non-glabrous skin,2001,47,Male,Stage III,5th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,124.21,124.21,Matched,49.0333333333,12/21/12,3,K601E E695K,0,1
+TCGA-EE-A3AB,TCGA-EE-A3AB-06,Metastasis,Non-glabrous skin,2001,30,Male,Stage III,5th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,122.63,122.63,Matched,19.4,12/21/12,3,V600E,1,1
+TCGA-EE-A3AC,TCGA-EE-A3AC-06,Metastasis,[Not Available],2009,47,Male,Stage III,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,63.99,63.99,Matched,28.1,12/21/12,3,WT,0,0
+TCGA-EE-A3AD,TCGA-EE-A3AD-06,Metastasis,[Not Available],2009,50,Male,Stage III,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,28.75,[Not Available],Matched,11.8,12/21/12,3,V600E,1,1
+TCGA-EE-A3AE,TCGA-EE-A3AE-06,Metastasis,Non-glabrous skin,2009,52,Female,Stage IA,6th,III,0.9,NO,4,0:LIVING,54.47,54.47,Matched,38.8333333333,12/21/12,1,WT,0,0
+TCGA-EE-A3AF,TCGA-EE-A3AF-06,Metastasis,[Not Available],2009,48,Female,Stage IIIC,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,13.8,10.94,Matched,28.7333333333,12/21/12,3,V600E,1,1
+TCGA-EE-A3AG,TCGA-EE-A3AG-06,Metastasis,Non-glabrous skin,2009,25,Male,Stage III,[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,41.56,24.8,Matched,45,12/21/12,3,V600E,1,1
+TCGA-EE-A3AH,TCGA-EE-A3AH-06,Metastasis,Non-glabrous skin,1998,30,Male,Stage II,5th,III,3.7,NO,40,1:DECEASED,138.7,137.45,Matched,11.5,12/21/12,2,V600E,1,1
+TCGA-EE-A3J3,TCGA-EE-A3J3-06,Metastasis,Non-glabrous skin,1986,42,Male,Stage IB,2nd,[Not Available],0.98,[Not Available],[Not Available],1:DECEASED,172.04,168.96,Matched,4.8,6/5/12,1,V600E,1,1
+TCGA-EE-A3J4,TCGA-EE-A3J4-06,Metastasis,Non-glabrous skin,1991,72,Male,Stage II,3rd,IV,2,YES,6,1:DECEASED,127.1,120.76,Matched,9.63333333333,6/5/12,2,V600E,1,1
+TCGA-EE-A3J5,TCGA-EE-A3J5-06,Metastasis,Non-glabrous skin,2000,71,Male,Stage III,5th,V,4.8,NO,8,1:DECEASED,36.93,36.53,Matched,60.1333333333,6/8/12,3,WT,0,0
+TCGA-EE-A3J7,TCGA-EE-A3J7-06,Metastasis,Non-glabrous skin,1998,43,Male,Stage I,5th,II,1.12,YES,[Not Available],0:LIVING,64.03,41.72,Matched,28.0666666667,6/8/12,1,WT,0,0
+TCGA-EE-A3J8,TCGA-EE-A3J8-06,Metastasis,Non-glabrous skin,2006,59,Male,Stage IIIA,6th,IV,4.8,NO,5,1:DECEASED,34.3,34,Matched,7.8,6/8/12,3,WT,0,0
+TCGA-EE-A3JA,TCGA-EE-A3JA-06,Metastasis,Non-glabrous skin,2006,44,Male,Stage IB,6th,IV,1.5,NO,[Not Available],1:DECEASED,53.15,44.58,Matched,27.5666666667,6/8/12,1,WT,0,0
+TCGA-EE-A3JB,TCGA-EE-A3JB-06,Metastasis,Non-glabrous skin,1992,60,Female,Stage III,3rd,IV,1.86,[Not Available],5,0:LIVING,201.64,47.11,Matched,17.7,5/20/14,3,V600E,1,1
+TCGA-EE-A3JD,TCGA-EE-A3JD-06,Metastasis,Non-glabrous skin,2009,70,Male,Stage III,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,27.33,13.07,Matched,83.5666666667,5/22/14,3,S467L,0,1
+TCGA-EE-A3JE,TCGA-EE-A3JE-06,Metastasis,Non-glabrous skin,2009,75,Male,Stage IIIB,6th,IV,3.7,YES,6,0:LIVING,51.31,6.37,Matched,8.56666666667,6/8/12,3,V600E,1,1
+TCGA-EE-A3JH,TCGA-EE-A3JH-06,Metastasis,Non-glabrous skin,2003,54,Male,Stage IB,6th,III,1.3,[Not Available],2,0:LIVING,134.23,108.71,Matched,5.23333333333,6/8/12,1,K601E,0,1
+TCGA-EE-A3JI,TCGA-EE-A3JI-06,Metastasis,Non-glabrous skin,1999,48,Male,Stage I,5th,IV,1.2,NO,1,1:DECEASED,152.69,146.09,Matched,34.3666666667,6/8/12,1,WT,0,0
+TCGA-ER-A193,TCGA-ER-A193-06,Metastasis,Non-glabrous skin,2006,62,Male,Stage IIB,6th,[Not Available],NA,NO,[Not Available],1:DECEASED,31.37,26.48,Matched,54.5666666667,4/10/12,2,V600G V600M,0,1
+TCGA-ER-A194,TCGA-ER-A194-01,Primary,Non-glabrous skin,2005,77,Male,[Not Available],6th,IV,4.5,YES,1,1:DECEASED,44.48,[Not Available],Matched,37.6,4/11/12,NA,WT,0,0
+TCGA-ER-A195,TCGA-ER-A195-06,Metastasis,Non-glabrous skin,2005,46,Male,[Not Available],6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,35.41,[Not Available],Matched,6.93333333333,4/11/12,NA,WT,0,0
+TCGA-ER-A196,TCGA-ER-A196-01,Primary,Non-glabrous skin,2007,64,Female,Stage IIC,6th,IV,22,YES,10,0:LIVING,58.64,58.64,Matched,0.866666666667,4/12/12,2,WT,0,0
+TCGA-ER-A197,TCGA-ER-A197-06,Metastasis,Non-glabrous skin,2006,83,Female,Stage IIIB,6th,[Not Available],8,YES,[Not Available],1:DECEASED,13.93,3.61,Matched,1.46666666667,4/12/12,3,WT,0,0
+TCGA-ER-A198,TCGA-ER-A198-06,Metastasis,Non-glabrous skin,2003,45,Male,[Not Available],6th,[Not Available],10,YES,[Not Available],1:DECEASED,50.72,0,Matched,13.4333333333,4/13/12,NA,V600E,1,1
+TCGA-ER-A199,TCGA-ER-A199-06,Metastasis,[Not Available],2007,86,Female,Stage IIIC,6th,IV,3,YES,8,1:DECEASED,9.17,3.91,Matched,8.1,4/13/12,3,WT,0,0
+TCGA-ER-A19A,TCGA-ER-A19A-06,Metastasis,Non-glabrous skin,2006,79,Male,Stage IV,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,77.69,53.12,Matched,11.6,4/16/12,4,WT,0,0
+TCGA-ER-A19B,TCGA-ER-A19B-06,Metastasis,Non-glabrous skin,2000,42,Male,[Not Available],5th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,98.32,52.07,Matched,3.63333333333,4/16/12,NA,V600E,1,1
+TCGA-ER-A19C,TCGA-ER-A19C-06,Metastasis,Non-glabrous skin,1998,77,Male,Stage I,5th,III,0.75,NO,[Not Available],1:DECEASED,48.85,[Not Available],Matched,2.33333333333,4/19/12,1,V600E,1,1
+TCGA-ER-A19D,TCGA-ER-A19D-06,Metastasis,Non-glabrous skin,2004,46,Female,Stage IB,6th,IV,1.75,NO,[Not Available],1:DECEASED,12.58,11.73,Matched,12.3,4/19/12,1,WT,0,0
+TCGA-ER-A19E,TCGA-ER-A19E-06,Metastasis,Non-glabrous skin,2008,36,Female,Stage IB,6th,III,1.1,NO,[Not Available],1:DECEASED,13.01,2.1,Matched,12.9666666667,4/19/12,1,V600E,1,1
+TCGA-ER-A19F,TCGA-ER-A19F-06,Metastasis,Non-glabrous skin,2003,82,Male,[Not Available],6th,[Not Available],6.7,[Not Available],[Not Available],1:DECEASED,26.35,[Not Available],Matched,27.3,4/19/12,NA,G466E,0,1
+TCGA-ER-A19G,TCGA-ER-A19G-06,Metastasis,Non-glabrous skin,1987,48,Female,[Not Available],2nd,II,1.6,NO,[Not Available],0:LIVING,301.84,301.84,Matched,14.3,4/19/12,NA,V600E,1,1
+TCGA-ER-A19H,TCGA-ER-A19H-06,Metastasis,Non-glabrous skin,1995,40,Male,[Not Available],4th,II,0.4,[Not Available],[Not Available],1:DECEASED,152.23,[Not Available],Matched,7.16666666667,4/19/12,NA,V600E,1,1
+TCGA-ER-A19J,TCGA-ER-A19J-06,Metastasis,Non-glabrous skin,2004,54,Male,Stage IV,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,6.44,3.22,Matched,6.13333333333,4/19/12,4,V600E V600M,1,1
+TCGA-ER-A19K,TCGA-ER-A19K-01,Primary,Non-glabrous skin,2006,79,Female,Stage IIC,6th,V,6.8,YES,[Not Available],1:DECEASED,15.41,9.03,Matched,10.3666666667,4/19/12,2,V600E V600M,1,1
+TCGA-ER-A19L,TCGA-ER-A19L-06,Metastasis,Non-glabrous skin,1994,35,Male,[Not Available],4th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,131.41,121.19,Matched,1.76666666667,4/20/12,NA,WT,0,0
+TCGA-ER-A19M,TCGA-ER-A19M-06,Metastasis,Non-glabrous skin,2006,36,Male,Stage IB,6th,IV,1.9,NO,[Not Available],1:DECEASED,61.01,56.83,Matched,13.0666666667,7/6/12,1,V600E,1,1
+TCGA-ER-A19N,TCGA-ER-A19N-06,Metastasis,Non-glabrous skin,2008,47,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,44.05,0,Matched,13.9666666667,4/20/12,NA,WT,0,0
+TCGA-ER-A19O,TCGA-ER-A19O-06,Metastasis,Non-glabrous skin,2006,56,Male,Stage IIIB,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,NA,11.47,Matched,5.03333333333,4/20/12,3,V600E,1,1
+TCGA-ER-A19P,TCGA-ER-A19P-06,Metastasis,Non-glabrous skin,1996,47,Female,[Not Available],4th,IV,NA,[Not Available],[Not Available],1:DECEASED,161.96,142.97,Matched,52.6666666667,4/20/12,NA,WT,0,0
+TCGA-ER-A19Q,TCGA-ER-A19Q-06,Metastasis,Non-glabrous skin,2001,37,Female,[Not Available],5th,III,1.2,NO,[Not Available],1:DECEASED,50.85,48.59,Matched,3.5,4/23/12,NA,V600E,1,1
+TCGA-ER-A19S,TCGA-ER-A19S-06,Metastasis,Non-glabrous skin,2008,81,Female,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],0:LIVING,49.44,49.44,Matched,6.33333333333,4/23/12,NA,V600E,1,1
+TCGA-ER-A19T,TCGA-ER-A19T-06,Metastasis,Non-glabrous skin,2006,51,Male,Stage IV,6th,V,15,NO,16,1:DECEASED,8.87,3.88,Matched,1.76666666667,4/23/12,4,WT,0,0
+TCGA-ER-A19T,TCGA-ER-A19T-01,Primary,Non-glabrous skin,2006,51,Male,Stage IV,6th,V,15,NO,16,1:DECEASED,8.87,3.88,Matched,1.86666666667,4/23/12,4,WT,0,0
+TCGA-ER-A19W,TCGA-ER-A19W-06,Metastasis,Non-glabrous skin,1994,48,Female,[Not Available],4th,II,0.75,NO,[Not Available],1:DECEASED,148.06,135.55,Matched,9.3,7/6/12,NA,WT,0,0
+TCGA-ER-A1A1,TCGA-ER-A1A1-06,Metastasis,Non-glabrous skin,2005,58,Male,Stage IIIC,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,104.99,64.75,Matched,7.33333333333,4/23/12,3,WT,0,0
+TCGA-ER-A2NB,TCGA-ER-A2NB-01,Primary,Non-glabrous skin,2010,57,Male,Stage IIIB,7th,IV,4.39,YES,1.3,1:DECEASED,28.15,15.14,Matched,2.56666666667,4/24/12,3,WT,0,0
+TCGA-ER-A2NC,TCGA-ER-A2NC-06,Metastasis,Non-glabrous skin,2006,50,Male,Stage IB,6th,[Not Available],1.97,NO,[Not Available],1:DECEASED,43.79,38.01,Matched,10.8333333333,4/26/12,1,V600E V600M,1,1
+TCGA-ER-A2ND,TCGA-ER-A2ND-06,Metastasis,Non-glabrous skin,2004,57,Female,Stage IIIC,6th,IV,1,NO,[Not Available],1:DECEASED,23.32,[Not Available],Matched,3.36666666667,4/30/12,3,V600E,1,1
+TCGA-ER-A2NE,TCGA-ER-A2NE-06,Metastasis,[Not Available],2007,39,Male,Stage 0,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,20.14,[Not Available],Matched,4,6/29/12,0,WT,0,0
+TCGA-ER-A2NF,TCGA-ER-A2NF-06,Metastasis,Non-glabrous skin,2010,53,Male,Stage IIIB,7th,V,4,YES,[Not Available],1:DECEASED,28.81,12.48,Matched,1.06666666667,4/30/12,3,WT,0,0
+TCGA-ER-A2NF,TCGA-ER-A2NF-01,Primary,Non-glabrous skin,2010,53,Male,Stage IIIB,7th,V,4,YES,[Not Available],1:DECEASED,28.81,12.48,Matched,1.03333333333,4/30/12,3,WT,0,0
+TCGA-ER-A2NG,TCGA-ER-A2NG-06,Metastasis,Non-glabrous skin,2009,43,Female,Stage IIIC,6th,III,3,YES,9,1:DECEASED,48.95,37.88,Matched,7.33333333333,5/1/12,3,V600E,1,1
+TCGA-ER-A2NH,TCGA-ER-A2NH-06,Metastasis,Non-glabrous skin,2009,49,Male,Stage IIIC,6th,IV,4,NO,1,0:LIVING,41.52,41.52,Matched,8.53333333333,5/1/12,3,WT,0,0
+TCGA-ER-A3ES,TCGA-ER-A3ES-06,Metastasis,[Not Available],1987,25,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,246.85,[Not Available],Matched,1.2,5/2/12,NA,WT,0,0
+TCGA-ER-A3ET,TCGA-ER-A3ET-06,Metastasis,Non-glabrous skin,2005,64,Female,Stage IIIA,6th,IV,3.55,[Not Available],[Not Available],1:DECEASED,92.94,79.99,Matched,3.3,5/2/12,3,WT,0,0
+TCGA-ER-A3EV,TCGA-ER-A3EV-06,Metastasis,[Not Available],2001,55,Male,Stage III,5th,[Not Available],4.4,[Not Available],[Not Available],1:DECEASED,46.94,46.71,Matched,3.26666666667,5/2/12,3,WT,0,0
+TCGA-ER-A3PL,TCGA-ER-A3PL-06,Metastasis,Non-glabrous skin,2009,30,Male,Stage IV,6th,V,2.2,YES,[Not Available],0:LIVING,33.18,31.47,Matched,10.0333333333,7/6/12,4,V600E,1,1
+TCGA-ER-A42H,TCGA-ER-A42H-01,Primary,Non-glabrous skin,2010,76,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,13.99,8.51,Matched,1.8,6/14/13,NA,WT,0,0
+TCGA-ER-A42K,TCGA-ER-A42K-06,Metastasis,Non-glabrous skin,2012,40,Female,Stage IIIC,7th,IV,5.5,YES,18.3,1:DECEASED,12.94,6.77,Matched,5.5,6/14/13,3,V600E,1,1
+TCGA-ER-A42L,TCGA-ER-A42L-06,Metastasis,Non-glabrous skin,2001,49,Male,Stage II,5th,IV,1.46,NO,1,0:LIVING,148.92,125.23,Matched,27.2333333333,6/14/13,2,WT,0,0
+TCGA-FR-A2OS,TCGA-FR-A2OS-01,Primary,Non-glabrous skin,2008,49,Female,Stage IIC,6th,V,NA,YES,[Not Available],1:DECEASED,12.09,10.38,Matched,1.06666666667,4/23/12,2,WT,0,0
+TCGA-FR-A3R1,TCGA-FR-A3R1-01,Primary,Non-glabrous skin,2011,69,Male,Stage IIC,7th,V,6.3,YES,3.75,0:LIVING,22.5,22.27,Matched,13.8333333333,9/24/12,2,WT,0,0
+TCGA-FR-A3YN,TCGA-FR-A3YN-06,Metastasis,[Not Available],2005,44,Male,Stage IB,6th,IV,1.25,NO,[Not Available],0:LIVING,92.9,92.9,Matched,15.4333333333,9/24/12,1,WT,0,0
+TCGA-FR-A3YO,TCGA-FR-A3YO-06,Metastasis,[Not Available],2007,NA,Female,I/II NOS,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,23.4333333333,9/24/12,2,V600_K601delinsE,0,1
+TCGA-FR-A44A,TCGA-FR-A44A-06,Metastasis,[Not Available],1999,29,Female,Stage II,5th,IV,2.51,NO,9,0:LIVING,174.08,174.08,Matched,8.2,11/1/12,2,V600E,1,1
+TCGA-FR-A69P,TCGA-FR-A69P-06,Metastasis,[Not Available],2013,34,Female,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,15.7,9,Matched,6.4,6/19/13,3,WT,0,0
+TCGA-FR-A726,TCGA-FR-A726-01,Primary,Non-glabrous skin,2013,90,Male,Stage IIC,7th,IV,14,YES,26,1:DECEASED,10.02,8.97,Matched,216.4,12/9/13,2,WT,0,0
+TCGA-FR-A728,TCGA-FR-A728-01,Primary,Non-glabrous skin,2013,54,Female,Stage IIIB,7th,IV,12,YES,6,0:LIVING,19.15,2.1,Matched,11.7,12/9/13,3,V600E,1,1
+TCGA-FR-A729,TCGA-FR-A729-06,Metastasis,[Not Available],1996,38,Female,Stage I,4th,II,0.25,NO,[Not Available],0:LIVING,220.63,206.93,Matched,NA,12/9/13,1,V600E,1,1
+TCGA-FR-A7U8,TCGA-FR-A7U8-06,Metastasis,[Not Available],2012,50,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,27.83,18.63,Matched,NA,12/18/13,3,WT,0,0
+TCGA-FR-A7U9,TCGA-FR-A7U9-06,Metastasis,Non-glabrous skin,2013,63,Female,Stage IIIC,7th,IV,2.8,YES,11,0:LIVING,18.76,7.59,Matched,NA,12/18/13,3,WT,0,0
+TCGA-FR-A7UA,TCGA-FR-A7UA-06,Metastasis,[Not Available],2011,65,Female,Stage IB,7th,IV,1.02,NO,29,0:LIVING,38.24,38.24,Matched,NA,12/18/13,1,V600E V600M,1,1
+TCGA-FR-A8YC,TCGA-FR-A8YC-06,Metastasis,[Not Available],2011,78,Male,Stage IIB,7th,IV,2.6,YES,16.6,1:DECEASED,34.79,[Not Available],Matched,NA,3/11/14,2,WT,0,0
+TCGA-FR-A8YD,TCGA-FR-A8YD-06,Metastasis,[Not Available],2011,56,Female,Stage IIC,7th,IV,4.5,YES,5,1:DECEASED,36.24,[Not Available],Matched,NA,3/11/14,2,WT,0,0
+TCGA-FR-A8YE,TCGA-FR-A8YE-06,Metastasis,[Not Available],2006,41,Male,Stage IA,6th,III,0.79,NO,[Not Available],0:LIVING,104.34,104.34,Matched,NA,3/11/14,1,V600E,1,1
+TCGA-FS-A1YW,TCGA-FS-A1YW-06,Metastasis,Non-glabrous skin,1987,52,Male,Stage IB,2nd,IV,1,NO,[Not Available],1:DECEASED,216.75,[Not Available],Matched,4.53333333333,11/12/12,1,WT,0,0
+TCGA-FS-A1YX,TCGA-FS-A1YX-06,Metastasis,Non-glabrous skin,2001,39,Female,Stage I,5th,IV,1.1,NO,[Not Available],1:DECEASED,48.55,[Not Available],Matched,0.9,11/12/12,1,V600E,1,1
+TCGA-FS-A1YY,TCGA-FS-A1YY-06,Metastasis,Non-glabrous skin,1987,55,Female,Stage IIA,2nd,IV,2.7,NO,[Not Available],1:DECEASED,228.42,222.63,Matched,5.66666666667,11/12/12,2,V600E,1,1
+TCGA-FS-A1Z0,TCGA-FS-A1Z0-06,Metastasis,Non-glabrous skin,1990,32,Female,Stage IA,3rd,III,0.95,NO,[Not Available],1:DECEASED,202.5,180.78,Matched,7.76666666667,11/12/12,1,WT,0,0
+TCGA-FS-A1Z3,TCGA-FS-A1Z3-06,Metastasis,Non-glabrous skin,2002,72,Female,Stage IV,5th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,20.89,9.07,Matched,28.8666666667,11/12/12,4,WT,0,0
+TCGA-FS-A1Z4,TCGA-FS-A1Z4-06,Metastasis,Non-glabrous skin,2001,62,Male,Stage I,5th,III,0.85,NO,[Not Available],1:DECEASED,28.06,[Not Available],Matched,1.36666666667,11/12/12,1,WT,0,0
+TCGA-FS-A1Z7,TCGA-FS-A1Z7-06,Metastasis,Non-glabrous skin,2005,19,Male,Stage IIIC,6th,V,17,YES,[Not Available],1:DECEASED,7.79,4.47,Matched,5.43333333333,11/12/12,3,V600E,1,1
+TCGA-FS-A1ZA,TCGA-FS-A1ZA-06,Metastasis,Non-glabrous skin,2003,45,Female,Stage IIIB,6th,IV,4.5,YES,[Not Available],1:DECEASED,27.69,21.78,Matched,33.2666666667,11/12/12,3,WT,0,0
+TCGA-FS-A1ZB,TCGA-FS-A1ZB-06,Metastasis,Non-glabrous skin,2002,57,Male,Stage II,5th,II,3,NO,[Not Available],1:DECEASED,48.82,48,Matched,6.73333333333,11/13/12,2,WT,0,0
+TCGA-FS-A1ZC,TCGA-FS-A1ZC-06,Metastasis,Non-glabrous skin,1978,51,Male,I/II NOS,1st,III,NA,[Not Available],[Not Available],1:DECEASED,357.1,339.49,Matched,19.0666666667,11/12/12,2,V600E V600M,1,1
+TCGA-FS-A1ZD,TCGA-FS-A1ZD-06,Metastasis,Non-glabrous skin,2001,63,Male,Stage IIA,6th,III,1.18,YES,[Not Available],1:DECEASED,53.48,49.18,Matched,7.43333333333,11/12/12,2,V600E,1,1
+TCGA-FS-A1ZE,TCGA-FS-A1ZE-06,Metastasis,Non-glabrous skin,2008,40,Male,Stage IIC,6th,III,5,YES,[Not Available],1:DECEASED,46.42,25,Matched,4.26666666667,11/12/12,2,WT,0,0
+TCGA-FS-A1ZF,TCGA-FS-A1ZF-06,Metastasis,Non-glabrous skin,2007,78,Female,Stage IIC,6th,IV,4.3,YES,[Not Available],1:DECEASED,15.44,[Not Available],Matched,5.56666666667,11/12/12,2,V600E,1,1
+TCGA-FS-A1ZG,TCGA-FS-A1ZG-06,Metastasis,Non-glabrous skin,2007,60,Female,Stage IIIC,6th,V,6,YES,[Not Available],1:DECEASED,9.69,4.6,Matched,1,11/12/12,3,WT,0,0
+TCGA-FS-A1ZH,TCGA-FS-A1ZH-06,Metastasis,Non-glabrous skin,2003,71,Female,Stage IV,6th,IV,3,YES,[Not Available],1:DECEASED,32.72,18.96,Matched,1.13333333333,11/12/12,4,V600E,1,1
+TCGA-FS-A1ZJ,TCGA-FS-A1ZJ-06,Metastasis,Non-glabrous skin,2001,75,Female,Stage I,5th,IV,1.22,NO,[Not Available],1:DECEASED,47.34,40.24,Matched,2.13333333333,11/12/12,1,WT,0,0
+TCGA-FS-A1ZK,TCGA-FS-A1ZK-06,Metastasis,Non-glabrous skin,2005,68,Male,Stage II,6th,IV,5,[Not Available],[Not Available],1:DECEASED,23.92,12.06,Matched,43.3333333333,11/12/12,2,WT,0,0
+TCGA-FS-A1ZM,TCGA-FS-A1ZM-06,Metastasis,Non-glabrous skin,2001,74,Male,Stage III,5th,IV,1.2,[Not Available],[Not Available],0:LIVING,101.18,101.18,Matched,7.23333333333,11/12/12,3,V600E,1,1
+TCGA-FS-A1ZN,TCGA-FS-A1ZN-01,Primary,Non-glabrous skin,2002,43,Male,Stage IIIA,5th,IV,8,YES,[Not Available],1:DECEASED,23.98,11.86,Matched,2.86666666667,11/12/12,3,V600E,1,1
+TCGA-FS-A1ZP,TCGA-FS-A1ZP-06,Metastasis,Non-glabrous skin,1997,52,Male,Stage II,5th,III,2.5,[Not Available],[Not Available],1:DECEASED,74.67,[Not Available],Matched,11.7,11/13/12,2,WT,0,0
+TCGA-FS-A1ZQ,TCGA-FS-A1ZQ-06,Metastasis,Non-glabrous skin,1997,31,Male,I/II NOS,6th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,133.44,129.43,Matched,13.4333333333,11/13/12,2,WT,0,0
+TCGA-FS-A1ZR,TCGA-FS-A1ZR-06,Metastasis,Non-glabrous skin,1995,36,Male,Stage II,4th,IV,2,[Not Available],[Not Available],1:DECEASED,11.4,4.99,Matched,4.03333333333,11/13/12,2,V600E,1,1
+TCGA-FS-A1ZS,TCGA-FS-A1ZS-06,Metastasis,Non-glabrous skin,1998,54,Male,Stage I,5th,[Not Available],1.15,[Not Available],[Not Available],0:LIVING,148.69,148.69,Matched,7.6,11/13/12,1,V600E,1,1
+TCGA-FS-A1ZT,TCGA-FS-A1ZT-06,Metastasis,Non-glabrous skin,2005,55,Male,Stage III,6th,IV,1.15,[Not Available],[Not Available],0:LIVING,53.12,53.12,Matched,4.9,11/13/12,3,WT,0,0
+TCGA-FS-A1ZU,TCGA-FS-A1ZU-06,Metastasis,Non-glabrous skin,2002,70,Female,Stage IIC,5th,V,8.4,YES,[Not Available],1:DECEASED,26.54,22.31,Matched,1.4,11/13/12,2,WT,0,0
+TCGA-FS-A1ZW,TCGA-FS-A1ZW-06,Metastasis,Non-glabrous skin,2005,65,Male,Stage IIIB,6th,III,1.2,YES,[Not Available],0:LIVING,49.44,49.44,Matched,18.4333333333,11/13/12,3,WT,0,0
+TCGA-FS-A1ZY,TCGA-FS-A1ZY-06,Metastasis,Non-glabrous skin,2006,71,Male,Stage IIB,6th,IV,2.9,YES,[Not Available],1:DECEASED,27.07,[Not Available],Matched,0.933333333333,11/13/12,2,WT,0,0
+TCGA-FS-A1ZZ,TCGA-FS-A1ZZ-06,Metastasis,Non-glabrous skin,2006,54,Female,Stage IIB,6th,IV,3.8,YES,[Not Available],1:DECEASED,27,[Not Available],Matched,41.0666666667,11/13/12,2,N581S,0,1
+TCGA-FS-A4F0,TCGA-FS-A4F0-06,Metastasis,Non-glabrous skin,2003,67,Female,Stage IIB,6th,V,14,NO,[Not Available],0:LIVING,77.76,77.76,Matched,NA,6/12/12,2,WT,0,0
+TCGA-FS-A4F2,TCGA-FS-A4F2-06,Metastasis,Non-glabrous skin,2003,46,Female,Stage IIC,6th,V,4.7,YES,[Not Available],1:DECEASED,50.1,[Not Available],Matched,NA,6/12/12,2,WT,0,0
+TCGA-FS-A4F4,TCGA-FS-A4F4-06,Metastasis,Non-glabrous skin,2001,64,Male,Stage II,5th,IV,2,YES,[Not Available],1:DECEASED,66.62,[Not Available],Matched,1.36666666667,6/12/12,2,WT,0,0
+TCGA-FS-A4F5,TCGA-FS-A4F5-06,Metastasis,Non-glabrous skin,2005,77,Female,Stage IB,6th,IV,1.48,NO,[Not Available],1:DECEASED,28.71,[Not Available],Matched,21.6666666667,6/12/12,1,WT,0,0
+TCGA-FS-A4F8,TCGA-FS-A4F8-06,Metastasis,Non-glabrous skin,1997,52,Male,Stage I,4th,[Not Available],0.9,[Not Available],[Not Available],1:DECEASED,174.7,[Not Available],Matched,5.4,6/12/12,1,V600E,1,1
+TCGA-FS-A4F9,TCGA-FS-A4F9-06,Metastasis,Non-glabrous skin,2011,80,Male,Stage IIIC,7th,[Not Available],10,YES,[Not Available],0:LIVING,34,12.35,Matched,12.5666666667,6/13/12,3,WT,0,0
+TCGA-FS-A4FB,TCGA-FS-A4FB-06,Metastasis,[Not Available],2009,46,Female,Stage III,6th,IV,2,[Not Available],[Not Available],1:DECEASED,26.71,[Not Available],Matched,5.43333333333,6/13/12,3,V600E,1,1
+TCGA-FS-A4FC,TCGA-FS-A4FC-06,Metastasis,Non-glabrous skin,2007,75,Female,Stage IIA,6th,IV,4,NO,[Not Available],1:DECEASED,54.37,[Not Available],Matched,19.9666666667,6/13/12,2,WT,0,0
+TCGA-FS-A4FD,TCGA-FS-A4FD-06,Metastasis,[Not Available],2004,39,Male,Stage IIIC,6th,IV,2,[Not Available],[Not Available],1:DECEASED,80.62,[Not Available],Matched,12.6666666667,6/13/12,3,WT,0,0
+TCGA-FW-A3I3,TCGA-FW-A3I3-06,Metastasis,[Not Available],2011,59,Female,Stage IV,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,17.44,17.44,Matched,2.1,4/16/12,4,WT,0,0
+TCGA-FW-A3R5,TCGA-FW-A3R5-06,Metastasis,Non-glabrous skin,2010,68,Male,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,36.93,36.93,Matched,1060.23333333,9/24/12,3,H725Y G469E,0,1
+TCGA-FW-A3TU,TCGA-FW-A3TU-06,Metastasis,Non-glabrous skin,2007,72,Female,[Not Available],[Not Available],IV,NA,[Not Available],[Not Available],1:DECEASED,55.55,[Not Available],Matched,21.4333333333,8/6/12,NA,WT,0,0
+TCGA-FW-A3TV,TCGA-FW-A3TV-06,Metastasis,Non-glabrous skin,2012,57,Female,Stage IIIB,7th,III,0.5,[Not Available],[Not Available],0:LIVING,13.5,4.57,Matched,9.23333333333,8/6/12,3,V600E,1,1
+TCGA-FW-A5DX,TCGA-FW-A5DX-01,Primary,Non-glabrous skin,2012,71,Male,Stage IIIC,7th,[Not Available],7,NO,[Not Available],0:LIVING,21.02,21.02,Matched,5.4,7/15/13,3,V600E,1,1
+TCGA-FW-A5DY,TCGA-FW-A5DY-06,Metastasis,Non-glabrous skin,2012,48,Female,Stage III,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,19.28,19.28,Matched,6.63333333333,7/15/13,3,WT,0,0
+TCGA-GF-A2C7,TCGA-GF-A2C7-01,Primary,Non-glabrous skin,2011,48,Male,Stage IIC,7th,IV,NA,YES,2,0:LIVING,0.69,0.69,Matched,2.23333333333,9/18/12,2,V600E,1,1
+TCGA-GF-A3OT,TCGA-GF-A3OT-06,Metastasis,Non-glabrous skin,2011,58,Female,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,9.89,8.15,Matched,15.1,7/5/12,3,WT,0,0
+TCGA-GF-A4EO,TCGA-GF-A4EO-06,Metastasis,Non-glabrous skin,2012,74,Female,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,19.42,19.42,Matched,NA,4/4/13,3,V600E K183E,1,1
+TCGA-GF-A6C8,TCGA-GF-A6C8-06,Metastasis,Non-glabrous skin,2012,62,Female,Stage IIB,7th,IV,4,YES,11,0:LIVING,2.04,2.04,Matched,10.8333333333,11/26/13,2,V600E,1,1
+TCGA-GF-A6C9,TCGA-GF-A6C9-06,Metastasis,[Not Available],2012,78,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,15.77,15.77,Matched,91.8666666667,12/2/13,3,V600E V600M,1,1
+TCGA-GF-A769,TCGA-GF-A769-01,Primary,Non-glabrous skin,2010,39,Male,Stage IIC,7th,IV,74,YES,10,1:DECEASED,35.15,[Not Available],Matched,4.33333333333,1/23/14,2,V600E,1,1
+TCGA-GN-A262,TCGA-GN-A262-06,Metastasis,Non-glabrous skin,2001,47,Female,[Not Available],[Not Available],[Not Available],3,[Not Available],[Not Available],0:LIVING,139.78,120.34,Matched,10,4/20/12,NA,V600E,1,1
+TCGA-GN-A263,TCGA-GN-A263-01,Primary,Non-glabrous skin,2004,24,Male,Stage IV,6th,V,NA,YES,1.25,1:DECEASED,15.34,1.28,Matched,12.7,4/20/12,4,V600E,1,1
+TCGA-GN-A264,TCGA-GN-A264-06,Metastasis,Non-glabrous skin,1997,60,Male,[Not Available],[Not Available],V,7,NO,0.42,1:DECEASED,117.84,105.81,Matched,1.73333333333,4/20/12,NA,WT,0,0
+TCGA-GN-A265,TCGA-GN-A265-06,Metastasis,Non-glabrous skin,2004,53,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],0:LIVING,96.85,3.25,Matched,8.33333333333,4/18/12,NA,V600E,1,1
+TCGA-GN-A266,TCGA-GN-A266-06,Metastasis,Non-glabrous skin,2004,45,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,10.12,3.58,Matched,106.033333333,4/20/12,NA,WT,0,0
+TCGA-GN-A267,TCGA-GN-A267-06,Metastasis,Non-glabrous skin,2005,38,Male,Stage IIIA,6th,IV,5.2,NO,8.6,1:DECEASED,64.39,56.8,Matched,11.6666666667,4/20/12,3,WT,0,0
+TCGA-GN-A268,TCGA-GN-A268-06,Metastasis,Non-glabrous skin,2005,83,Female,Stage IIB,6th,V,9.8,NO,1.67,1:DECEASED,62.75,59.33,Matched,9.8,4/20/12,2,WT,0,0
+TCGA-GN-A26A,TCGA-GN-A26A-06,Metastasis,Non-glabrous skin,2006,63,Female,Stage IIIA,6th,IV,2.3,NO,11,1:DECEASED,32.46,29.83,Matched,9.33333333333,4/20/12,3,V600E,1,1
+TCGA-GN-A26C,TCGA-GN-A26C-01,Primary,Non-glabrous skin,2006,77,Male,Stage IIIC,6th,IV,14,YES,0.4,1:DECEASED,26.97,24.8,Matched,51.1,4/24/12,3,WT,0,0
+TCGA-GN-A26D,TCGA-GN-A26D-06,Metastasis,Non-glabrous skin,2008,72,Female,Stage IIC,6th,V,12,YES,5,1:DECEASED,47.96,32.92,Matched,1.7,4/24/12,2,WT,0,0
+TCGA-GN-A4U3,TCGA-GN-A4U3-06,Metastasis,Non-glabrous skin,2004,30,Male,Stage III,6th,IV,3,NO,[Not Available],0:LIVING,121.81,90.54,Matched,8.7,8/19/13,3,WT,0,0
+TCGA-GN-A4U4,TCGA-GN-A4U4-06,Metastasis,Non-glabrous skin,2011,73,Male,Stage IIA,7th,IV,1.7,YES,4,0:LIVING,39.32,7.13,Matched,18.9333333333,8/19/13,2,WT,0,0
+TCGA-GN-A4U5,TCGA-GN-A4U5-01,Primary,Non-glabrous skin,2011,61,Female,Stage IB,7th,IV,1.15,NO,0,0:LIVING,37.98,37.98,Matched,9.26666666667,8/19/13,1,V600E,1,1
+TCGA-GN-A4U7,TCGA-GN-A4U7-06,Metastasis,Non-glabrous skin,2011,56,Female,Stage IIIC,7th,IV,1.39,NO,8,1:DECEASED,10.41,6.01,Matched,7.33333333333,8/19/13,3,V600E,1,1
+TCGA-GN-A4U8,TCGA-GN-A4U8-06,Metastasis,Non-glabrous skin,2009,51,Male,[Not Available],6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,48.85,48.85,Matched,11.6666666667,8/19/13,NA,V600E,1,1
+TCGA-GN-A4U9,TCGA-GN-A4U9-06,Metastasis,Non-glabrous skin,2012,71,Male,Stage IIIC,7th,IV,1.7,YES,5,1:DECEASED,22.11,12.61,Matched,2.23333333333,8/19/13,3,WT,0,0
+TCGA-GN-A8LK,TCGA-GN-A8LK-06,Metastasis,Non-glabrous skin,2009,70,Male,Stage IB,6th,IV,0.7,NO,0,1:DECEASED,50.07,48.23,Matched,NA,4/3/14,1,WT,0,0
+TCGA-GN-A8LL,TCGA-GN-A8LL-06,Metastasis,Non-glabrous skin,2012,68,Female,Stage IIC,7th,[Not Available],5,YES,[Not Available],1:DECEASED,21.35,[Not Available],Matched,NA,4/1/14,2,WT,0,0
+TCGA-GN-A8LN,TCGA-GN-A8LN-01,Primary,Non-glabrous skin,2013,68,Male,Stage IIC,7th,IV,4.85,YES,1.6,0:LIVING,25.36,14.36,Matched,NA,4/3/14,2,WT,0,0
+TCGA-GN-A9SD,TCGA-GN-A9SD-06,Metastasis,Non-glabrous skin,2009,59,Female,Stage IA,6th,III,0.5,NO,1,1:DECEASED,59.36,55.42,Matched,NA,6/26/14,1,V600E,1,1
+TCGA-HR-A2OG,TCGA-HR-A2OG-06,Metastasis,Non-glabrous skin,[Not Available],50,Female,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],0:LIVING,0.23,0.23,Matched,NA,10/16/12,NA,WT,0,0
+TCGA-HR-A2OH,TCGA-HR-A2OH-06,Metastasis,Non-glabrous skin,[Not Available],46,Female,Stage IIIB,6th,[Not Available],3.4,YES,[Not Available],1:DECEASED,65.83,[Not Available],Matched,NA,10/16/12,3,V600E,1,1
+TCGA-HR-A5NC,TCGA-HR-A5NC-01,Primary,Non-glabrous skin,[Not Available],90,Female,[Not Available],6th,V,8,[Not Available],[Not Available],0:LIVING,32.85,5.06,Matched,NA,5/30/14,NA,V600E,1,1
+TCGA-IH-A3EA,TCGA-IH-A3EA-01,Primary,Non-glabrous skin,2008,61,Male,Stage IIC,6th,[Not Available],NA,YES,[Not Available],0:LIVING,17.21,10.32,Matched,42.1666666667,2/15/13,2,V600E V600M,1,1
+TCGA-LH-A9QB,TCGA-LH-A9QB-06,Metastasis,Non-glabrous skin,1984,24,Female,[Not Available],2nd,III,NA,[Not Available],[Not Available],0:LIVING,368.5,368.5,Matched,NA,5/7/14,NA,V600E,1,1
+TCGA-OD-A75X,TCGA-OD-A75X-06,Metastasis,Non-glabrous skin,1989,49,Male,[Not Available],3rd,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,297.67,[Not Available],Matched,28.9666666667,10/29/13,NA,V600E V600M,1,1
+TCGA-QB-A6FS,TCGA-QB-A6FS-06,Metastasis,[Not Available],2013,49,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,7.23,6.27,Matched,32.1,9/6/13,3,V600E V600M,1,1
+TCGA-QB-AA9O,TCGA-QB-AA9O-06,Metastasis,[Not Available],2012,73,Male,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,18.04,[Not Available],Matched,NA,6/12/14,3,WT,0,0
+TCGA-RP-A690,TCGA-RP-A690-06,Metastasis,Non-glabrous skin,2005,66,Female,[Not Available],6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,0.2,0.2,Matched,0.533333333333,3/25/15,NA,WT,0,0
+TCGA-RP-A693,TCGA-RP-A693-06,Metastasis,Non-glabrous skin,2008,77,Male,Stage IV,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,0.33,0.33,Matched,22.6666666667,12/3/13,4,WT,0,0
+TCGA-RP-A694,TCGA-RP-A694-06,Metastasis,Non-glabrous skin,2009,71,Male,Stage IV,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,0.69,0.69,Matched,19.1333333333,12/3/13,4,WT,0,0
+TCGA-RP-A695,TCGA-RP-A695-06,Metastasis,Non-glabrous skin,1999,NA,Male,Stage IV,5th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,24.0666666667,12/3/13,4,WT,0,0
+TCGA-RP-A6K9,TCGA-RP-A6K9-06,Metastasis,Non-glabrous skin,2001,NA,Female,[Not Available],5th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,NA,[Not Available],Matched,NA,11/14/14,NA,WT,0,0
+TCGA-W3-A824,TCGA-W3-A824-06,Metastasis,Non-glabrous skin,1995,63,Male,Stage I,4th,[Not Available],1.5,[Not Available],[Not Available],0:LIVING,227.99,79.04,Matched,NA,3/31/14,1,WT,0,0
+TCGA-W3-A825,TCGA-W3-A825-06,Metastasis,Non-glabrous skin,1998,60,Female,Stage II,5th,IV,1.3,[Not Available],[Not Available],1:DECEASED,62.98,[Not Available],Matched,NA,3/31/14,2,S467L,0,1
+TCGA-W3-A828,TCGA-W3-A828-06,Metastasis,Non-glabrous skin,1997,66,Male,Stage II,4th,IV,0.5,[Not Available],3,1:DECEASED,120.99,[Not Available],Matched,NA,3/31/14,2,WT,0,0
+TCGA-W3-AA1O,TCGA-W3-AA1O-06,Metastasis,[Not Available],1997,85,Male,Stage III,4th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,4.01,[Not Available],Matched,NA,7/9/14,3,G469R H235Y,0,1
+TCGA-W3-AA1Q,TCGA-W3-AA1Q-06,Metastasis,Non-glabrous skin,1994,57,Male,Stage III,4th,[Not Available],NA,[Not Available],[Not Available],1:DECEASED,69.02,66,Matched,NA,7/17/14,3,V600E V600M,1,1
+TCGA-W3-AA1R,TCGA-W3-AA1R-06,Metastasis,Non-glabrous skin,1995,71,Male,Stage II,4th,V,NA,[Not Available],5.5,1:DECEASED,111.01,103.02,Matched,NA,7/17/14,2,V600E V600M,1,1
+TCGA-W3-AA1V,TCGA-W3-AA1V-06,Metastasis,Non-glabrous skin,1994,63,Male,Stage II,4th,IV,1.3,NO,[Not Available],1:DECEASED,42.05,40.05,Matched,NA,7/17/14,2,S467L,0,1
+TCGA-W3-AA1W,TCGA-W3-AA1W-06,Metastasis,Non-glabrous skin,1996,64,Male,Stage II,4th,IV,1.54,NO,0,0:LIVING,218.99,25,Matched,NA,7/17/14,2,V600E V600M,1,1
+TCGA-W3-AA21,TCGA-W3-AA21-06,Metastasis,Non-glabrous skin,1994,26,Male,Stage I,4th,III,1.1,NO,3,1:DECEASED,104.96,96.98,Matched,NA,7/17/14,1,V600E V600M,1,1
+TCGA-WE-A8JZ,TCGA-WE-A8JZ-06,Metastasis,Non-glabrous skin,2012,70,Male,Stage IIIB,7th,[Not Available],14,YES,9,0:LIVING,24.01,24.01,Matched,NA,6/2/14,3,WT,0,0
+TCGA-WE-A8K1,TCGA-WE-A8K1-06,Metastasis,Non-glabrous skin,2010,74,Male,Stage IIIC,7th,[Not Available],3,YES,5,0:LIVING,49.01,49.01,Matched,NA,3/5/14,3,WT,0,0
+TCGA-WE-A8K4,TCGA-WE-A8K4-01,Primary,Non-glabrous skin,2013,85,Male,Stage IIB,7th,[Not Available],12,[Not Available],4,0:LIVING,20.17,20.17,Matched,NA,6/2/14,2,WT,0,0
+TCGA-WE-A8K5,TCGA-WE-A8K5-06,Metastasis,Non-glabrous skin,2009,65,Male,Stage IV,6th,III,1.7,NO,12,1:DECEASED,61.1,49.21,Matched,NA,6/2/14,4,V600E V600M,1,1
+TCGA-WE-A8K6,TCGA-WE-A8K6-06,Metastasis,Non-glabrous skin,2013,79,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,17.94,8.51,Matched,NA,6/2/14,3,V600E,1,1
+TCGA-WE-A8ZM,TCGA-WE-A8ZM-06,Metastasis,Non-glabrous skin,2006,70,Male,Stage IIIB,6th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,101.25,101.25,Matched,NA,6/2/14,3,WT,0,0
+TCGA-WE-A8ZN,TCGA-WE-A8ZN-06,Metastasis,Non-glabrous skin,2009,57,Male,Stage IIB,6th,[Not Available],4.5,NO,[Not Available],0:LIVING,58.94,47.6,Matched,NA,6/2/14,2,WT,0,0
+TCGA-WE-A8ZO,TCGA-WE-A8ZO-06,Metastasis,Non-glabrous skin,2009,73,Female,Stage IIIB,6th,IV,2.4,NO,14,0:LIVING,70.47,58.97,Matched,NA,6/2/14,3,WT,0,0
+TCGA-WE-A8ZQ,TCGA-WE-A8ZQ-06,Metastasis,Non-glabrous skin,2009,48,Male,Stage IIA,6th,[Not Available],2.3,NO,6,0:LIVING,63.17,63.17,Matched,NA,6/2/14,2,V600E,1,1
+TCGA-WE-A8ZR,TCGA-WE-A8ZR-06,Metastasis,Non-glabrous skin,2013,49,Male,Stage IIIC,7th,[Not Available],7.3,YES,18,1:DECEASED,9,[Not Available],Matched,NA,6/2/14,3,V600E,1,1
+TCGA-WE-A8ZT,TCGA-WE-A8ZT-06,Metastasis,[Not Available],2013,25,Female,Stage IV,7th,[Not Available],4,YES,14,0:LIVING,11.79,2.27,Matched,NA,6/2/14,4,V600E,1,1
+TCGA-WE-A8ZX,TCGA-WE-A8ZX-06,Metastasis,Non-glabrous skin,2012,45,Male,Stage IIIB,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,35.78,10.71,Matched,NA,6/2/14,3,V600E,1,1
+TCGA-WE-A8ZY,TCGA-WE-A8ZY-06,Metastasis,Non-glabrous skin,2010,62,Male,Stage IIA,7th,[Not Available],3,NO,3,1:DECEASED,49.47,[Not Available],Matched,NA,6/2/14,2,WT,0,0
+TCGA-WE-AA9Y,TCGA-WE-AA9Y-06,Metastasis,Non-glabrous skin,2013,37,Male,Stage IIIC,7th,[Not Available],1.4,NO,4,0:LIVING,12.16,12.16,Matched,NA,6/2/14,3,WT,0,0
+TCGA-WE-AAA0,TCGA-WE-AAA0-06,Metastasis,Non-glabrous skin,2011,47,Male,Stage IA,7th,[Not Available],0.8,NO,0,0:LIVING,40.37,40.37,Matched,NA,6/2/14,1,V600E,1,1
+TCGA-WE-AAA3,TCGA-WE-AAA3-06,Metastasis,Non-glabrous skin,2013,84,Female,Stage IIIC,7th,[Not Available],7,YES,12,0:LIVING,21.39,21.39,Matched,NA,6/2/14,3,WT,0,0
+TCGA-WE-AAA4,TCGA-WE-AAA4-06,Metastasis,Non-glabrous skin,2012,56,Female,Stage IIIC,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,24.97,24.97,Matched,NA,6/2/14,3,V600E,1,1
+TCGA-XV-A9VZ,TCGA-XV-A9VZ-01,Primary,Non-glabrous skin,2013,90,Female,Stage II,7th,IV,5,[Not Available],[Not Available],0:LIVING,0.36,0.36,Matched,NA,9/11/14,2,WT,0,0
+TCGA-XV-A9W2,TCGA-XV-A9W2-01,Primary,Non-glabrous skin,2013,81,Male,Stage I,7th,II,1,[Not Available],[Not Available],0:LIVING,13.7,13.7,Matched,NA,9/11/14,1,WT,0,0
+TCGA-XV-A9W5,TCGA-XV-A9W5-01,Primary,Non-glabrous skin,2013,51,Male,I/II NOS,7th,IV,2,[Not Available],[Not Available],0:LIVING,12.88,12.88,Matched,NA,9/11/14,2,V600E,1,1
+TCGA-XV-AAZV,TCGA-XV-AAZV-01,Primary,Non-glabrous skin,2013,56,Female,Stage II,7th,IV,10,[Not Available],[Not Available],0:LIVING,13.53,13.53,Matched,NA,9/11/14,2,V600E,1,1
+TCGA-XV-AAZW,TCGA-XV-AAZW-01,Primary,Non-glabrous skin,2013,62,Female,Stage II,7th,V,13,[Not Available],[Not Available],1:DECEASED,12.91,[Not Available],Matched,NA,9/11/14,2,V600E,1,1
+TCGA-XV-AAZY,TCGA-XV-AAZY-01,Primary,Non-glabrous skin,2013,76,Female,Stage IIIC,7th,V,16,[Not Available],[Not Available],0:LIVING,13.3,13.3,Matched,NA,9/11/14,3,WT,0,0
+TCGA-XV-AB01,TCGA-XV-AB01-06,Metastasis,Non-glabrous skin,2013,54,Female,Stage II,7th,[Not Available],NA,[Not Available],[Not Available],0:LIVING,13.24,13.24,Matched,NA,9/11/14,2,V600E,1,1
+TCGA-YD-A89C,TCGA-YD-A89C-06,Metastasis,Non-glabrous skin,2013,43,Female,Stage IA,7th,IV,1,NO,5,0:LIVING,6.9,6.9,Matched,NA,2/28/14,1,WT,0,0
+TCGA-YD-A9TA,TCGA-YD-A9TA-06,Metastasis,Non-glabrous skin,2010,75,Male,[Not Available],[Not Available],III,1.5,[Not Available],[Not Available],0:LIVING,49.15,49.15,Matched,NA,7/7/14,NA,WT,0,0
+TCGA-YD-A9TB,TCGA-YD-A9TB-06,Metastasis,Non-glabrous skin,1987,NA,Female,[Not Available],[Not Available],IV,1.5,NO,3,0:LIVING,NA,[Not Available],Matched,NA,7/7/14,NA,V600E,1,1
+TCGA-YG-AA3N,TCGA-YG-AA3N-01,Primary,Non-glabrous skin,2013,67,Male,Stage IIC,7th,IV,17,[Not Available],7,0:LIVING,10.05,10.05,Matched,NA,5/23/14,2,V600E V600M,1,1
+TCGA-YG-AA3O,TCGA-YG-AA3O-06,Metastasis,Non-glabrous skin,2011,62,Male,[Not Available],[Not Available],[Not Available],NA,[Not Available],[Not Available],1:DECEASED,37.91,32.82,Matched,NA,6/5/14,NA,V600G V600M,0,1
+TCGA-YG-AA3P,TCGA-YG-AA3P-06,Metastasis,Non-glabrous skin,2013,63,Female,Stage IIB,7th,V,10,NO,6,0:LIVING,14.42,14.42,Matched,NA,5/23/14,2,WT,0,0
+TCGA-Z2-A8RT,TCGA-Z2-A8RT-06,Metastasis,Non-glabrous skin,2012,42,Female,Stage IIB,7th,III,4,YES,[Not Available],0:LIVING,27.56,27.56,Matched,NA,6/30/14,2,WT,0,0
+TCGA-Z2-AA3S,TCGA-Z2-AA3S-06,Metastasis,Non-glabrous skin,2006,58,Male,Stage IA,6th,II,0.5,NO,[Not Available],0:LIVING,96.91,93.5,Matched,NA,6/30/14,1,WT,0,0
+TCGA-Z2-AA3V,TCGA-Z2-AA3V-06,Metastasis,Non-glabrous skin,2013,57,Female,Stage IA,7th,[Not Available],0.5,NO,0.9,0:LIVING,15.97,15.97,Matched,NA,6/30/14,1,V600E,1,1
