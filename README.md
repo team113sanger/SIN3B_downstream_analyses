@@ -1,5 +1,8 @@
 # SIN3B Downstream analysis 
 
+## Contact 
+Estefania Vázquez (evazquez@liigh.unam.mx)
+
 This repository contains the code used for the analysis of TCGA SKCM data. The analysis is divided into several sections, each corresponding to a specific aspect of the study. Below is a brief description of each section:
 
 ## Summary 
