@@ -245,11 +245,11 @@ hallmark_sets <- msigdbr(
   species = "Homo sapiens",
   category = "H"
 ) |>
-  select(gs_name, ensembl_gene)
+  dplyr::select(gs_name, ensembl_gene)
 
 # Create mapping
 term2gene <- hallmark_sets |>
-  rename(
+  dplyr::rename(
     TERM = gs_name,
     GENE = ensembl_gene
   )
@@ -269,7 +269,7 @@ significant_hallmarks <- hallmark_gsea@result |>
   as_tibble() |>
   filter(pvalue < 0.05) |>
   arrange(pvalue) |>
-  select(
+  dplyr::select(
     ID,
     Description,
     setSize,
@@ -279,7 +279,7 @@ significant_hallmarks <- hallmark_gsea@result |>
   )
 
 # Display results
-significant_results |>
+significant_hallmarks |>
   knitr::kable()
 
 # Save
@@ -348,7 +348,7 @@ plot_theme <- theme(
 
 # Load TPM data and gene IDs
 tpms <- read_delim(here("input_data/2581-feature-tpm-v103.txt")) |> dplyr::rename(ENSEMBL_GENE_ID = "id") |> glimpse()
-gene_ids <- readRDS("ensembl_gs_annotation.rds")
+gene_ids <- readRDS(here("input_data/ensembl_gs_annotation.rds"))
 
 # Merge 
 samples90 <- tpms |>
@@ -368,14 +368,14 @@ extract_gene_expression <- function(data, gene_name) {
   new_name <- paste0(gene_name, "_expression_tpms")
   data |>
     filter(external_gene_name == gene_name) |>
-    select(-ENSEMBL_GENE_ID) |>
+    dplyr::select(-ENSEMBL_GENE_ID) |>
     pivot_longer(
       cols = -external_gene_name,
       names_to = "sample",
       values_to = "tpm"
     ) |>
     rename_with(~new_name, .cols = "tpm") |>
-    select(-external_gene_name)
+    dplyr::select(-external_gene_name)
 }
 
 # Extract genes: POLE4, STK11, BRAF, SIN3B
@@ -473,12 +473,12 @@ correlation_grid <- do.call(grid.arrange, c(correlation_plots, ncol = 2))
 
 
 # Save
-#ggsave(
-#  "figures/pole4_stk11_correlation.pdf",
-#  correlation_plot,
-#  width = 10,
-#  height = 8,
-#  dpi = 400)
+ggsave(
+ "figures/pole4_stk11_correlation.pdf",
+ correlation_grid,
+ width = 10,
+ height = 8,
+ dpi = 400)
 
 ```
 
@@ -587,10 +587,10 @@ get_tcga_expression <- function(force_download = FALSE) {
 }
 
 # Load expression data
-SKCM_counts <- get_tcga_expression()
+#SKCM_counts <- get_tcga_expression()
 
 # Alternatively use already downloaded object
-SKCM_counts <- readRDS("SKCM_counts.rds")
+SKCM_counts <- readRDS(here("input_data/SKCM_counts.rds"))
 
 
 # Check dimensions and distribution 
@@ -618,7 +618,7 @@ get_clinical_data <- function(save_path = "clinical_cbioportal.rds") {
     # Extract and process clinical data
     clinical_data <- colData(skcm_study) |>
       as.data.frame() |>
-      select(
+      dplyr::select(
         PATIENT_ID, SAMPLE_ID, SAMPLE_TYPE, 
         AGE, SEX, AJCC_PATHOLOGIC_TUMOR_STAGE,
         BRESLOW_DEPTH, OS_STATUS, OS_MONTHS,
@@ -696,7 +696,7 @@ process_clinical_data <- function(data) {
 
 
 # Load and process data
-clinical_data <- read_csv("clinical_data_complete_cbioportal.csv") |>
+clinical_data <- read_csv(here("input_data/clinical_data_complete_cbioportal.csv")) |>
   process_clinical_data()
 
 # Save 
@@ -737,7 +737,7 @@ To Incorporate BRAF mutation data, two classifications were created:
 # BRAF Mutation Analysis 
 
 # Load mutation data
-braf_mutation <- read_delim(here("data", "BRAF_mutations_cbioportal.txt"))
+braf_mutation <- read_delim(here("input_data", "BRAF_mutations_cbioportal.txt"))
 glimpse(braf_mutation)
 table(unique(braf_mutation$BRAF))
 
@@ -763,7 +763,7 @@ ggplot(braf_df |> filter(BRAF != "WT"),
 # Create BRAF classifications
 # prepare data
 braf_mutation <- braf_mutation |>
-  rename(sample_id = SAMPLE_ID,
+  dplyr::rename(sample_id = SAMPLE_ID,
          BRAF_mutation = BRAF)
 
 
@@ -829,14 +829,14 @@ braf_class2 |> count(mutation_status_class2, sort = TRUE)
 
 # Combined classification
 combined_braf <- braf_class1 |>
-  select(
+  dplyr::select(
     sample_id, 
     BRAF_mutation,
     mutation_status_class1
   ) |>
   left_join(
     braf_class2 |> 
-      select(sample_id, mutation_status_class2),  # Select from braf_class2
+      dplyr::select(sample_id, mutation_status_class2),  # Select from braf_class2
     by = "sample_id"
   )
 
