@@ -1,0 +1,2066 @@
+---
+title: "SIN3B Analysis Pipeline"
+author: "Estef Vazquez"
+output:
+  html_document:
+    toc: yes
+    toc-depth: 3 
+    toc_float:
+      collapsed: false
+      smooth_scroll: true      
+    code_folding: show         
+
+---
+
+## Overview
+
+This document performs analysis of *SIN3B* in cutaneous melanoma data (cell lines' transcriptomic and the TCGA SKCM data), including:
+
+1.  Data pre-processing
+2.  Gene Set Enrichment Analysis (GSEA)
+    -   Gene Ontology (GO)
+    -   MSigDB Hallmarks
+3.  SIN3B and SIN3A paralogs comparison between KO and Controls (cell lines)
+4.  Expression correlations between *SIN3B*, *POLE4* and *STK11* (TCGA SKCM)
+5.  Survival Analysis - TCGA SKCM data download and processing (primaries and metastases analysed separately)
+    -   Kaplan-Meier curves (SIN3B high/low)
+    -   Cox proportional hazards models (univariate and multivariate)
+    -   Forest plots
+
+## Setup
+
+Load the required libraries and set up environment.
+
+```{r setup, message=FALSE, warning=FALSE}
+
+# Set global chunk options
+knitr::opts_chunk$set(
+  echo = TRUE,       
+  warning = FALSE,   
+  message = FALSE,   
+  fig.width = 10,    
+  fig.height = 8,   
+  dpi = 300          
+)
+
+# Load libraries
+library(here)
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(purrr)
+library(gt)
+library(gtsummary)  
+library(gridExtra)
+library(patchwork) 
+library(clusterProfiler) 
+library(enrichplot)
+library(DOSE)
+library(org.Hs.eg.db)
+library(biomaRt) 
+#library(stringr)
+#library(readr)
+library(msigdbr)
+library(fgsea)
+library(plotly)
+library(broom)
+library(skimr)
+library(corrplot)
+library(TCGAbiolinks)
+library(cBioPortalData)
+library(DESeq2)
+library(AnVIL)
+library(survival)
+library(survminer)
+library(ggsurvfit)
+library(glmnet)
+
+# Set theme
+theme_set(theme_classic())
+
+# Define directories to use
+directories <- c(
+  here("data", "processed"),
+  here("results"),
+  here("figures")
+)
+
+# Create directories if they don't exist
+for (dir in directories) {
+  if (!dir.exists(dir)) {
+    message(paste("Creating directory:", dir))
+    dir.create(dir, recursive = TRUE)
+  } else {
+    message(paste("Directory already exists:", dir))
+  }
+}
+
+# Verify directory structure
+directory_status <- sapply(directories, dir.exists)
+#print(directory_status)
+
+# Set options
+options(
+  connectionObserver = NULL,
+  tidyverse.quiet = TRUE
+)
+
+```
+
+## 1. GSEA - Data Loading and Processing
+
+```{r load-data-GSEA, cache=TRUE}
+
+# Load differential expression results
+de_genes <- read_csv(
+  "2581-all-lines-deseq-results.csv",
+  show_col_types = FALSE
+) %>%
+  rename(ensembl_id = ...1) %>%
+  relocate(gene, .after = ensembl_id)
+
+# View
+glimpse(de_genes)
+```
+
+### 1.1 Process data
+
+```{r prepare-gsea}
+# Order genes by LFC
+ranked_genes <- de_genes %>%
+  arrange(log2FoldChange) %>%
+  mutate(gene = make.unique(gene)) %>%
+  column_to_rownames("gene")
+
+# Extract and name fold changes
+gene_list_fc <- ranked_genes %>%
+  pull(log2FoldChange) %>%
+  set_names(ranked_genes$ensembl_id) %>%
+  sort(decreasing = TRUE)
+
+# Save in folder
+# saveRDS(gene_list_fc, "data/processed/ranked_genes.rds")
+```
+
+### 1.2 Gene Set Enrichment Analysis
+
+```{r GSEA-BP, cache=TRUE}
+# Run GSEA - Gene Ontology 
+gsea_bp <- gseGO(
+  geneList = gene_list_fc,
+  ont = "BP", #biological process
+  keyType = "ENSEMBL",
+  minGSSize = 5,
+  maxGSSize = 800,
+  pvalueCutoff = 0.05,
+  verbose = TRUE,
+  OrgDb = org.Hs.eg.db,
+  pAdjustMethod = "BH",
+  eps = 0
+)
+
+# Filter results 
+significant_bp <- gsea_bp %>%
+  as_tibble() %>%
+  filter(p.adjust < 0.05) %>%  
+  arrange(pvalue)
+
+# Save
+gsea_results <- as.data.frame(significant_bp)
+# write_csv(gsea_results, "results/gsea_go_bp_results.csv")
+```
+
+```{r GSEA-viz-function}
+# Plot GSEA results
+#' @param gsea_bp GSEA result object
+#' @param n_terms Number of terms to show
+#' @return ggplot object
+
+create_dotplot <- function(gsea_bp, n_terms = 5) {
+  df <- as.data.frame(gsea_bp)
+  
+  ggplot(
+    head(df[order(df$p.adjust), ], n_terms),
+    aes(x = reorder(Description, -p.adjust), y = NES)
+  ) +
+    geom_point(
+      size = 9,
+      aes(color = NES < 0)
+    ) +
+    scale_color_manual(
+      values = c("red", "blue"),
+      guide = "none"
+    ) +
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      text = element_text(color = "black"),
+      axis.text = element_text(size = 16, color = "black"),
+      axis.title = element_text(size = 14, face = "bold", color = "black"),
+      panel.grid.major = element_line(color = "gray90"),
+      panel.grid.minor = element_line(color = "gray95")
+    ) +
+    labs(
+      x = "",
+      y = "Normalized Enrichment Score (NES)",
+      title = "Gene Set Enrichment Analysis - BP"
+    )
+}
+```
+
+### 1.3 GSEA Visualization - Gene Ontology
+
+```{r gsea-plots, fig.cap="GSEA Barplot"}
+# Create barplot for top pathways
+df <- as.data.frame(gsea_bp@result)
+ggplot(
+  head(df[order(df$pvalue), ], 5),
+  aes(x = reorder(Description, -pvalue), y = NES)
+) +
+  geom_col(aes(fill = NES < 0)) +
+  scale_fill_manual(
+    values = "blue",
+    guide = "none"
+  ) +
+  coord_flip() +
+  theme_classic() +
+  labs(
+    x = "Pathway",
+    y = "Normalized Enrichment Score (NES)",
+    title = "Top 5 Hallmark Pathways - SIN3B KO vs control cells"
+  )
+```
+
+### 1.4 MSigDB Hallmark Analysis
+
+```{r msigdb, cache=TRUE}
+# Get hallmark gene sets
+hallmark_sets <- msigdbr(
+  species = "Homo sapiens",
+  category = "H"
+) %>%
+  dplyr::select(gs_name, ensembl_gene) 
+
+#check that columns exist
+#colnames(hallmark_sets)
+
+# Create mapping
+term2gene <- data.frame(
+  TERM = hallmark_sets$gs_name,
+  GENE = hallmark_sets$ensembl_gene
+)
+
+# Running GSEA 
+hallmark_gsea <- GSEA(
+  geneList = gene_list_fc,
+  TERM2GENE = term2gene,
+  minGSSize = 5,
+  maxGSSize = 500,
+  pvalueCutoff = 1, #get all results
+  nPermSimple = 1000
+)
+
+# Filter significant
+significant_hallmarks <- hallmark_gsea@result %>%
+  as_tibble() %>%
+  filter(pvalue < 0.05) %>%
+  arrange(pvalue) %>%
+  dplyr::select(
+    ID,
+    Description,
+    setSize,
+    NES,
+    pvalue,
+    p.adjust
+  )
+
+# Display results
+significant_hallmarks %>%
+  knitr::kable()
+
+# Save
+# saveRDS(significant_hallmarks, "results/significant_hallmarks.rds")
+# write_csv(significant_hallmarks, "results/significant_hallmark_pathways.csv")
+```
+
+### 1.5 Hallmark Visualization
+
+```{r hallmark-plots, fig.cap="Top Hallmark Pathways"}
+# Create barplot for top pathways
+df <- as.data.frame(hallmark_gsea@result)
+ggplot(
+  head(df[order(df$pvalue), ], 5),
+  aes(x = reorder(Description, -pvalue), y = NES)
+) +
+  geom_col(aes(fill = NES < 0)) +
+  scale_fill_manual(
+    values = "blue",
+    guide = "none"
+  ) +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    x = "Pathway",
+    y = "Normalized Enrichment Score (NES)",
+    title = "Top 5 Hallmark Pathways"
+  )
+```
+
+## 2. Cell lines - Knock Out vs Controls
+
+```{r theme-load, cache=TRUE}
+# Theme
+plot_theme <- theme(
+  plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+  axis.title = element_text(size = 14, face = "bold", color = "#2C3E50"),
+  axis.text = element_text(size = 14, color = "#2C3E50"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "white"),
+  plot.background = element_rect(fill = "white"),
+  plot.margin = margin(20, 20, 20, 20)
+)
+
+# Load TPM data and gene IDs
+tpms <- read_delim("2581-feature-tpm-v103.txt") %>% dplyr::rename(ENSEMBL_GENE_ID = "id") %>% glimpse()
+
+gene_ids <- readRDS("ensembl_gs_annotation.rds")
+
+# Merge - add gene symbol
+samples90 <- tpms %>%
+ inner_join(gene_ids, by = "ENSEMBL_GENE_ID") %>%
+  relocate(external_gene_name, .after = ENSEMBL_GENE_ID) 
+
+# Save 
+# saveRDS(samples90, "results/samples90_object.rds")
+```
+
+### 2.1 Extract Genes - BRAF, POLE4, STK11, SIN3B
+
+```{r extract-genes}
+# Extracting genes of interest 
+extract_gene_expression <- function(data, gene_name) {
+  new_name <- paste0(gene_name, "_expression_tpms")
+  data %>%
+    dplyr::filter(external_gene_name == gene_name) %>%
+    dplyr::select(-ENSEMBL_GENE_ID) %>%
+    pivot_longer(
+      cols = -external_gene_name,
+      names_to = "sample",
+      values_to = "tpm"
+    ) %>%
+    rename_with(~new_name, .cols = "tpm") %>%
+    dplyr::select(-external_gene_name)
+}
+
+POLE4_expr <- extract_gene_expression(samples90, "POLE4")
+STK11_expr <- extract_gene_expression(samples90, "STK11")
+SIN3B_expr <- extract_gene_expression(samples90, "SIN3B")
+SIN3A_expr <- extract_gene_expression(samples90, "SIN3A")
+BRAF_expr <- extract_gene_expression(samples90, "BRAF")
+
+# Join 
+gene_expr <- SIN3B_expr %>%
+  inner_join(STK11_expr, by = "sample") %>%
+  inner_join(POLE4_expr, by = "sample") %>% 
+  inner_join(SIN3A_expr, by = "sample") %>% 
+  inner_join(BRAF_expr, by = "sample") %>% glimpse()
+
+# Convert to matrix and log2 
+gene_matrix <- gene_expr %>%
+  column_to_rownames("sample") %>%
+  as.matrix()
+gene_matrix_log2 <- log2(gene_matrix + 1)
+
+# Back to df
+gene_expr_log2 <- gene_matrix_log2 %>%
+  as.data.frame() %>%
+  rownames_to_column("sample")
+
+# Save
+# saveRDS(gene_expr_log2, "results/cell_lines_gene_expression_log2.rds")
+```
+
+### 2.2 KO vs Controls Visualization
+
+```{r plots-KO-controls, fig.width=10, fig.height=8}
+# Sample classification
+classify_samples <- function(data) {
+  data %>%
+    mutate(
+      Exp_Design = case_when(
+        str_detect(sample, "CONTROL") ~ "CONTROL",
+        str_detect(sample, "KO") ~ "KNOCK_OUT",
+        TRUE ~ "Other"
+      ),
+      cell_line = case_when(
+        str_detect(sample, "A2058") ~ "A2058",
+        str_detect(sample, "A375") ~ "A375",
+        str_detect(sample, "SKMEL28") ~ "SKMEL28",
+        TRUE ~ "Other"
+      ),
+       # Extract additional info if available
+      replicate = str_extract(sample, "N\\d+$")
+    ) %>%
+    mutate(across(c(Exp_Design, cell_line), factor))
+}
+
+# Prepare data for SIN3A
+sin3a_data <- gene_expr_log2 %>%
+  select(sample, SIN3A_expression_tpms) %>%
+  classify_samples()
+
+# Prepare data for SIN3B
+sin3b_data <- gene_expr_log2 %>%
+  select(sample, SIN3B_expression_tpms) %>%
+  classify_samples()
+
+# Calculate statistical significance
+sin3a_stats <- wilcox.test(SIN3A_expression_tpms ~ Exp_Design, data = sin3a_data) %>%
+  {paste("Wilcoxon, p =", round(.$p.value, 2))}
+
+sin3b_test <- wilcox.test(SIN3B_expression_tpms ~ Exp_Design, data = sin3b_data)
+sin3b_pvalue <- sin3b_test$p.value
+# Format p-value 
+sin3b_stats <- if(sin3b_pvalue < 0.001) {
+  paste0("Wilcoxon, p = ", format(sin3b_pvalue, digits = 3, scientific = TRUE))
+} else {
+  paste0("Wilcoxon, p = ", round(sin3b_pvalue, 3))
+}
+
+# Color scheme
+my_colors <- c("CONTROL" = "blue", "KNOCK_OUT" = "red")
+
+# SIN3A plot
+sin3a_plot <- sin3a_data %>%
+  ggplot(aes(x = Exp_Design, y = SIN3A_expression_tpms, fill = Exp_Design)) +
+  geom_boxplot(alpha = 0.9, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.5, color = "gray30") +
+  scale_fill_manual(values = my_colors) +
+  annotate("text", x = 1.5, y = max(sin3a_data$SIN3A_expression_tpms), 
+           label = sin3a_stats, size = 4) +
+  labs(
+    title = "SIN3A Expression: Control vs SIN3A Knockout",
+    y = "Expression (log2TPM + 1)",
+    x = ""
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 12),
+    legend.position = "right",
+    legend.title = element_text(size = 12, face = "bold"),
+    panel.grid.major.x = element_blank(),
+    panel.border = element_rect(fill = NA, color = "black")
+  )
+
+sin3a_plot
+
+# SIN3B plot
+sin3b_plot <- sin3b_data %>%
+  ggplot(aes(x = Exp_Design, y = SIN3B_expression_tpms, fill = Exp_Design)) +
+  geom_boxplot(alpha = 0.9, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.5, color = "gray30") +
+  scale_fill_manual(values = my_colors) +
+  annotate("text", x = 1.5, y = max(sin3b_data$SIN3B_expression_tpms), 
+           label = sin3b_stats, size = 4) +
+  labs(
+    title = "SIN3B Expression: Control vs SIN3B Knockout",
+    y = "Expression (log2TPM + 1)",
+    x = ""
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 12),
+    legend.position = "right",
+    legend.title = element_text(size = 12, face = "bold"),
+    panel.grid.major.x = element_blank(),
+    panel.border = element_rect(fill = NA, color = "black")
+  )
+sin3b_plot
+
+# combined dataset for faceted plot
+combined_data <- gene_expr_log2 %>%
+  select(sample, SIN3A_expression_tpms, SIN3B_expression_tpms) %>%
+  classify_samples() %>%
+  pivot_longer(
+    cols = c(SIN3A_expression_tpms, SIN3B_expression_tpms),
+    names_to = "gene",
+    values_to = "expression"
+  ) %>%
+  mutate(gene = str_remove(gene, "_expression_tpms"))
+
+# faceted 
+faceted_plot <- combined_data %>%
+  ggplot(aes(x = Exp_Design, y = expression, fill = Exp_Design)) +
+  geom_boxplot(alpha = 0.9, outlier.shape = NA) +
+  geom_jitter(width = 0.2, alpha = 0.5, color = "gray30") +
+  scale_fill_manual(values = my_colors) +
+  facet_wrap(~gene, scales = "free_y") +
+  labs(
+    title = "SIN3A and SIN3B Expression",
+    y = "Expression (log2TPM + 1)",
+    x = ""
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 12),
+    legend.position = "right",
+    legend.title = element_text(size = 12, face = "bold"),
+    panel.grid.major.x = element_blank(),
+    panel.border = element_rect(fill = NA, color = "black"),
+    strip.text = element_text(size = 14, face = "bold")
+  )
+faceted_plot
+
+# Save 
+ggsave(
+  filename = "figures/sin3b_expression_plot.pdf",
+  plot = sin3b_plot,
+  width = 7,
+  height = 7,
+  dpi = 300,
+  units = "in"
+)
+
+ggsave(
+  filename = "figures/sin3a_expression_plot.pdf",
+  plot = sin3a_plot,
+  width = 7,
+  height = 7,
+  dpi = 300,
+  units = "in"
+)
+
+ggsave(
+  filename = "figures/sin3_faceted_plot.pdf",
+  plot = faceted_plot,
+  width = 10,
+  height = 8,
+  dpi = 300,
+  units = "in"
+)
+```
+
+## 3. TCGA SKCM Analysis
+
+```{r, cache=TRUE}
+# download TCGA expression data from TCGAbiolinks
+get_tcga_expression <- function(force_download = FALSE) {
+  file_path <- "SKCM_counts.rds"
+  
+  if (!file.exists(file_path) || force_download) {
+    # Build query
+    query_TCGA <- GDCquery(
+      project = "TCGA-SKCM",
+      data.category = "Transcriptome Profiling",
+      experimental.strategy = "RNA-Seq",
+      workflow.type = "STAR - Counts",
+      access = "open"
+    )
+    
+    # Download and prepare data
+    GDCdownload(query_TCGA)
+    SKCM_data <- GDCprepare(query_TCGA, summarizedExperiment = TRUE)
+    
+    # Extract counts and save
+    SKCM_counts <- assay(SKCM_data, "unstranded")
+    saveRDS(SKCM_counts, file_path)
+  }
+  
+  readRDS(file_path)
+}
+
+# Load expression data
+SKCM_counts <- get_tcga_expression()
+
+# Alternatively use already downloaded object
+SKCM_counts <- readRDS("SKCM_counts.rds")
+dim(SKCM_counts)
+
+#skimr::skim(SKCM_counts)
+```
+
+### 3.1 Clinical Data Processing
+
+```{r}
+# Get clinical data from cBioPortal
+get_clinical_data <- function(save_path = "clinical_cbioportal.rds") {
+  if (!file.exists(save_path)) {
+    # Initialize connection
+    cbio <- cBioPortal(hostname = "www.cbioportal.org", protocol = "https")
+    
+    # Download study data
+    skcm_study <- cBioDataPack("skcm_tcga", ask = FALSE)
+    
+    # Extract and process clinical data
+    clinical_data <- colData(skcm_study) %>%
+      as.data.frame() %>%
+      select(
+        PATIENT_ID, SAMPLE_ID, SAMPLE_TYPE, 
+        AGE, SEX, AJCC_PATHOLOGIC_TUMOR_STAGE,
+        BRESLOW_DEPTH, OS_STATUS, OS_MONTHS,
+        # Add other relevant columns if required
+      )
+    
+    saveRDS(clinical_data, save_path)
+  }
+  
+  readRDS(save_path)
+}
+
+#clinical_data <- get_clinical_data()
+
+# Clean data
+process_clinical_data <- function(data) {
+  processed_data <- data %>%
+    # Convert to lowercase
+    rename_with(tolower) %>%
+    # Select and clean variables
+    mutate(
+      # Convert survival os status to 0/1
+      os_status_recode = case_when(
+        str_detect(tolower(os_status), "deceased") ~ 1,
+        str_detect(tolower(os_status), "living|alive") ~ 0,
+        TRUE ~ NA_real_
+      ),
+      # Clean stage 
+      stage = case_when(
+        grepl("Stage 0", ajcc_pathologic_tumor_stage) ~ "0",
+        grepl("Stage I[ABC]?$", ajcc_pathologic_tumor_stage) ~ "1",
+        grepl("Stage II[ABC]?$", ajcc_pathologic_tumor_stage) ~ "2",
+        grepl("Stage III[ABC]?$", ajcc_pathologic_tumor_stage) ~ "3",
+        grepl("Stage IV", ajcc_pathologic_tumor_stage) ~ "4",
+        grepl("I/II NOS", ajcc_pathologic_tumor_stage) ~ "2",
+        TRUE ~ NA_character_
+      ),
+      # Clean numeric 
+      os_months = if_else(os_months == "[Not Available]", NA_real_, as.numeric(os_months)),
+      age = as.numeric(age),
+      breslow_depth = as.numeric(breslow_depth)
+    ) %>%
+    # Convert to factors
+    mutate(across(c(sample_type, sex, stage), as.factor)) %>%
+    # Relocate 
+    relocate(os_status_recode, .after = os_status) %>%
+    relocate(stage, .after = ajcc_pathologic_tumor_stage) 
+  
+  # check
+  if(!all(processed_data$os_status_recode %in% c(0, 1, NA))) {
+    warning("Found values other than 0,1,NA in os_status_recode")
+  }
+  
+  # Check missing values
+  n_missing <- colSums(is.na(processed_data))
+  if(any(n_missing > 0)) {
+    warning("Missing values found in columns: ", 
+            paste(names(n_missing[n_missing > 0]), collapse = ", "))
+  }
+  
+  # Add summary information
+  attr(processed_data, "summary") <- list(
+    n_patients = n_distinct(processed_data$patient_id),
+    n_samples = nrow(processed_data),
+    median_age = median(processed_data$age, na.rm = TRUE),
+    n_events = sum(processed_data$os_status_recode == 1, na.rm = TRUE),
+    median_followup = median(processed_data$os_months, na.rm = TRUE)
+  )
+  
+  return(processed_data)
+}
+
+# Load and process data
+clinical_data <- read_csv("clinical_data_complete_cbioportal.csv") %>%
+  process_clinical_data()
+
+# Save 
+saveRDS(clinical_data, here("data", "processed", "clinical_data_processed.rds"))
+
+#clinical_data <- readRDS("clinical_data_processed.rds")
+
+# Verify data
+print("Clinical data dimensions:")
+print(dim(clinical_data))
+print("Sample type distribution:")
+print(table(clinical_data$sample_type))
+
+# Generate summary
+clinical_summary <- clinical_data %>%
+  summarise(
+    total_samples = n(),
+    missing_stage = sum(is.na(stage)),
+    missing_os = sum(is.na(os_months)),
+    n_primary = sum(sample_type == "Primary"),
+    n_metastatic = sum(sample_type == "Metastasis")
+  )
+
+knitr::kable(clinical_summary)
+```
+
+### 3.2 BRAF Mutation Classification
+
+Mutation data was donwloaded from cbioportal. To Incorporate BRAF mutation data, two classifications were created:
+
+1.  **Class 1**: Only *BRAF* V600E mutations coded as 1 (all other mutations and WT = 0)
+
+2.  **Class 2:** All *BRAF* mutations coded as 1 (WT = 0)
+
+```{r BRAF-mutation}
+
+# Load mutation data
+braf_mutation <- read_delim(here("data", "BRAF_mutations_cbioportal.txt"))
+#table(unique(braf_mutation$BRAF))
+
+
+# Mutation frequencies
+braf_df <- braf_mutation %>%
+  dplyr::select(BRAF) %>%
+  separate_rows(BRAF, sep = " ") %>%
+  dplyr::count(BRAF, sort = TRUE) %>%
+  mutate(percentage = (n/sum(n))*100)
+
+
+# Visualize mutation frequencies in TCGA dataset
+ggplot(braf_df %>% filter(BRAF != "WT"), 
+       aes(x = reorder(BRAF, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() + 
+  theme_classic() +
+  labs(x = "BRAF Mutation",
+       y = "Frequency",
+       title = "BRAF Mutation Frequencies in TCGA SKCM")
+
+
+# Create BRAF classifications
+braf_mutation <- braf_mutation %>%
+  rename(sample_id = SAMPLE_ID,
+         BRAF_mutation = BRAF)
+
+
+# Classification 1 - BRAF V600E 
+braf_class1 <- braf_mutation %>%
+  mutate(
+    mutation_status_class1 = case_when(
+      grepl("V600E", BRAF_mutation) ~ 1,
+      TRUE ~ 0
+    ),
+    mutation_type = case_when(
+      BRAF_mutation == "WT" ~ "Wild_Type",
+      grepl("V600E", BRAF_mutation) & !grepl(" ", BRAF_mutation) ~ "V600E_Single",
+      grepl("V600E.*V600", BRAF_mutation) | grepl("V600.*V600E", BRAF_mutation) ~ "V600E_Double",
+      grepl("V600", BRAF_mutation) ~ "Other_V600",
+      grepl("G469|K601|L597", BRAF_mutation) ~ "Class_2",
+      grepl("G466|N581", BRAF_mutation) ~ "Other_Activating",
+      TRUE ~ "Other"
+    ),
+    multiple_mutations = case_when(
+      str_count(BRAF_mutation, " ") == 0 ~ "Single",
+      str_count(BRAF_mutation, " ") == 1 ~ "Double",
+      str_count(BRAF_mutation, " ") == 2 ~ "Triple",
+      TRUE ~ "None"
+    ) 
+  ) %>%
+    mutate(mutation_status_class1 = as.factor(mutation_status_class1)) %>% glimpse()
+
+braf_class1 %>% dplyr::count(mutation_status_class1, sort = TRUE)
+
+
+# Classification 2 - all BRAF mutations
+braf_class2 <- braf_mutation %>%
+  mutate(
+    mutation_status_class2 = case_when(
+      grepl("WT", BRAF_mutation) ~ 0,
+      TRUE ~ 1
+    ),
+    mutation_type = case_when(
+      BRAF_mutation == "WT" ~ "Wild_Type",
+      grepl("V600E", BRAF_mutation) & !grepl(" ", BRAF_mutation) ~ "V600E_Single",
+      grepl("V600E.*V600", BRAF_mutation) | grepl("V600.*V600E", BRAF_mutation) ~ "V600E_Double",
+      grepl("V600", BRAF_mutation) ~ "Other_V600",
+      grepl("G469|K601|L597", BRAF_mutation) ~ "Class_2",
+      grepl("G466|N581", BRAF_mutation) ~ "Other_Activating",
+      TRUE ~ "Other"
+    ),
+    multiple_mutations = case_when(
+      str_count(BRAF_mutation, " ") == 0 ~ "Single",
+      str_count(BRAF_mutation, " ") == 1 ~ "Double",
+      str_count(BRAF_mutation, " ") == 2 ~ "Triple",
+      TRUE ~ "None"
+    )
+  ) %>% 
+  mutate(mutation_status_class2 = as.factor(mutation_status_class2)) %>% glimpse()
+
+braf_class2 %>% dplyr::count(mutation_status_class2, sort = TRUE)
+
+
+# Combined classification
+combined_braf <- braf_class1 %>%
+  dplyr::select(
+    sample_id, 
+    BRAF_mutation,
+    mutation_status_class1
+  ) %>%
+  left_join(
+    braf_class2 %>% 
+      select(sample_id, mutation_status_class2),  # Select from braf_class2
+    by = "sample_id"
+  )
+
+
+# Verify structure
+# glimpse(combined_braf)
+# Save BRAF classifications
+saveRDS(combined_braf, here("data", "processed", "braf_classifications.rds"))
+
+#combined_braf <- readRDS("braf_classifications.rds")
+
+```
+
+### 3.3 Integrating BRAF with clinical data 
+
+```{r BRAF-clinicaldata}
+
+# Load processed data
+clinical_data <- readRDS(here("data", "processed", "clinical_data_processed.rds"))
+braf_classifications <- readRDS(here("data", "processed", "braf_classifications.rds"))
+
+# Merge clinical and BRAF data
+clinical_data_with_braf <- clinical_data %>%
+  left_join(braf_classifications, by = "sample_id") 
+
+
+# Recode variables
+clinical_data_with_braf <- clinical_data_with_braf %>% 
+  mutate(
+    os_status_recode = as.numeric(as.character(os_status_recode)),
+    age = as.numeric(age),
+    breslow_depth = as.numeric(breslow_depth),
+    stage = as.numeric(str_extract(stage, "\\d"))
+  ) %>% 
+  relocate(BRAF_mutation, .after = braf_class2) 
+
+
+# BRAF stats by sample type
+braf_summary <- clinical_data_with_braf %>% 
+  group_by(sample_type) %>%
+  summarise(
+    n_samples = n(),
+    n_v600e = sum(mutation_status_class1 == 1, na.rm = TRUE),
+    n_any_mutation = sum(mutation_status_class2 == 1, na.rm = TRUE),
+    prop_v600e = mean(mutation_status_class1 == 1, na.rm = TRUE),
+    prop_any_mutation = mean(mutation_status_class2 == 1, na.rm = TRUE)
+  )
+
+knitr::kable(braf_summary, caption = "Summary of BRAF Mutations by Sample Type")
+
+
+# Plot distribution - class 1 - V600E mutations
+p1 <- ggplot(clinical_data_with_braf, aes(x = mutation_status_class1)) +
+  geom_bar(fill = "#404040", alpha = 0.7) +
+  facet_wrap(~sample_type) +
+  theme_classic() +
+  labs(x = "Mutation status", y = "Count",
+       title = "Distribution of BRAF class 1 - V600E mutations")
+p1
+
+
+# Check NAs
+na_count <- clinical_data_with_braf %>%
+  summarise(
+    na_class1 = sum(is.na(mutation_status_class1)),
+    na_class2 = sum(is.na(mutation_status_class2))
+  )
+
+print("Missing values in BRAF classifications:")
+print(na_count)
+#4 NAs
+
+
+# Visualize clinical data
+# stage 
+p3 <- ggplot(clinical_data_with_braf, aes(x = factor(stage))) +
+  geom_bar() +
+  labs(x = "Stage", y = "Count", 
+       title = "Distribution of Stages - TCGA SKCM Metastases") +
+  facet_wrap(~sample_type) +
+  theme_classic()
+p3
+
+# sex
+p4 <- ggplot(clinical_data_with_braf, aes(x = sex)) +
+ geom_bar(fill = "#404040", alpha = 0.7) +
+  facet_wrap(~sample_type) +
+ theme_classic() +
+ labs(x = "Sex", y = "Count",
+      title = "Distribution of Sex") +
+ theme(plot.title = element_text(hjust = 0.5))
+p4
+
+# survival
+p5 <- ggplot(clinical_data_with_braf, aes(x = os_status)) +
+ geom_bar(fill = "#404040", alpha = 0.7) + 
+  facet_wrap(~sample_type) +
+ theme_classic() +
+ labs(x = "Vital Status", y = "Count",
+      title = "Distribution of OS status") +
+ theme(plot.title = element_text(hjust = 0.5))
+
+
+# Save plots
+ggsave(here("figures", "braf_class1_distribution.pdf"), p1, width = 8, height = 6)
+ggsave(here("figures", "stage_distribution.pdf"), p3, width = 8, height = 6)
+ggsave(here("figures", "sex_distribution.pdf"), p4, width = 8, height = 6)
+ggsave(here("figures", "vital_status_distribution.pdf"), p5, width = 8, height = 6)
+
+
+# Save 
+saveRDS(clinical_data_with_braf, 
+        here("data", "processed", "clinical_data_with_braf_final.rds"))
+
+
+#clinical_data_with_braf <- readRDS("clinical_data_with_braf_final.rds")
+
+```
+
+### 3.4 BRAF Mutation Survival Analysis
+
+```{r BRAF-survival}
+
+# Load data
+clinical_data_with_braf <- readRDS("clinical_data_with_braf_final.rds")
+
+# Verify structure 
+print("BRAF Mutation Status Distribution:")
+print(table(clinical_data_with_braf$mutation_status_class1, 
+           clinical_data_with_braf$sample_type))
+
+# Create separate datasets for primary and metastatic
+primary_data <- clinical_data_with_braf %>% 
+  filter(sample_type == "Primary") %>%
+  filter(!is.na(mutation_status_class1) & !is.na(os_months) & !is.na(os_status_recode)) #remove NAs
+
+metastatic_data <- clinical_data_with_braf %>% 
+  filter(sample_type == "Metastasis") %>%
+  filter(!is.na(mutation_status_class1) & !is.na(os_months) & !is.na(os_status_recode))
+
+
+# Print sample size
+print(paste("Primary samples:", nrow(primary_data)))
+print(paste("Metastatic samples:", nrow(metastatic_data)))
+
+# Check factor levels 
+print(levels(primary_data$mutation_status_class1))
+# If needed, reorder: primary_data$mutation_status_class1 <- relevel(primary_data$mutation_status_class1, ref = "0")
+
+
+# Survival Analysis for metastatic samples with high SIN3B
+# Load metastatic dataset with classification 
+metastasis_classifications_66th <- readRDS("metastatic_classifications_66th.rds")
+
+# Count 
+metastasis_classifications_66th %>% dplyr::count(SIN3B_expression_class)
+
+# Make factor
+metastasis_classifications_66th <- metastasis_classifications_66th %>% mutate(SIN3B_expression_class = as.factor(SIN3B_expression_class)) 
+
+#SIN3B_expression_class     n
+#  <chr>                  <int>
+# High                     126
+# Low                      243
+
+
+# Filter high SIN3B
+SIN3B_high <- metastasis_classifications_66th %>% 
+                                 filter(SIN3B_expression_class == "High") 
+
+
+# Subset
+SIN3B_high_sub <- SIN3B_high %>% select(sample_id, gene, 
+                                        expression, patient_id,
+                                        sample_type, os_status_recode,
+                                        os_months, braf_mutation, 
+                                        braf_class1, braf_class2,
+                                        SIN3B_expression_class) 
+
+
+# Make factor
+SIN3B_high_sub <- SIN3B_high_sub %>% mutate(braf_class1 = as.factor(braf_class1)) 
+
+# Count samples in each group 
+counts <- table(SIN3B_high_sub$braf_class1)
+n_wt <- counts["0"]  # Wild-type 
+n_mut <- counts["1"]  # V600E 
+
+# title 
+plot_title <- "Survival by BRAF Status in SIN3B High Metastatic Melanoma"
+
+# Create survival fit
+fit_sin3b <- survfit(Surv(os_months, os_status_recode) ~ braf_class1, data = SIN3B_high_sub)
+print(fit_sin3b)
+  
+# Create plot with formatting
+km_plot <- ggsurvplot(
+  fit_sin3b,
+  data = SIN3B_high_sub,
+  pval = TRUE,
+  risk.table = TRUE,
+  pval.method = TRUE,
+  title = plot_title,  
+  xlab = "Time (months)",
+  ylab = "Overall survival probability",
+  legend.labs = c(paste0("BRAF WT (n=", n_wt, ")"),
+                 paste0("BRAF Mutated (n=", n_mut, ")")),
+  legend.title = "BRAF Mutation Status Class I",
+  palette = c("blue", "#E41A1C"),  # First color for level 0 (WT), second for level 1 (V600E)
+  linetype = "solid",
+  conf.int = FALSE,  
+  risk.table.height = 0.20,
+  risk.table.fontsize = 5,
+  tables.theme = theme_cleantable(),
+  ggtheme = theme_classic() +
+    theme(
+      panel.grid = element_blank(),
+      axis.text = element_text(size = 14, color = "black"),
+      axis.title = element_text(size = 15, face = "bold"),
+      legend.text = element_text(size = 14),
+      text = element_text(size = 12),
+      plot.title = element_text(size = 15, face = "bold", hjust = 0.46),
+      legend.position = "right"
+    )
+)
+
+print(km_plot)
+
+
+# Save
+ggsave(here("figures", "sin3b_high_braf_survival.pdf"), 
+       km_plot$plot, 
+       width = 8, height = 7)
+
+
+# Run Cox model to verify statistical significance
+cox_model <- coxph(Surv(os_months, os_status_recode) ~ braf_class1, data = SIN3B_high_sub)
+print(summary(cox_model))
+
+```
+
+### 3.5 Expression Data Processing - counts to VST
+
+```{r process-expression}
+
+process_expression_data <- function(SKCM_counts) {
+  
+  # Create DESeq object
+  dds <- DESeqDataSetFromMatrix(
+    countData = SKCM_counts,
+    colData = data.frame(
+      row.names = colnames(SKCM_counts),
+      condition = rep("A", ncol(SKCM_counts))
+    ),
+    design = ~ 1
+  )
+  
+  # Pre-filtering 
+  keep <- rowSums(counts(dds) >= 10) >= 71
+  dds <- dds[keep, ]
+  dds <- estimateSizeFactors(dds)
+  
+  # VST transformation
+  vst_data <- vst(dds, blind = TRUE, fitType = "local")
+  vst_matrix <- assay(vst_data)
+  
+  return(vst_matrix)
+}
+
+# Load raw counts
+skcm_counts <- readRDS("SKCM_counts.rds")
+
+# Transfor to VST
+vst_matrix <- process_expression_data(skcm_counts)
+
+# Save expression data (vst)
+#saveRDS(vst_matrix,here("data", "processed", "expression_vst_processed.rds"))
+          
+
+```
+
+### 3.6 Match Clinical and Expression Data
+
+```{r match-clinical-expression}
+
+extract_patient_info <- function(barcode) {
+  parts <- str_split(barcode, "-")[[1]]
+  list(
+    patient_id = str_c(parts[1:3], collapse = "-"),
+    sample_type = str_sub(parts[4], 1, 2)
+  )
+}
+
+# clinical data loaded previously
+match_clinical_expression <- function(expression_data, clinical_data) {
+  
+  # Process barcodes
+  sample_info <- map(colnames(expression_data), extract_patient_info)
+  new_colnames <- map_chr(sample_info, ~paste0(.x$patient_id, "-", .x$sample_type))
+  
+  # Update expression matrix
+  expression_new <- expression_data
+  colnames(expression_new) <- new_colnames
+  
+  # Find matching samples
+  matching_ids <- intersect(new_colnames, clinical_data$sample_id)
+  
+  # Create matched datasets
+  expression_matched <- expression_new[, matching_ids]
+  clinical_matched <- clinical_data %>%
+    filter(sample_id %in% matching_ids)
+  
+  list(
+    expression = expression_matched,
+    clinical = clinical_matched,
+    n_matched = length(matching_ids)
+  )
+}
+
+# Match with clinical data
+matched_data <- match_clinical_expression(
+  expression_data = vst_matrix, 
+  clinical_data = clinical_data # uses the cleaned data
+)
+
+# Verify  
+print(table(matched_data$clinical$sample_type))
+
+# Save 
+#saveRDS(matched_data$expression, "expression_matched.rds")
+#saveRDS(matched_data$clinical, "clinical_matched.rds")
+
+```
+
+### 3.7 Processing Genes of Interest 
+
+```{r process-4genes}
+
+process_gene_expression <- function(expression_data, genes_of_interest) {
+  
+  # initial dimensions
+  print("Initial expression data dimensions:")
+  print(dim(expression_data))
+  
+  # Clean ensembl id
+  expression_df <- expression_data %>%
+    as.data.frame() %>%
+    rownames_to_column("ensembl_id") %>%
+    mutate(ensembl_id_clean = str_remove(ensembl_id, "\\.[0-9]*$"))
+  
+   # dimensions after initial processing
+  print("Dimensions after initial processing:")
+  print(dim(expression_df))
+  
+  # Get mapping with biomart
+  ensembl <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
+  gene_mapping <- getBM(
+    attributes = c("ensembl_gene_id", "hgnc_symbol"),
+    filters = "ensembl_gene_id",
+    values = expression_df$ensembl_id_clean,
+    mart = ensembl
+  )
+  
+   # Print mapping info
+  print("Number of mapped genes:")
+  print(nrow(gene_mapping))
+  
+ # Add gene symbol, filter and clean up
+ final_df <- expression_df %>%
+    left_join(gene_mapping, 
+              by = c("ensembl_id_clean" = "ensembl_gene_id")) %>%
+    filter(hgnc_symbol %in% genes_of_interest) %>%
+    dplyr::select(-ensembl_id, -ensembl_id_clean)  # Remove extra columns
+
+
+  # Print final dimensions
+  print(dim(final_df))
+  
+  return(final_df)
+}
+
+# Verify matched_data before processing
+print("Matched data dimensions:")
+print(dim(matched_data$expression))
+print("Sample type distribution in matched data:")
+print(table(matched_data$clinical$sample_type))
+
+# Process genes of interest
+gene_expression <- process_gene_expression(
+  expression_data = matched_data$expression, 
+  genes_of_interest = c("SIN3B", "BRAF", "POLE4", "STK11")
+)
+
+# Verify final gene_expression object
+#print("Gene expression final dimensions:")
+#print(dim(gene_expression))
+#print("Column names:")
+#print(names(gene_expression))
+
+# Relocate 
+gene_expression <- gene_expression %>% relocate(hgnc_symbol, .before = "TCGA-D3-A3C8-06") 
+
+# Save
+#saveRDS(gene_expression, here("data", "processed", "gene_expression_4genes.rds"))
+```
+
+### 3.8 Separate Datasets into Primaries and Metastases
+
+```{r create-sep-datasets}
+
+prepare_analysis_data <- function(expression_data, clinical_data, sample_type) {
+    clinical_filtered <- clinical_data %>%
+        filter(sample_type == !!sample_type)
+    
+    
+# Prepare expression data - long format
+  expression_filtered <- expression_data %>%
+    dplyr::select(gene = hgnc_symbol, all_of(clinical_filtered$sample_id)) %>%
+    pivot_longer(-gene, names_to = "sample_id", values_to = "expression")
+  
+  expression_filtered %>%
+    inner_join(clinical_filtered, by = "sample_id")
+}
+
+# Create separate datasets (extracting 4 genes in long format)
+primary_data <- prepare_analysis_data(
+  expression_data = gene_expression, 
+  clinical_data = matched_data$clinical, 
+  sample_type = "Primary"
+)
+
+metastatic_data <- prepare_analysis_data(
+  expression_data = gene_expression,
+  clinical_data = matched_data$clinical, 
+  sample_type = "Metastasis"
+)
+
+# Verify 
+print(n_distinct(primary_data$sample_id))
+print(n_distinct(metastatic_data$sample_id))
+print(table(primary_data$gene))
+print(table(metastatic_data$gene))
+
+# Save 
+saveRDS(primary_data, here("data", "processed", "primary_analysis_data.rds"))
+saveRDS(metastatic_data, here("data", "processed", "metastatic_analysis_data.rds"))
+
+```
+
+### 3.9 SIN3B classification
+
+```{r classificating-sin3b-66th}
+
+#' Classify expression data based on 66th percentile cutoff
+#' @param data Data frame containing expression data
+#' @param expression_col Column name containing expression values
+#' @return List containing classified data and summary statistics
+
+
+classify_expression_66th <- function(data, expression_col = "expression") {
+  cutoff_percentile <- 0.66
+  
+  # Filter SIN3B only
+  sin3b_data <- data %>%
+    filter(gene == "SIN3B")
+  
+  # Calculate cutoff on SIN3B 
+  cutoff_value <- quantile(sin3b_data[[expression_col]], 
+                          probs = cutoff_percentile, 
+                          na.rm = TRUE)
+  
+  # Classification
+  classified_data <- sin3b_data %>%
+    mutate(SIN3B_expression_class = case_when(
+      .data[[expression_col]] >= cutoff_value ~ "High",
+      .data[[expression_col]] < cutoff_value ~ "Low",
+      TRUE ~ NA_character_
+    ))
+  
+  # summary statistics
+  summary_stats <- list(
+    cutoff_value = cutoff_value,
+    n_high = sum(classified_data$SIN3B_expression_class == "High", na.rm = TRUE),
+    n_low = sum(classified_data$SIN3B_expression_class == "Low", na.rm = TRUE),
+    total_samples = nrow(classified_data),
+    high_proportion = sum(classified_data$SIN3B_expression_class == "High", na.rm = TRUE) / nrow(classified_data),
+    low_proportion = sum(classified_data$SIN3B_expression_class == "Low", na.rm = TRUE) / nrow(classified_data),
+    na_samples = sum(is.na(classified_data$SIN3B_expression_class))
+  )
+  
+  return(list(
+    classified_data = classified_data,
+    summary = summary_stats
+  ))
+}
+
+# Histogram
+create_expression_histogram <- function(data, title, filename = NULL) {
+  sin3b_data <- data %>%
+    filter(gene == "SIN3B")
+  
+  mean_val <- mean(sin3b_data$expression)
+  median_val <- median(sin3b_data$expression)
+  
+  p <- ggplot(sin3b_data, aes(x = expression)) +
+                geom_histogram(aes(y = after_stat(density)),
+                  fill = "#2E86C1",
+                  color = "black",
+                  alpha = 0.7,
+                  bins = ceiling(sqrt(nrow(sin3b_data)))) +
+    geom_density(color = "red", linewidth = 1) +
+    geom_vline(xintercept = c(mean_val, median_val),
+               color = c("darkgreen", "red"),
+               linetype = "dashed",
+               linewidth = 1) +
+    annotate("text",
+             x = c(mean_val, median_val),
+             y = Inf,
+             label = c(sprintf("Mean = %.2f", mean_val),
+                      sprintf("Median = %.2f", median_val)),
+             vjust = c(2, 4),
+             color = c("darkgreen", "red")) +
+    labs(title = title,
+         x = "SIN3B expression (vst)",
+         y = "Density") +
+    theme_classic() +
+    theme(
+      plot.title = element_text(size = 14, face = "bold"),
+      axis.title = element_text(size = 12),
+      axis.text = element_text(size = 10)
+    )
+  
+  if (!is.null(filename)) {
+    ggsave(filename, p, width = 8, height = 6, dpi = 300)
+  }
+  
+  return(p)
+}
+
+# Load data
+primary_data <- readRDS(here("data", "processed", "primary_analysis_data.rds"))
+metastatic_data <- readRDS(here("data", "processed", "metastatic_analysis_data.rds"))
+
+
+# Apply classification on 66th percentile
+classification_results <- list(
+  primary = classify_expression_66th(primary_data),
+  metastatic = classify_expression_66th(metastatic_data)
+)
+
+# Extract classified data
+primary_classifications <- classification_results$primary$classified_data
+metastatic_classifications <- classification_results$metastatic$classified_data
+
+# Create visualization 
+primary_hist <- create_expression_histogram(
+  primary_data, 
+  "SIN3B Distribution - Primary Tumors (66th percentile)",
+  here("figures", "primary_distribution_66th.pdf")
+)
+
+metastatic_hist <- create_expression_histogram(
+  metastatic_data,
+  "SIN3B Distribution - Metastases (66th percentile)", 
+  here("figures", "metastatic_distribution_66th.pdf")
+)
+
+# summaries
+cat("Primary tumor classification summary (66th percentile):\n")
+print(classification_results$primary$summary)
+cat("\nMetastatic classification summary (66th percentile):\n")
+print(classification_results$metastatic$summary)
+
+# Display
+gridExtra::grid.arrange(primary_hist, metastatic_hist, ncol = 2)
+
+# Verify distribution
+cat("Primary classification distribution:\n")
+print(table(primary_classifications$SIN3B_expression_class))
+cat("\nMetastatic classification distribution:\n")
+print(table(metastatic_classifications$SIN3B_expression_class))
+
+# Create summary table 
+summary_table <- tibble(
+  tissue = c("Primary", "Metastatic"),
+  cutoff_value = c(
+    classification_results$primary$summary$cutoff_value,
+    classification_results$metastatic$summary$cutoff_value
+  ),
+  n_high = c(
+    classification_results$primary$summary$n_high,
+    classification_results$metastatic$summary$n_high
+  ),
+  n_low = c(
+    classification_results$primary$summary$n_low,
+    classification_results$metastatic$summary$n_low
+  ),
+  total_samples = c(
+    classification_results$primary$summary$total_samples,
+    classification_results$metastatic$summary$total_samples
+  ),
+  high_proportion = c(
+    classification_results$primary$summary$high_proportion,
+    classification_results$metastatic$summary$high_proportion
+  ),
+  low_proportion = c(
+    classification_results$primary$summary$low_proportion,
+    classification_results$metastatic$summary$low_proportion
+  )
+)
+
+knitr::kable(summary_table, digits = 3)
+
+
+# Save classifications
+saveRDS(primary_classifications, here("data", "processed", "primary_classifications_66th.rds"))
+saveRDS(metastatic_classifications, here("data", "processed", "metastatic_classifications_66th.rds"))
+
+# sample counts
+cat("Number of primary samples:", nrow(primary_classifications), "\n")
+cat("Number of metastatic samples:", nrow(metastatic_classifications), "\n")
+
+```
+
+### 3.10 Prepare final dataset - input for SIN3B survival analysis
+
+```{r final-datasets-input-surv, message=FALSE, warning=TRUE}
+
+# Load processed clinical data with BRAF
+clinical_data_with_braf <- readRDS(here("data", "processed", "clinical_data_with_braf_final.rds"))
+
+# Prepare final datasets for 66th classification
+prepare_final_dataset <- function(classification_data, expression_data, clinical_processed) {
+  
+  # Print available columns in input data
+  print("Columns in clinical_data:")
+  print(names(expression_data))
+  
+  # Get wide format gene expression - separate columns for the Cox model
+  gene_expressions <- expression_data %>%
+    dplyr::select(sample_id, gene, expression) %>%
+    tidyr::pivot_wider(
+      names_from = gene, 
+      values_from = expression
+    )
+  
+  
+# Join classification 66th, gene expression and clinical clean data
+final_data <- classification_data %>%
+    dplyr::select(sample_id, SIN3B_expression_class) %>%
+    dplyr::inner_join(gene_expressions, by = "sample_id") %>%
+    dplyr::inner_join(
+      clinical_processed %>% 
+        filter(sample_id %in% expression_data$sample_id), 
+      by = "sample_id"
+      )
+
+  print("Columns in final dataset:")
+  print(names(final_data))
+  return(final_data)
+}
+
+
+# Create final integrated datasets 
+primary_final <- prepare_final_dataset(
+  classification_results$primary$classified_data,
+  primary_data,
+  clinical_data_with_braf %>% filter(sample_type == "Primary")
+)
+
+primary_final <- primary_final %>% mutate(SIN3B_expression_class = as.factor(SIN3B_expression_class)) 
+
+
+metastatic_final <- prepare_final_dataset(
+  classification_results$metastatic$classified_data,
+  metastatic_data,
+  clinical_data_with_braf %>% filter(sample_type == "Metastasis")
+)
+
+metastatic_final <- metastatic_final %>% mutate(SIN3B_expression_class = as.factor(SIN3B_expression_class)) 
+
+# Verify 
+#print("Primary dataset dimensions:")
+#print(dim(primary_final))  # 103 samples
+#print(table(primary_final$sample_type))
+#print(table(primary_final$SIN3B_expression_class))
+
+#print("Metastatic dataset dimensions:")
+#print(dim(metastatic_final))  # 369 samples
+#print(table(metastatic_final$sample_type))
+#print(table(metastatic_final$SIN3B_expression_class))
+
+
+# Save 
+saveRDS(primary_final, here("results", "primary_SIN3B_classification_66th_final.rds"))
+saveRDS(metastatic_final, here("results", "metastatic_SIN3B_classification_66th_final.rds"))
+
+```
+
+Input data (expression, clinical, SIN3B 66th classification and BRAF mutation status) is now integrated and ready for survival analysis (Kaplan Meier curves and Cox PH models).
+
+## 4. Survival Analysis
+
+### 4.1 TCGA Data - Correlation Analysis
+
+```{r Correlation-analysis}
+
+# Transform 
+expression_data_transformed <- gene_expression %>%
+  column_to_rownames("hgnc_symbol") %>%  
+  t() %>%  
+  as.data.frame() %>%  
+  rownames_to_column("sample_id") # Keep sample IDs as a column
+
+# theme
+plot_theme <- theme_classic() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    axis.title = element_text(size = 12, face = "bold"),
+    axis.text = element_text(size = 10),
+    panel.grid.minor = element_blank(),
+    panel.border = element_rect(fill = NA, color = "gray80"),
+    legend.position = "bottom"
+  )
+
+# Create list
+gene_pairs <- list(
+  list(x = "SIN3B", y = "POLE4"),
+  list(x = "SIN3B", y = "STK11")
+)
+
+# corr plot function 
+create_correlation_plot <- function(data, x_gene, y_gene, title) {
+  x_label <- bquote(.(x_gene) ~ "(log"[2] ~ "expression)")
+  y_label <- bquote(.(y_gene) ~ "(log"[2] ~ "expression)")
+  
+  ggplot(data, aes(x = .data[[x_gene]], y = .data[[y_gene]])) +
+    geom_point(color = "#2C3E50", 
+              alpha = 0.7, 
+              size = 2, 
+              shape = 21, 
+              fill = "black") +
+    geom_smooth(method = "lm", 
+               se = TRUE,
+               color = "red",
+               fill = "gray",
+               alpha = 0.15,
+               linewidth = 1.2) +
+    stat_cor(method = "pearson",
+            label.x = min(data[[x_gene]]) + 0.1*(max(data[[x_gene]]) - min(data[[x_gene]])),
+            label.y = max(data[[y_gene]]) - 0.1*(max(data[[y_gene]]) - min(data[[y_gene]])),
+            color = "#2C3E50",
+            size = 5) +
+    labs(x = x_label,
+         y = y_label,
+         title = title) +
+    scale_x_continuous(breaks = scales::pretty_breaks(n = 6)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 6)) +
+    coord_fixed(ratio = 1) +
+    plot_theme
+}
+
+# SIN3B vs POLE4 
+sin3b_pole4_plot <- create_correlation_plot(
+  data = expression_data_transformed,
+  x_gene = "SIN3B",
+  y_gene = "POLE4",
+  title = "Correlation between SIN3B and POLE4"
+)
+
+print(sin3b_pole4_plot)
+
+# Save 
+ggsave("figures/correlation_sin3b_pole4.pdf", sin3b_pole4_plot, width = 8, height = 6)
+
+# SIN3B vs STK11 plot
+sin3b_stk11_plot <- create_correlation_plot(
+  data = expression_data_transformed,
+  x_gene = "SIN3B",
+  y_gene = "STK11",
+  title = "Correlation between SIN3B and STK11"
+)
+
+print(sin3b_stk11_plot)
+
+# Save 
+ggsave("figures/correlation_sin3b_stk11.pdf", sin3b_stk11_plot, width = 8, height = 6)
+
+```
+
+### 4.2 Survival plots
+
+```{r}
+# Data prep 
+validate_and_prepare_data <- function(data) {
+  data %>%
+    mutate(
+      os_status_recode = as.numeric(as.character(os_status_recode)),
+      across(c(age, breslow_depth, os_months), as.numeric))
+}
+
+
+# Survival plot - KM
+create_survival_plot <- function(data, title) {
+  n_high <- sum(data$SIN3B_expression_class == "High")
+  n_low <- sum(data$SIN3B_expression_class == "Low")
+  
+  fit <- survfit(Surv(os_months, os_status_recode) ~ SIN3B_expression_class, data = data)
+  
+  ggsurvplot(
+    fit,
+    data = data,
+    pval = TRUE,
+    risk.table = TRUE,
+    pval.method = TRUE,
+    title = title,
+    xlab = "Time (months)",
+    ylab = "Overall survival probability",
+    legend.labs = c(paste0("SIN3B High (n=", n_high, ")"),
+                   paste0("SIN3B Low (n=", n_low, ")")),
+    legend.title = "66th percentile classification",
+    palette = c("#E41A1C", "blue"),
+    linetype = "solid",
+    conf.int = FALSE,  
+    risk.table.height = 0.20,
+    risk.table.fontsize = 5,
+    tables.theme = theme_cleantable(),
+    ggtheme = theme_classic() +
+      theme(
+        panel.grid = element_blank(),
+        axis.text = element_text(size = 14, color = "black"),
+        axis.title = element_text(size = 15, face = "bold"),
+        legend.text = element_text(size = 14),
+        text = element_text(size = 12),
+        plot.title = element_text(size = 15, face = "bold", hjust = 0.46),
+        legend.position = "right"
+      )
+  )
+}
+
+# Extract Cox model results 
+process_cox_results <- function(model) {
+  tidy_results <- broom::tidy(model, conf.int = TRUE, exponentiate = TRUE) %>%
+    mutate(
+      term = case_when(
+        term == "SIN3B" ~ "SIN3B expression",
+        term == "age" ~ "Age",
+        term == "sexMale" ~ "Sex",
+        term == "breslow_depth" ~ "Breslow depth",
+        term == "stage_numeric" ~ "Stage",
+        term == "mutation_status_class11" ~ "BRAF V600E",
+        term == "POLE4" ~ "POLE4 expression",
+        term == "STK11" ~ "STK11 expression",
+        str_detect(term, "SIN3B:POLE4") ~ "SIN3B*POLE4 expression",
+        str_detect(term, "SIN3B:STK11") ~ "SIN3B*STK11 expression",
+        TRUE ~ term
+      )
+    )
+}
+
+# Forest plot
+create_forest_plot <- function(model_results, title) {
+  max_ci <- max(model_results$conf.high, na.rm = TRUE)
+  text_position <- max_ci * 1.5  
+  
+  ggplot(model_results, aes(y = reorder(term, estimate))) +
+    geom_vline(xintercept = 1, 
+               linetype = "dashed", 
+               color = "gray30", 
+               linewidth = 0.7) +
+    geom_point(aes(x = estimate, color = p.value < 0.05), 
+               size = 5, 
+               shape = 16) +
+    geom_errorbarh(
+      aes(xmin = conf.low,
+          xmax = conf.high,
+          color = p.value < 0.05),
+      height = 0.10,
+      linewidth = 0.7 ) +
+    geom_text(
+      aes(x = text_position,
+          label = case_when(
+            p.value < 0.0001 ~ "p < 0.0001",
+            TRUE ~ sprintf("p = %.4f", p.value)
+          ),
+          color = p.value < 0.05),
+      hjust = 0,
+      size = 3.6
+    ) +
+    scale_x_log10(
+      breaks = c(0.1, 0.2, 0.5, 1, 2, 5, 10),
+      labels = scales::number_format(accuracy = 0.1),
+      limits = c(min(model_results$conf.low) * 0.8, 
+                text_position * 1.3) 
+    ) +
+    scale_color_manual(values = c("black", "#E41A1C")) +
+    labs(
+      x = "Hazard Ratio (95% Confidence Interval)",
+      y = "",
+      title = title
+    ) +
+    theme_classic() +
+    theme(
+      panel.grid = element_blank(),
+      axis.text = element_text(size = 11, color = "black"),
+      axis.title.x = element_text(size = 12, 
+                                 face = "bold", 
+                                 margin = margin(t = 10)),
+      axis.text.y = element_text(face = "bold",
+                                size = 11),
+      plot.title = element_text(size = 13, 
+                               face = "bold", 
+                               hjust = 0.5),
+      legend.position = "none",
+      plot.margin = margin(t = 20, r = 70, b = 20, l = 20)
+    )
+  
+}
+
+```
+
+### 4.3 KM and Cox PH models
+
+```{r}
+# Model summaries
+format_interaction_summaries <- function(models, name) {
+  for (model_name in names(models)) {
+    cat("\n-- ", model_name, " --\n")
+    print(summary(models[[model_name]]))
+  }
+}
+
+
+perform_survival_analysis <- function(data, name) {
+  
+  #KM
+  km_fit <- survfit(Surv(os_months, os_status_recode) ~ SIN3B_expression_class, data = data)
+  log_rank <- survdiff(Surv(os_months, os_status_recode) ~ SIN3B_expression_class, data = data)
+  
+  cat("\nKaplan-Meier Analysis for", name, "\n")
+  print(summary(km_fit))
+  cat("\nLog-rank test:\n")
+  print(log_rank)
+  
+  
+  # Cox Proportional Hazards Models
+  cat("\n=== Cox Models for", name, "===\n")
+  # Univariate SIN3B
+  cox_uni <- coxph(Surv(os_months, os_status_recode) ~ SIN3B, data = data)
+  
+  cat("\nUnivariate model (continuous SIN3B):\n")
+  print(summary(cox_uni))
+  
+  # Multivariate model - adjusting for clinical covariates and BRAF mutation status
+  cox_multi <- coxph(Surv(os_months, os_status_recode) ~ 
+                     SIN3B + 
+                     mutation_status_class1 +  
+                     sex + 
+                     age +
+                     stage + 
+                     breslow_depth,
+                     data = data)
+  
+  cox_multi %>% summary() 
+  anova(cox_multi)  
+  cox.zph(cox_multi)
+  
+  #table
+  multi_table <- coxph(Surv(os_months, os_status_recode) ~ 
+                        SIN3B + 
+                        mutation_status_class1 +
+                        sex +
+                        age + 
+                        stage +
+                        breslow_depth,
+                        data = data) %>% tbl_regression(exp = TRUE)
+  
+  #print(multi_table)
+  
+  # Scaling - subtracts mean and divides by SD - mean = 0, sd = 1
+  data <- data %>%
+    mutate(
+      SIN3B_scaled = scale(SIN3B),
+      POLE4_scaled = scale(POLE4),
+      STK11_scaled = scale(STK11)
+    )
+ 
+  
+  # Interaction models
+  interaction_models <- list(
+    
+    #adjusting for POLE4 
+    POLE4_no_int = coxph(Surv(os_months, os_status_recode) ~ 
+                  SIN3B_scaled + 
+                  POLE4_scaled + 
+                  mutation_status_class1 + 
+                  sex + 
+                  age +
+                  stage + 
+                  breslow_depth, 
+                  data = data),
+    
+    #adjusting for STK11 
+    STK11_no_int = coxph(Surv(os_months, os_status_recode) ~ 
+                  SIN3B_scaled + 
+                  STK11_scaled + 
+                  mutation_status_class1 + 
+                  sex + 
+                  age +
+                  stage + 
+                  breslow_depth, 
+                  data = data)
+  )
+ 
+ 
+  format_interaction_summaries(interaction_models, name)
+  
+  return(list(
+    km_fit = km_fit,
+    log_rank = log_rank,
+    cox_uni = cox_uni,
+    cox_multi = cox_multi,
+    interaction_models = interaction_models,
+    diagnostics = list(
+      uni_ph = cox.zph(cox_uni),
+      multi_ph = cox.zph(cox_multi),
+      uni_concordance = concordance(cox_uni),
+      multi_concordance = concordance(cox_multi)
+    ),
+    multi_table = multi_table
+  ))
+}
+
+#Load data 
+#primary_final <- readRDS(here("results", "primary_SIN3B_classification_66th_final.rds")) %>%
+#  validate_and_prepare_data()
+
+#metastatic_final <- readRDS(here("results", #"metastatic_SIN3B_classification_66th_final.rds")) %>%
+#  validate_and_prepare_data()
+
+# Run Survival  
+primary_results <- perform_survival_analysis(primary_final, "Primary Tumors")
+metastatic_results <- perform_survival_analysis(metastatic_final, "Metastatic Tumors")
+
+# KM curves
+primary_survival <- create_survival_plot(primary_final, "Survival Analysis in Primary Tumors")
+metastatic_survival <- create_survival_plot(metastatic_final, "Survival Analysis in Metastatic Tumors")
+
+# Forest plot metastases
+metastatic_uni_forest <- create_forest_plot(
+  process_cox_results(metastatic_results$cox_uni),
+  "Univariate Cox PH - TCGA SKCM Metastases"
+)
+
+ggsave(
+  here("figures", "metastatic_univariate_forest2.pdf"),
+  metastatic_uni_forest,
+  width = 11, height = 7
+)
+
+metastatic_multi_forest <- create_forest_plot(
+  process_cox_results(metastatic_results$cox_multi),
+  "Multivariate Cox PH - TCGA SKCM Metastases"
+)
+
+ggsave(
+  here("figures", "metastatic_multivariate_forest2.pdf"),
+  metastatic_multi_forest,
+  width = 11, height = 7
+)
+
+ggsave(here("figures", "KM_metastatic_survival2.pdf"), 
+       metastatic_survival$plot, 
+       width = 8, height = 6)
+
+#print
+metastatic_survival$plot
+metastatic_multi_forest
+
+```
+
+### 4.4 Format Interaction Models
+
+```{r}
+
+# Format models 
+format_interaction_summaries <- function(interaction_models, dataset_name) {
+  cat("\n===Interaction Model Summaries for", dataset_name, "===\n")
+  #loop
+  for(gene in names(interaction_models)) {
+    cat(sprintf("\n\n%s=== %s Interaction Model ===%s\n", 
+                strrep("-", 20), gene, strrep("-", 20)))
+    
+    model_summary <- summary(interaction_models[[gene]])
+  #create summary
+    coef_table <- data.frame(
+      "Variable" = rownames(model_summary$coefficients),
+      "Hazard_Ratio" = exp(model_summary$coefficients[, "coef"]),
+      "CI_Lower" = exp(model_summary$coefficients[, "coef"] - 
+                      1.96 * model_summary$coefficients[, "se(coef)"]),
+      "CI_Upper" = exp(model_summary$coefficients[, "coef"] + 
+                      1.96 * model_summary$coefficients[, "se(coef)"]),
+      "P_value" = model_summary$coefficients[, "Pr(>|z|)"]
+    )
+    # Clean up variable names
+    coef_table$Variable <- gsub("mutation_status_class11", "BRAF V600E", coef_table$Variable)
+    coef_table$Variable <- gsub("sexMale", "Sex", coef_table$Variable)
+    coef_table$Variable <- gsub("stage", "Stage", coef_table$Variable)
+    coef_table$Variable <- gsub("breslow_depth", "Breslow depth", coef_table$Variable)
+
+      coef_table <- coef_table %>%
+      mutate(
+        Hazard_Ratio = sprintf("%.2f", Hazard_Ratio),
+        CI = sprintf("(%.2f-%.2f)", CI_Lower, CI_Upper),
+        P_value = case_when(
+          P_value < 0.0001 ~ "< 0.0001",
+          P_value < 0.001 ~ sprintf("%.4f", P_value),
+          P_value < 0.01 ~ sprintf("%.3f", P_value),
+          TRUE ~ sprintf("%.2f", P_value)
+        )
+      ) %>%
+      select(Variable, Hazard_Ratio, CI, P_value)
+    
+    # show outuput
+    cat("\nModel Statistics:\n")
+    cat("Likelihood ratio test =", sprintf("%.2f", model_summary$logtest["test"]), 
+        "on", model_summary$logtest["df"], "df,",
+        "p =", format.pval(model_summary$logtest["pvalue"], digits = 4), "\n")
+    cat("Concordance =", sprintf("%.3f", model_summary$concordance), "\n")
+    cat("\nHazard Ratios and Confidence Intervals:\n")
+    print(knitr::kable(coef_table, format = "pipe", digits = 2))
+    cat("\nProportional Hazards Assumption Test:\n")
+    print(cox.zph(interaction_models[[gene]]))
+    cat("\n", strrep("-", 60), "\n")
+  }
+}
+
+
+#  process results 
+process_cox_results <- function(model) {
+  tidy_results <- broom::tidy(model, conf.int = TRUE, exponentiate = TRUE) %>%
+    mutate(
+      term = case_when(
+        term == "SIN3B_scaled" ~ "SIN3B expression",
+        term == "age" ~ "Age",
+        term == "sexMale" ~ "Sex",
+        term == "breslow_depth" ~ "Breslow depth",
+        term == "stage" ~ "Stage",
+        term == "mutation_status_class11" ~ "BRAF V600E",
+        term == "POLE4_scaled" ~ "POLE4 expression",
+        term == "STK11_scaled" ~ "STK11 expression",
+        str_detect(term, "SIN3B_scaled:POLE4_scaled") ~ "SIN3B*POLE4 expression",
+        str_detect(term, "SIN3B_scaled:STK11_scaled") ~ "SIN3B*STK11 expression",
+        TRUE ~ term
+      )
+    )
+  return(tidy_results)
+}
+
+
+
+# Forest plots
+create_interaction_forest_plots <- function(results, dataset_name) {
+  interaction_plots <- list()
+  
+  for(gene in names(results$interaction_models)) {
+    model_results <- process_cox_results(results$interaction_models[[gene]])
+    
+    interaction_plots[[gene]] <- create_forest_plot(
+      model_results,
+      sprintf("%s Interaction Model - %s", gene, dataset_name)
+    )
+  }
+  
+  return(interaction_plots)
+}
+
+
+
+# Create forest plots
+primary_interaction_plots <- create_interaction_forest_plots(primary_results, "Primary Tumors")
+
+metastatic_interaction_plots <- create_interaction_forest_plots(metastatic_results, "Metastases")
+
+# Print 
+print(primary_interaction_plots[["POLE4_no_int"]])
+print(metastatic_interaction_plots[["STK11_no_int"]])
+
+
+# Loop and save plots
+for(gene in names(primary_interaction_plots)) {
+  
+  ggsave(
+    here("figures", sprintf("primary_%s_int_forest2.pdf", tolower(gene))),
+    primary_interaction_plots[[gene]],
+    width = 11, height = 8
+  )
+  
+  ggsave(
+    here("figures", sprintf("metastatic_%s_int_forest2.pdf", tolower(gene))),
+    metastatic_interaction_plots[[gene]],
+    width = 11, height = 8
+  )
+}
+
+
+
+# formatted tables
+create_interaction_tables <- function(results, dataset_name) {
+  interaction_tables <- list()
+  
+  for(gene in names(results$interaction_models)) {
+    interaction_tables[[gene]] <- tbl_regression(
+      results$interaction_models[[gene]],
+      exponentiate = TRUE,
+      label = list(
+        SIN3B = "SIN3B expression",
+        mutation_status_class1 = "BRAF V600E",
+        stage = "Stage",
+        breslow_depth = "Breslow depth"
+      )
+    ) %>%
+    add_global_p() %>%
+    bold_p() %>%
+    add_n() %>%  
+    add_vif()    # Add VIFs - multicollinearity check
+  }
+  
+  return(interaction_tables)
+}
+
+
+# Create tables for both datasets
+primary_interaction_tables <- create_interaction_tables(primary_results, "Primary")
+metastatic_interaction_tables <- create_interaction_tables(metastatic_results, "Metastatic")
+
+
+# Save tables as html - if required
+
+for(gene in names(primary_interaction_tables)) {
+  primary_interaction_tables[[gene]] %>%
+    as_gt() %>%
+    gtsave(filename = here("figures", sprintf("primary_%s_interaction_table2.html", tolower(gene))))
+    
+  metastatic_interaction_tables[[gene]] %>%
+    as_gt() %>%
+    gtsave(filename = here("figures", sprintf("metastatic_%s_interaction_table2.html", tolower(gene))))
+}
+
+```
+
+## Session Info
+
+```{r}
+sessionInfo()
+```
