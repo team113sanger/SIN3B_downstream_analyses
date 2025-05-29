@@ -1,12 +1,9 @@
 # SIN3B Downstream analysis 
 
-## Contact 
-Estef Vazquez (evazquez@liigh.unam.mx)
+## Summary 
 
 This repository contains code and input data used for analyzing SIN3B in cutaneous melanoma, using cell line's transcriptomic data and TCGA SKCM data. The Rmd document is organized into sections, each addressing a specific aspect of the study. Below is a brief description of each section:  
 
-
-## Summary 
 
 ### Cell line transcriptomic analysis
 
@@ -20,6 +17,9 @@ To investigate the correlation between SIN3B expression and overall survival, an
 
 To evaluate the effect of SIN3B on survival, whilst accounting for clinical variables, Cox Proportional Hazards Models were utilised. Expression data for SIN3B, POLE4, and STK11 were evaluated using scaled vst values. In metastatic melanomas, the univariate analysis showed high SIN3B expression was associated with worse overall survival (HR = 1.50, p = 0.0044). This association remained significant in multivariate analysis after adjusting for clinical covariates and BRAF V600E mutation status. There were moderate significant correlations between SIN3B and POLE4 (R = 0.16, p = 0.0021), and SIN3B and STK11 (R = 0.37, p = 1.7e-13), suggesting interconnected effects. POLE4 showed a trending association with worse survival (HR = 1.18, p = 0.074), while STK11 showed no significant association (HR = 0.94, p = 0.549). Significant predictors included stage (HR = 1.394, p = 0.002), Breslow depth (HR = 1.027, p = 0.030), and age (HR = 1.019 per year, p = 0.003). The complete case analysis included 360 patients with 193 events (univariate), and 251 patients with 143 events for multivariate. 
 
+
+## Contact 
+Estef Vazquez (evazquez@liigh.unam.mx)
 
 
 ## References  
