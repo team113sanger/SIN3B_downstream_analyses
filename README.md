@@ -5,7 +5,6 @@ Estef Vazquez (evazquez@liigh.unam.mx)
 
 This repository contains code and input data used for analyzing SIN3B in cutaneous melanoma, using cell line's transcriptomic data and TCGA SKCM data. The Rmd document is organized into sections, each addressing a specific aspect of the study. Below is a brief description of each section:  
 
-~
 
 ## Summary 
 
